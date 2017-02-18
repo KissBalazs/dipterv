@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Linkek parseolása</h2>
+    <h3>Add meg a parse-olandó cikkek linkjeit soronként:</h3>
+    <h3>Egyelőre csak a nol.hu cikkeire.</h3>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,16 @@
+<form action="page_to_send_the_data">
+First name: <input type="text" name="FirstName" value="Mickey"><br>
+Last name: <input type="text" name="LastName" value="Mouse"><br>
+<input type="submit" value="Submit">
+</form>
+{% extends "base.html" %}
+{% block content %}
+{% for post in posts %}
+<h2>{{ post.title }}</h2>
+<p>{{ post.timestamp }}</p>
+<p>{{ post.body }}</p>
+<p>{{ post.labels }}</p>
+<p>{{ post.category }}</p>
+{% endfor %}
+{% endblock %}
+
