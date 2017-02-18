@@ -1,6 +1,8 @@
 __author__ = 'forestg'
 from django import forms
 
+from django.db import models
+
 from .models import MyPost
 from .models import MyParse
 from .models import MyMultiParse
