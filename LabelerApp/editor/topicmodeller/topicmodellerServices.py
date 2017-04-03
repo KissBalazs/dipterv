@@ -3,6 +3,8 @@ __author__ = 'forestg'
 from gensim import corpora, models, similarities
 import os.path
 import pickle
+import sys
+
 # logging bekapcsolása:
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -120,10 +122,13 @@ def yieldLabels(article,label):
 
     return labels
 
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 # Néhány dummy data próbálgatásnak. Elvilkeg működik
-#print (yieldLabels("Ablak Rogán Rogln azasdasdasd Wikc","ElsőDefLabel"))
-#print (yieldLabels("Orbán Viktor együtt focizott a Felcsúti kedves bácsikkal, Fidesz pólóban","MásodikDefLabel"))
-#print (yieldLabels("Rogán Antal szerint a Fidesz legfőbb feladata, hogy foci stadionokat építsen","HarmadikDefLabel"))
-#print (yieldLabels("Senki nem szereti már a facebookot - állapították meg angol kutatók","NegyedikDefLabel"))
-#print (yieldLabels( "Bill Clinton újra indul fidesz az Ameriakai elnökválasztásért meg Fidesz.","ÖtödikDefLabel"))
+print (yieldLabels("Ablak Rogán Rogln azasdasdasd Wikc","ElsőDefLabel"))
+print (yieldLabels("Orbán Viktor együtt focizott a Felcsúti kedves bácsikkal, Fidesz pólóban","MásodikDefLabel"))
+print (yieldLabels("Rogán Antal szerint a Fidesz legfőbb feladata, hogy foci stadionokat építsen","HarmadikDefLabel"))
+print (yieldLabels("Senki nem szereti már a facebookot - állapították meg angol kutatók","NegyedikDefLabel"))
+print (yieldLabels( "Bill Clinton újra indul fidesz az Ameriakai elnökválasztásért meg Fidesz.","ÖtödikDefLabel"))
 

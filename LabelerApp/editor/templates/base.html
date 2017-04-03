@@ -5,35 +5,52 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'css/editor.css' %}">
 </head>
 <body>
 <div class="page-header">
+
     <div class="row">
         <div class="col-md-6">
             <h1><a href="/">Címkéző app</a></h1>
 
             <h3>Kiss Balázs</h3>
         </div>
+
         <div class="col-md-6">
-            <a href="{% url 'editor.views.post_new' %}" class="top-menu2">
-                <span class="glyphicon glyphicon-plus"></span>
-                Új cikk létrehozása
-            </a>
-            <a href="{% url 'editor.views.url_parse' %}" class="top-menu2">
-                <span class="glyphicon glyphicon-plus"></span>
-                URL parse
-            </a>
-            <a href="{% url 'editor.views.url_multi_parse' %}" class="top-menu2">
-                <span class="glyphicon glyphicon-plus"></span>
-                Multiple URL parse
-            </a>
+            {% if user.is_authenticated %}
+            <div>
+                <p class="top-menu">user: {{ user.username }}
+                    <small>(<a href="{% url 'logout' %}">Log out</a>)</small>
+                </p>
+                <ul class="list-style">
+                    <li>
+                        <a href="{% url 'editor.views.post_new' %}" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Új cikk létrehozása
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'editor.views.url_parse' %}" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            URL parse
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'editor.views.url_multi_parse' %}" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Multiple URL parse
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% else %}
+            <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+            {% endif %}
         </div>
-
-
-
     </div>
+
+
 </div>
 <div class="content container">
     <div class="row">
@@ -46,21 +63,3 @@
 </body>
 </html>
 
-
-<!-- <html>
-<style type="text/css">
-    body { color: black; background: white; padding: 0 5em; margin: 0 }
-    h1 { padding: 2em 1em; background: grey }
-    h2 { color: #blue; border-top: 1px dotted #fff; margin-top: 2em }
-    h3 { color: #grey; }
-    p { margin: 1em 0; color: black }
-</style>
- így kéne: <link rel="stylesheet" href="main.css">
-<body>
-<h1>Labeler Application</h1>
-<h3>Alfa version</h3>
-<h3>made by: Kiss Balázs - kiss.balazs.forest@gmail.com</h3>
- block content
- endblock
-</body>
-</html>-->

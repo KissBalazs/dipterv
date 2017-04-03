@@ -1,7 +1,14 @@
+h1 a {
+    color: #FCA205;
+}
+body {
+    padding-left: 15px;
+}
+
 .page-header {
     background-color: #ff9400;
     margin-top: 0;
-    padding: 20px 400px 20px 40px;
+    padding: 20px 0px 20px 40px ;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
@@ -15,11 +22,10 @@
 }
 
 h1, h2, h3, h4 {
-    font-family:  "Arial", Times, serif;
+    // font-family: 'Lobster', cursive;
 }
 
 .date {
-    float: right;
     color: #828282;
 }
 
@@ -33,19 +39,9 @@ h1, h2, h3, h4 {
 
 .top-menu, .top-menu:hover, .top-menu:visited {
     color: #ffffff;
-    float: right;
     font-size: 26pt;
     margin-right: 20px;
-    margin-top: 20px;
-}
 
-
-.top-menu2, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: left;
-    font-size: 26pt;
-    margin-right: 20px;
-    margin-top: 20px;
 }
 
 .post {
@@ -55,3 +51,14 @@ h1, h2, h3, h4 {
 .post h1 a, .post h1 a:visited {
     color: #000000;
 }
+
+
+.top-menu2{
+    font-size: 16pt;
+}
+
+.list-style{
+    list-style-type:none;
+    padding: inherit;
+}
+

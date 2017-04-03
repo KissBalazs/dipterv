@@ -92,7 +92,10 @@ def url_multi_parse(request):
         form = MultiplePostParse()
     return render(request, 'url_multi_parse_edit.html', {'form':form})
 
-
+def post_remove(request, pk):
+    post = get_object_or_404(MyPost, pk=pk)
+    post.delete()
+    return redirect('post_list')
 
 
 
