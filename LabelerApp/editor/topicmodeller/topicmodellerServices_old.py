@@ -81,3 +81,4 @@ def yieldLabels(text,labels):
 
     return labels
 
+# print(yieldLabels("facebookot egy szar", "elso_label"))

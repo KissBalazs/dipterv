@@ -26,11 +26,19 @@ def yieldLabels(article,label):
                u'volna alá ha is ad szerző helyett amúgy főleg os es szerintem oka hozzászólás soha hozzászólások '+
                u'száma kategória feladva komment szia hello üdv')
 
+    #
+    # dictionaryPath = 'documents/dictionary' # -- I do not use this at the moment for anything.
+    # corpusPath = "documents/corpus" #  -- I do not use this at the moment for anything.
+    # documentsPath = 'documents/labelerAppDocuments'
+    # labelsPath = 'documents/labelerAppLabels'
 
-    dictionaryPath = '/tmp/onlab/dictionary' # -- I do not use this at the moment for anything.
-    corpusPath = "/tmp/onlab/corpus" #  -- I do not use this at the moment for anything.
-    documentsPath = '/tmp/onlab/labelerAppDocuments'
-    labelsPath = '/tmp/onlab/labelerAppLabels'
+    dir = os.path.dirname(__file__)
+    dictionaryPath = os.path.join(dir, '/documents/dictionary') # -- I do not use this at the moment for anything.
+    corpusPath = os.path.join(dir, 'documents/corpus') #  -- I do not use this at the moment for anything.
+    documentsPath = os.path.join(dir, 'documents/labelerAppDocuments')
+    labelsPath = os.path.join(dir, 'documents/labelerAppLabels')
+
+
     documents_list = []
     labels_list = []
 
@@ -41,15 +49,15 @@ def yieldLabels(article,label):
 
     #1. Dokumentumok megnyitása.
     if (os.path.isfile(documentsPath)):
-        print("Opening stored documents list...");
+        print("Opening stored documents list...")
         with open(labelsPath,'rb') as f:
             labels_list = pickle.load(f)
         with open(documentsPath, 'rb') as f:
             documents_list = pickle.load(f)
         print(documents_list)
     else:
-        print("Creating new documents list fie...");
-        documents_list.append("dummy article");
+        print("Creating new documents list fie...")
+        documents_list.append("dummy article")
         labels_list.append("dummy labels")
         print(documents_list)
 
@@ -122,13 +130,14 @@ def yieldLabels(article,label):
 
     return labels
 
-reload(sys)
-sys.setdefaultencoding('utf8')
+# TODO: ezeket ne hagyd benne mert lefut.
+# reload(sys)
+# sys.setdefaultencoding('utf8')
 
 # Néhány dummy data próbálgatásnak. Elvilkeg működik
-print (yieldLabels("Ablak Rogán Rogln azasdasdasd Wikc","ElsőDefLabel"))
-print (yieldLabels("Orbán Viktor együtt focizott a Felcsúti kedves bácsikkal, Fidesz pólóban","MásodikDefLabel"))
-print (yieldLabels("Rogán Antal szerint a Fidesz legfőbb feladata, hogy foci stadionokat építsen","HarmadikDefLabel"))
-print (yieldLabels("Senki nem szereti már a facebookot - állapították meg angol kutatók","NegyedikDefLabel"))
-print (yieldLabels( "Bill Clinton újra indul fidesz az Ameriakai elnökválasztásért meg Fidesz.","ÖtödikDefLabel"))
+# print (yieldLabels("Ablak Rogán Rogln azasdasdasd Wikc","ElsőDefLabel"))
+# print (yieldLabels("Orbán Viktor együtt focizott a Felcsúti kedves bácsikkal, Fidesz pólóban","MásodikDefLabel"))
+# print (yieldLabels("Rogán Antal szerint a Fidesz legfőbb feladata, hogy foci stadionokat építsen","HarmadikDefLabel"))
+# print (yieldLabels("Senki nem szereti már a facebookot - állapították meg angol kutatók","NegyedikDefLabel"))
+# print (yieldLabels( "Bill Clinton újra indul fidesz az Ameriakai elnökválasztásért meg Fidesz.","ÖtödikDefLabel"))
 
