@@ -5,7 +5,7 @@ import scrapy
 from editor.langdetect.langdetectServices import langdetect
 
 
-class QuotesSpider(scrapy.Spider):
+class IndexCrawler(scrapy.Spider):
     name = "index" # must be unique
 
 

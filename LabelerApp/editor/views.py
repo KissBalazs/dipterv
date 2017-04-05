@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # from django.shortcuts import render
+import os
+
 from django.shortcuts import redirect
 from django.utils import timezone
 
@@ -110,5 +112,22 @@ def post_remove(request, pk):
 
 
 def parse_index(request):
+    # import scrapy
+    # from scrapy.crawler import CrawlerProcess
+    # from editor.webcrawler.webcrawler.spiders.index_crawler import IndexCrawler
+    #
+    # process = CrawlerProcess({
+    # 'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+    # })
+    #
+    # process.crawl(IndexCrawler, ["-o", "../data/index.json"])
+    # process.start()
+    #
+    #     # todo: ezt bizony kézzel kell majd futtatni :\
+    # parse_index_hu()
+
     parse_index_hu()
+
+
+    # execfile( '/home/forestg/projects/dipterv/LabelerApp/editor/webcrawler/webcrawler/scripts/index_frontpage_parse.py')
     return HttpResponseRedirect('/')

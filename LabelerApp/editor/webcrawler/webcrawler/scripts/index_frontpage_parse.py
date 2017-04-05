@@ -6,6 +6,8 @@ import sys
 
 
 def parse_index_hu():
+    import subprocess
+
     # tester_path="data/quotes.json"
     tester_path="../data/index.json"
     print (sys.version)
@@ -14,9 +16,11 @@ def parse_index_hu():
 
     # os.system("scrapy crawl quotes -o data/quotes.json")
     os.system("scrapy crawl index -o ../data/index.json")
+    # process = subprocess.call(['scrapy', 'crawl', 'index', '-o', '../data/index.json'])
+
 
 
     # TODO FONTOS: a json fájlhoz hozzfáfűz a parancs! scrapy crawl quotes -o quotes.json
             # szóval megoldás, ezt töröltetni kell sajnos.
 
-# parse_index_hu()
+parse_index_hu()
