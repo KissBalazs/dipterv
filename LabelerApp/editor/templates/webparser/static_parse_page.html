@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends 'base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Statikus parse</title>
+</head>
+<body>
+{% block content %}
+    <h1>Statikus oldalak parse-olása</h1>
+
+
+
+<h1>Wikipedia parse</h1>
+
+<table class="table table-striped table-rows">
+    <tr>
+        <td>Dokumentumtér állapota</td>
+        <td>utolsó frissítés: {{create_date_wiki}} </td>
+        <td> <a href="{% url 'editor.views.static_parse_page_wiki_refresh_documents' %}" class="top-menu2">Frissítés</a></td>
+        <td>
+            <a href="{% url 'editor.views.static_parse_page_wiki_documents' %}" class="top-menu2">Megtekintés</a>
+        </td>
+    </tr>
+    <tr>
+        <td>Szótár állapota</td>
+        <td>TODO</td>
+        <td><button>FrissítésTODO</button></td>
+        <td><button>Megtekintés</button></td>
+    </tr>
+    <tr>
+        <td>Corpus állapota</td>
+        <td>TODO</td>
+        <td><button>FrissítésTODO</button></td>
+        <td><button>Megtekintés</button></td>
+    </tr>
+</table>
+
+<h1>Index parse</h1>
+
+<table class="table table-striped table-rows">
+    <tr>
+        <td>Dokumentumtér állapota</td>
+        <td>utolsó frissítés: {{create_date_index}} </td>
+        <td> <a href="{% url 'editor.views.static_parse_page_index_refresh_documents' %}" class="top-menu2">Frissítés</a></td>
+        <td>
+            <a href="{% url 'editor.views.static_parse_page_index_documents' %}" class="top-menu2">Megtekintés</a>
+        </td>
+    </tr>
+    <tr>
+        <td>Szótár állapota</td>
+        <td>TODO</td>
+        <td><button>FrissítésTODO</button></td>
+        <td><button>Megtekintés</button></td>
+    </tr>
+    <tr>
+        <td>Corpus állapota</td>
+        <td>TODO</td>
+        <td><button>FrissítésTODO</button></td>
+        <td><button>Megtekintés</button></td>
+    </tr>
+</table>
+
+{% endblock %}
+</body>
+</html>

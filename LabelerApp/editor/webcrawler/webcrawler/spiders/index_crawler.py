@@ -2,11 +2,13 @@
 
 import scrapy
 
-from editor.langdetect.langdetectServices import langdetect
+# from editor.langdetect.langdetectServices import langdetect
+from BeautifulSoup import BeautifulSoup
 
 
 class IndexCrawler(scrapy.Spider):
     name = "index" # must be unique
+    counter = 0
 
 
     start_urls = [
@@ -22,12 +24,27 @@ class IndexCrawler(scrapy.Spider):
                 # }
 
     def parse_article(self, response):
+        # author_meta_raw_list = response.css('meta').re(r'.*author.*')
+
+        # author_meta_raw = author_meta_raw_list[0] if author_meta_raw_list else None
+
+        # author_clean = ""
+        # if(author_meta_raw):
+        #     author_clean = BeautifulSoup(author_meta_raw)['content']
+        # else:
+        #     author_clean = "nincs"
+        # # [u'<meta name="author" content="Munk Veronika">']
+        # todo: írjár róla hogy az index válrtozrtatja a buzeráns oldalát
+
         text = ''.join(response.css('div.cikk-torzs p::text').extract())
+        self.counter += 1
+
+
         yield{
+            'id': self.counter,
             'url':response.url,
-            'title':response.css('div.content-title h1 span::text').extract(),
+            'title':response.css('div.content-title h1 span::text').extract_first(),
             'text':text,
-            'language':langdetect(text)
         }
 
         # next_page = response.css('li.next a::attr(href)').extract_first()

@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 # from django.shortcuts import render
+import json
 import os
 
+import datetime
 from django.shortcuts import redirect
 from django.utils import timezone
 
 from editor.webcrawler.webcrawler.scripts.index_frontpage_parse import parse_index_hu
+from editor.webcrawler.webcrawler.scripts.wiki_frontpage_parse import parse_wiki_hu
 from .models import MyPost
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
@@ -112,22 +115,68 @@ def post_remove(request, pk):
 
 
 def parse_index(request):
-    # import scrapy
-    # from scrapy.crawler import CrawlerProcess
-    # from editor.webcrawler.webcrawler.spiders.index_crawler import IndexCrawler
-    #
-    # process = CrawlerProcess({
-    # 'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-    # })
-    #
-    # process.crawl(IndexCrawler, ["-o", "../data/index.json"])
-    # process.start()
-    #
-    #     # todo: ezt bizony kézzel kell majd futtatni :\
-    # parse_index_hu()
-
     parse_index_hu()
 
-
-    # execfile( '/home/forestg/projects/dipterv/LabelerApp/editor/webcrawler/webcrawler/scripts/index_frontpage_parse.py')
     return HttpResponseRedirect('/')
+
+
+def static_parse_page(request):
+    wiki_path = "/home/forestg/projects/dipterv/LabelerApp/data/wiki.json"
+    index_path = "/home/forestg/projects/dipterv/LabelerApp/data/index.json"
+    if (os.path.isfile(wiki_path)):
+        create_date_wiki = datetime.datetime.fromtimestamp(
+            int(os.path.getmtime(wiki_path))
+        ).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        create_date_wiki = "nem létezik a fájl"
+
+    if (os.path.isfile(index_path)):
+        create_date_index = datetime.datetime.fromtimestamp(
+            int(os.path.getmtime(index_path))
+        ).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        create_date_index = "nem létezik a fájl"
+    return render(request, 'webparser/static_parse_page.html', {'create_date_wiki': create_date_wiki, 'create_date_index':create_date_index})
+
+
+def static_parse_page_wiki_documents(request):
+    path = "/home/forestg/projects/dipterv/LabelerApp/data/wiki.json"
+    if (os.path.isfile(path)):
+        with open(path) as data_file:
+            document_array = json.load(data_file)
+    else:
+        document_array = [{
+        "id":"0",
+        "lang":"",
+        "url":"Nem létezik a dokumentumtér.",
+        "title":"",
+        "text":""
+        }]
+
+    return render(request, 'webparser/static_parse_page_wiki_documents.html',{'document_array':document_array})
+
+def static_parse_page_wiki_refresh_documents(request):
+    parse_wiki_hu()
+    return redirect('static_parse_page_wiki_documents')
+
+
+def static_parse_page_index_documents(request):
+    path = "/home/forestg/projects/dipterv/LabelerApp/data/index.json"
+    if (os.path.isfile(path)):
+        with open(path) as data_file:
+            document_array = json.load(data_file)
+    else:
+        document_array = [{
+        "id":"0",
+        "url":"Nem létezik a dokumentumtér.",
+        "title":"",
+        "text":""
+        }]
+
+    return render(request, 'webparser/static_parse_page_index_documents.html',{'document_array':document_array})
+
+def static_parse_page_index_refresh_documents(request):
+    parse_index_hu()
+    return redirect('static_parse_page_index_documents')
+
+

@@ -11,15 +11,16 @@
 <div class="page-header">
 
     <div class="row">
-        <div class="col-md-6">
-            <h1><a href="/">Címkéző app</a></h1>
+        <div class="col-md-4">
+            <h1><a href="/">Webes szövegbányászat</a></h1>
 
             <h3>Kiss Balázs</h3>
         </div>
+        {% if user.is_authenticated %}
+        <div class="col-md-4">
 
-        <div class="col-md-6">
-            {% if user.is_authenticated %}
             <div>
+                <!--todo: ezt törölni -->
                 <p class="top-menu">user: {{ user.username }}
                     <small>(<a href="{% url 'logout' %}">Log out</a>)</small>
                 </p>
@@ -43,17 +44,37 @@
                         </a>
                     </li>
                     <li>
-                         <a href="{% url 'editor.views.parse_index' %}" class="top-menu2">
+                        <a href="{% url 'editor.views.parse_index' %}" class="top-menu2">
                             <span class="glyphicon glyphicon-plus"></span>
-                             Generate Index parsing
+                            Generate Index parsing
                         </a>
                     </li>
                 </ul>
             </div>
-            {% else %}
-            <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
-            {% endif %}
+
         </div>
+        <div class="col-md-4">
+            <div>
+                <p class="top-menu">Új funkciók</p>
+                <ul class="list-style">
+                    <li>
+                        <a href="{% url 'editor.views.static_parse_page' %}" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Statikus parse-olás
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Dinamikus parse-olás
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+        {% endif %}
     </div>
 
 

@@ -9,7 +9,6 @@ from editor.views import url_parse
 from editor.views import url_multi_parse
 from . import views
 
-
 urlpatterns = patterns('',
 
     url(r'^$', views.post_list, name='post_list'),
@@ -21,6 +20,17 @@ urlpatterns = patterns('',
     url(r'^post/(?P<pk>\d+)/remove/$', views.post_remove, name='post_remove'),
 
 
+
+    url(r'^static_parse_page$', views.static_parse_page, name='static_parse_page'),
+
+    url(r'^static_parse_page/static_parse_page_wiki_documents', views.static_parse_page_wiki_documents, name='static_parse_page_wiki_documents'),
+    url(r'^static_parse_page/static_parse_page_wiki_refresh_documents', views.static_parse_page_wiki_refresh_documents, name='static_parse_page_wiki_refresh_documents'),
+                       # gecifontos a sorrend matching miatt!
+
+    url(r'^static_parse_page/static_parse_page_index_documents', views.static_parse_page_index_documents, name='static_parse_page_index_documents'),
+    url(r'^static_parse_page/static_parse_page_index_refresh_documents', views.static_parse_page_index_refresh_documents, name='static_parse_page_index_refresh_documents'),
+
 )
+
 
 # urlpatterns = patterns('',url(r'^$', get_name),)
