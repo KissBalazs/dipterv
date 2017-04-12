@@ -1,0 +1,18 @@
+- index.hu cikkeinek beparse-olása
+- index.hu -s cikkekből statisztika készítése
+- linkek megadása egy nagy text-ben
+- azon oldalak felparse-olása, első körben nyelvüket állapítsuk meg, többi később
+
+
+MENÜ:
+- index.hu parseolás állapot
+- wikipedia.hu parseolás állapot
+- adatok megtekintése mindkét oldalnál
+- adatbányászati elemzés indítása
+- adatbányászati elemzés megtekintése, ha kész
+    - ugyan az, mint a megtekintés, csak kiegészítve a javasolt címkékkel
+    - kiegészítve a nyelvmeghatározással
+- lehessen kézzel is hozzáadni cikket, lássuk annak az eredményét! 
+- textield amibe be lehet vinni nagy számú linket
+    - ezt feldolgozom, dokumentumot készítek belőle -> megtekintés
+    - ezt is elemzem gond, azt megtekintés

@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>Labeler App</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/editor.css' %}">
+</head>
+<body>
+<div class="page-header">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1><a href="/">Címkéző app</a></h1>
+
+            <h3>Kiss Balázs</h3>
+        </div>
+
+        <div class="col-md-6">
+            {% if user.is_authenticated %}
+            <div>
+                <p class="top-menu">user: {{ user.username }}
+                    <small>(<a href="{% url 'logout' %}">Log out</a>)</small>
+                </p>
+                <ul class="list-style">
+                    <li>
+                        <a href="{% url 'editor.views.post_new' %}" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Új cikk létrehozása
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'editor.views.url_parse' %}" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            URL parse
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'editor.views.url_multi_parse' %}" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Multiple URL parse
+                        </a>
+                    </li>
+                    <li>
+                         <a href="{% url 'editor.views.parse_index' %}" class="top-menu2">
+                            <span class="glyphicon glyphicon-plus"></span>
+                             Generate Index parsing
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% else %}
+            <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+            {% endif %}
+        </div>
+    </div>
+
+
+</div>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
