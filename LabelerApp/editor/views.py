@@ -4,9 +4,14 @@ import json
 import os
 
 import datetime
+
+import operator
 from django.shortcuts import redirect
 from django.utils import timezone
+from gensim import corpora
 
+from editor.topicmodeller.services.indexHuTopicModelling import create_dictionary_index
+from editor.topicmodeller.utils.consts import IndexDocumentsPath, IndexDictionaryPath, IndexFrequenciesPath
 from editor.webcrawler.webcrawler.scripts.index_frontpage_parse import parse_index_hu
 from editor.webcrawler.webcrawler.scripts.wiki_frontpage_parse import parse_wiki_hu
 from .models import MyPost
@@ -136,7 +141,16 @@ def static_parse_page(request):
         ).strftime('%Y-%m-%d %H:%M:%S')
     else:
         create_date_index = "nem létezik a fájl"
-    return render(request, 'webparser/static_parse_page.html', {'create_date_wiki': create_date_wiki, 'create_date_index':create_date_index})
+
+    if (os.path.isfile(IndexFrequenciesPath)):
+        create_date_index_freq = datetime.datetime.fromtimestamp(
+            int(os.path.getmtime(IndexFrequenciesPath))
+        ).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        create_date_index_freq = "nem létezik a fájl"
+
+
+    return render(request, 'webparser/static_parse_page.html', {'create_date_wiki': create_date_wiki, 'create_date_index':create_date_index, 'create_date_index_freq':create_date_index_freq})
 
 
 def static_parse_page_wiki_documents(request):
@@ -161,7 +175,7 @@ def static_parse_page_wiki_refresh_documents(request):
 
 
 def static_parse_page_index_documents(request):
-    path = "/home/forestg/projects/dipterv/LabelerApp/data/index.json"
+    path = IndexDocumentsPath
     if (os.path.isfile(path)):
         with open(path) as data_file:
             document_array = json.load(data_file)
@@ -179,4 +193,17 @@ def static_parse_page_index_refresh_documents(request):
     parse_index_hu()
     return redirect('static_parse_page_index_documents')
 
+def static_parse_page_index_refresh_dictionary(request):
+    create_dictionary_index()
+    return redirect('static_parse_page')
 
+def static_parse_page_index_show_dictionary(request):
+    path = IndexFrequenciesPath
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            frequencies = json.load(data_file)
+        sortedDictionary =  sorted(frequencies.items(), key=operator.itemgetter(1))
+    else:
+        sortedDictionary = {["nem létezik még az fájl",""]}
+
+    return render(request, 'webparser/static_parse_page_index_dictionary.html',{'sortedDictionary':sortedDictionary, 'size':len(sortedDictionary)})

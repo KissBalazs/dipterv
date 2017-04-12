@@ -50,9 +50,9 @@
     </tr>
     <tr>
         <td>Szótár állapota</td>
-        <td>TODO</td>
-        <td><button>FrissítésTODO</button></td>
-        <td><button>Megtekintés</button></td>
+        <td>utolsó frissítés: {{create_date_index_freq}} </td>
+        <td> <a href="{% url 'editor.views.static_parse_page_index_refresh_dictionary' %}" class="top-menu2">Frissítés</a></td>
+        <td> <a href="{% url 'editor.views.static_parse_page_index_show_dictionary' %}" class="top-menu2">Megtekintés</a></td>
     </tr>
     <tr>
         <td>Corpus állapota</td>

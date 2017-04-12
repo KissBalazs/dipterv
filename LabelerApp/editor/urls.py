@@ -29,6 +29,8 @@ urlpatterns = patterns('',
 
     url(r'^static_parse_page/static_parse_page_index_documents', views.static_parse_page_index_documents, name='static_parse_page_index_documents'),
     url(r'^static_parse_page/static_parse_page_index_refresh_documents', views.static_parse_page_index_refresh_documents, name='static_parse_page_index_refresh_documents'),
+    url(r'^static_parse_page/static_parse_page_index_refresh_dictionary', views.static_parse_page_index_refresh_dictionary, name='static_parse_page_index_refresh_dictionary'),
+    url(r'^static_parse_page/static_parse_page_index_show_dictionary', views.static_parse_page_index_show_dictionary, name='static_parse_page_index_show_dictionary'),
 
 )
 

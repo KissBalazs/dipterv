@@ -4,18 +4,19 @@ import os.path
 
 import sys
 
+from editor.topicmodeller.utils.consts import IndexDocumentsPath
+
 
 def parse_index_hu():
     import subprocess
 
     # tester_path="data/quotes.json"
-    tester_path="/home/forestg/projects/dipterv/LabelerApp/data/index.json"
+    tester_path= IndexDocumentsPath
     print (sys.version)
     if(os.path.isfile(tester_path)):
         os.remove(tester_path)
 
-    # os.system("scrapy crawl quotes -o data/quotes.json")
-    os.system("cd /home/forestg/projects/dipterv/LabelerApp/editor/webcrawler; scrapy crawl index -o /home/forestg/projects/dipterv/LabelerApp/data/index.json")
+    os.system("cd /home/forestg/projects/dipterv/LabelerApp/editor/webcrawler; scrapy crawl index -o "+ IndexDocumentsPath)
 
 
     # TODO FONTOS: a json fájlhoz hozzfáfűz a parancs! scrapy crawl quotes -o quotes.json
