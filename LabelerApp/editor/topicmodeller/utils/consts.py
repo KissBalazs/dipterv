@@ -17,9 +17,15 @@ stopwordlist = (u'a az egy be ki le fel meg el át rá ide oda szét össze viss
                u'száma kategória feladva komment szia hello üdv - is, , - volt, is. van, kis, ki, meg, meg. ki. után, egész –')
 
 indexDictionaryPath = '../documents/IndexDictionary'
+wikiDictionaryPath = '../documents/WikiDictionary' # todo: ezek kellenek?
 
 IndexDocumentsPath = "/home/forestg/projects/dipterv/LabelerApp/data/index.json"
 IndexDictionaryPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/indexDictionary.dict"
 IndexFrequenciesPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/indexFrequency"
+IndexTopicsPath2 = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/indexTopics2.json"
+
+WikiDocumentsPath = "/home/forestg/projects/dipterv/LabelerApp/data/wiki.json"
+WikiDictionaryPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/wikiDictionary.dict"
+WikiFrequenciesPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/wikiFrequency"
 
 

@@ -25,12 +25,12 @@
     </tr>
     <tr>
         <td>Szótár állapota</td>
-        <td>TODO</td>
-        <td><button>FrissítésTODO</button></td>
-        <td><button>Megtekintés</button></td>
+        <td>utolsó frissítés: {{create_date_wiki_freq}} </td>
+        <td> <a href="{% url 'editor.views.static_parse_page_wiki_refresh_dictionary' %}" class="top-menu2">Frissítés</a></td>
+        <td> <a href="{% url 'editor.views.static_parse_page_wiki_show_dictionary' %}" class="top-menu2">Megtekintés</a></td>
     </tr>
     <tr>
-        <td>Corpus állapota</td>
+        <td>Téma elemzés</td>
         <td>TODO</td>
         <td><button>FrissítésTODO</button></td>
         <td><button>Megtekintés</button></td>
@@ -43,7 +43,9 @@
     <tr>
         <td>Dokumentumtér állapota</td>
         <td>utolsó frissítés: {{create_date_index}} </td>
-        <td> <a href="{% url 'editor.views.static_parse_page_index_refresh_documents' %}" class="top-menu2">Frissítés</a></td>
+        <td>
+            <a href="{% url 'editor.views.static_parse_page_index_refresh_documents' %}" class="top-menu2">Frissítés</a>
+        </td>
         <td>
             <a href="{% url 'editor.views.static_parse_page_index_documents' %}" class="top-menu2">Megtekintés</a>
         </td>
@@ -55,10 +57,10 @@
         <td> <a href="{% url 'editor.views.static_parse_page_index_show_dictionary' %}" class="top-menu2">Megtekintés</a></td>
     </tr>
     <tr>
-        <td>Corpus állapota</td>
-        <td>TODO</td>
-        <td><button>FrissítésTODO</button></td>
-        <td><button>Megtekintés</button></td>
+        <td>Téma elemzés</td>
+        <td>Utolsó frissítés: {{create_date_index_topics}} </td>
+        <td> <a href="{% url 'editor.views.static_parse_page_index_topicmodel_start' %}" class="top-menu2">Frissítés</a></td>
+        <td> <a href="{% url 'editor.views.static_parse_page_index_show_topicmodel' %}" class="top-menu2">Megtekintés</a></td>
     </tr>
 </table>
 

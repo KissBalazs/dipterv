@@ -25,12 +25,16 @@ urlpatterns = patterns('',
 
     url(r'^static_parse_page/static_parse_page_wiki_documents', views.static_parse_page_wiki_documents, name='static_parse_page_wiki_documents'),
     url(r'^static_parse_page/static_parse_page_wiki_refresh_documents', views.static_parse_page_wiki_refresh_documents, name='static_parse_page_wiki_refresh_documents'),
+    url(r'^static_parse_page/static_parse_page_wiki_refresh_dictionary', views.static_parse_page_wiki_refresh_dictionary, name='static_parse_page_wiki_refresh_dictionary'),
+    url(r'^static_parse_page/static_parse_page_wiki_show_dictionary', views.static_parse_page_wiki_show_dictionary, name='static_parse_page_wiki_show_dictionary'),
                        # gecifontos a sorrend matching miatt!
 
     url(r'^static_parse_page/static_parse_page_index_documents', views.static_parse_page_index_documents, name='static_parse_page_index_documents'),
     url(r'^static_parse_page/static_parse_page_index_refresh_documents', views.static_parse_page_index_refresh_documents, name='static_parse_page_index_refresh_documents'),
     url(r'^static_parse_page/static_parse_page_index_refresh_dictionary', views.static_parse_page_index_refresh_dictionary, name='static_parse_page_index_refresh_dictionary'),
     url(r'^static_parse_page/static_parse_page_index_show_dictionary', views.static_parse_page_index_show_dictionary, name='static_parse_page_index_show_dictionary'),
+    url(r'^static_parse_page/static_parse_page_index_topicmodel_start', views.static_parse_page_index_topicmodel_start, name='static_parse_page_index_topicmodel_start'),
+    url(r'^static_parse_page/static_parse_page_index_show_topicmodel', views.static_parse_page_index_show_topicmodel, name='static_parse_page_index_show_topicmodel'),
 
 )
 

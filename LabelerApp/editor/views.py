@@ -10,8 +10,10 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from gensim import corpora
 
-from editor.topicmodeller.services.indexHuTopicModelling import create_dictionary_index
-from editor.topicmodeller.utils.consts import IndexDocumentsPath, IndexDictionaryPath, IndexFrequenciesPath
+from editor.topicmodeller.services.indexHuTopicModelling import create_dictionary_index, topic_model_index_hu
+from editor.topicmodeller.services.wikiHuTopicModelling import create_dictionary_wiki
+from editor.topicmodeller.utils.consts import IndexDocumentsPath, IndexDictionaryPath, IndexFrequenciesPath, \
+    WikiFrequenciesPath, IndexTopicsPath2
 from editor.webcrawler.webcrawler.scripts.index_frontpage_parse import parse_index_hu
 from editor.webcrawler.webcrawler.scripts.wiki_frontpage_parse import parse_wiki_hu
 from .models import MyPost
@@ -148,9 +150,22 @@ def static_parse_page(request):
         ).strftime('%Y-%m-%d %H:%M:%S')
     else:
         create_date_index_freq = "nem létezik a fájl"
+    if (os.path.isfile(WikiFrequenciesPath)):
+        create_date_wiki_freq = datetime.datetime.fromtimestamp(
+            int(os.path.getmtime(WikiFrequenciesPath))
+        ).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        create_date_wiki_freq = "nem létezik a fájl"
+    if (os.path.isfile(WikiFrequenciesPath)):
+        create_date_index_topics = datetime.datetime.fromtimestamp(
+            int(os.path.getmtime(IndexTopicsPath2))
+        ).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        create_date_index_topics = "nem létezik a fájl"
 
-
-    return render(request, 'webparser/static_parse_page.html', {'create_date_wiki': create_date_wiki, 'create_date_index':create_date_index, 'create_date_index_freq':create_date_index_freq})
+    return render(request, 'webparser/static_parse_page.html', {'create_date_wiki': create_date_wiki, 'create_date_index':create_date_index,
+                                                                'create_date_index_freq':create_date_index_freq, 'create_date_wiki_freq':create_date_wiki_freq,
+                                                                'create_date_index_topics':create_date_index_topics})
 
 
 def static_parse_page_wiki_documents(request):
@@ -173,6 +188,20 @@ def static_parse_page_wiki_refresh_documents(request):
     parse_wiki_hu()
     return redirect('static_parse_page_wiki_documents')
 
+def static_parse_page_wiki_show_dictionary(request):
+    path = WikiFrequenciesPath
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            frequencies = json.load(data_file)
+        sortedDictionary =  sorted(frequencies.items(), key=operator.itemgetter(1))
+    else:
+        sortedDictionary = {["nem létezik még az fájl",""]}
+
+    return render(request, 'webparser/static_parse_page_wiki_dictionary.html',{'sortedDictionary':sortedDictionary, 'size':len(sortedDictionary)})
+
+def static_parse_page_wiki_refresh_dictionary(request):
+    create_dictionary_wiki()
+    return redirect('static_parse_page')
 
 def static_parse_page_index_documents(request):
     path = IndexDocumentsPath
@@ -207,3 +236,19 @@ def static_parse_page_index_show_dictionary(request):
         sortedDictionary = {["nem létezik még az fájl",""]}
 
     return render(request, 'webparser/static_parse_page_index_dictionary.html',{'sortedDictionary':sortedDictionary, 'size':len(sortedDictionary)})
+
+def static_parse_page_index_topicmodel_start(request):
+    topic_model_index_hu()
+    return redirect('static_parse_page')
+
+
+def static_parse_page_index_show_topicmodel(request):
+    path = IndexTopicsPath2
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            indexTopicsJson = json.load(data_file)
+        indexTopics =  sorted(indexTopicsJson.items(), key=operator.itemgetter(0))
+    else:
+        indexTopics = {["nem létezik még az fájl",""]}
+    print(indexTopics)
+    return render(request, 'webparser/static_parse_page_index_topics.html',{'indexTopics':indexTopics})

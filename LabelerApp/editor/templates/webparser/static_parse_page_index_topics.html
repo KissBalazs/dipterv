@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Index témakörök</title>
+</head>
+<body>
+{% block content %}
+
+<h1>Index témakörök</h1>
+
+<table class="table table-striped table-rows" style="table-layout: fixed;width: 1500px;">
+    <col width="2">
+    <col width="4">
+    <!--<col width="3">-->
+    <!--<col width="3">-->
+    <!--<col width="10">-->
+    <tr>
+        <th>Témakör</th>
+        <th>Lejellemzőbb szavak</th>
+    </tr>
+    {% for entry in indexTopics %}
+    <tr>
+        <td> {{entry.0}} </td>
+        <td>
+            {% for word in entry.1 %}
+                {{word}} -
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+</body>

@@ -36,7 +36,11 @@ class IndexCrawler(scrapy.Spider):
         # # [u'<meta name="author" content="Munk Veronika">']
         # todo: írjár róla hogy az index válrtozrtatja a buzeráns oldalát
 
-        text = ''.join(response.css('div.cikk-torzs p::text').extract())
+        #Magyarázat: mindeközbenes blogfolyamnál egymás alá hányja a híreket, és nagyon elcseszi a dokumentumteret, ha mindig minden cikket behúzok...
+        if("mindekozben" in response.url):
+            text = ''.join(response.css('div.cikk-torzs p::text').extract_first())
+        else:
+            text = ''.join(response.css('div.cikk-torzs p::text').extract())
         self.counter += 1
 
 
