@@ -8,7 +8,7 @@ from BeautifulSoup import BeautifulSoup
 
 class IndexCrawler(scrapy.Spider):
     name = "index" # must be unique
-    counter = 0
+    counter = -1
 
 
     start_urls = [
@@ -17,11 +17,12 @@ class IndexCrawler(scrapy.Spider):
 
     def parse(self, response):
         for href in response.css('a::attr(href)').re(r'.*dex.*'): # 1. kiszedjük a valid linkeket
-            if not ("szerzo" in href) and not("mailto" in href) and not ("velvet" in href)and ("id" in href): # 2. megszűrjük, csak a cikkekre mutatójk maradnak
+            if not ("szerzo" in href) and not("mailto" in href) and not ("velvet" in href)and ("id" in href) \
+                    and not ("otthonterkep" in href) and not ("bookline" in href) and not ("totalcar" in href): # 2. megszűrjük, csak a cikkekre mutatójk maradnak
                 yield scrapy.Request(response.urljoin(href), callback=self.parse_article)
                 # yield {
                 #     'link': href,
-                # }
+                # }.lc
 
     def parse_article(self, response):
         # author_meta_raw_list = response.css('meta').re(r'.*author.*')
@@ -38,7 +39,9 @@ class IndexCrawler(scrapy.Spider):
 
         #Magyarázat: mindeközbenes blogfolyamnál egymás alá hányja a híreket, és nagyon elcseszi a dokumentumteret, ha mindig minden cikket behúzok...
         if("mindekozben" in response.url):
-            text = ''.join(response.css('div.cikk-torzs p::text').extract_first())
+            textRaw = ''.join(response.css('div.clearafter').extract_first())
+            from BeautifulSoup import BeautifulSoup
+            text = BeautifulSoup(textRaw).text
         else:
             text = ''.join(response.css('div.cikk-torzs p::text').extract())
         self.counter += 1

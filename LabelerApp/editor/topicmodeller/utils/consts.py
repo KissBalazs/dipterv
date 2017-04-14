@@ -14,7 +14,8 @@ stopwordlist = (u'a az egy be ki le fel meg el át rá ide oda szét össze viss
                u'számára szemben szerint szinte talán tehát teljes tovább továbbá több úgy ugyanis új újabb újra után '+
                u'utána utolsó vagyis valaki valami valamint való vagyok vannak voltam voltak voltunk vele viszont '+
                u'volna alá ha is ad szerző helyett amúgy főleg os es szerintem oka hozzászólás soha hozzászólások '+
-               u'száma kategória feladva komment szia hello üdv - is, , - volt, is. van, kis, ki, meg, meg. ki. után, egész –')
+               u'száma kategória feladva komment szia hello üdv - is, , - volt, is. van, kis, ki, meg, meg. ki. után, '+
+               u'egész – miatt óta túl ráadásul esetleg végül 	. ')
 
 indexDictionaryPath = '../documents/IndexDictionary'
 wikiDictionaryPath = '../documents/WikiDictionary' # todo: ezek kellenek?
@@ -27,5 +28,7 @@ IndexTopicsPath2 = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodell
 WikiDocumentsPath = "/home/forestg/projects/dipterv/LabelerApp/data/wiki.json"
 WikiDictionaryPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/wikiDictionary.dict"
 WikiFrequenciesPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/wikiFrequency"
+WikiTopicsPath2 = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/wikiTopics2.json"
+
 
 

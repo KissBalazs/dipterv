@@ -109,6 +109,9 @@ def topic_model_index_hu():
     else:
         raise ValueError(path + "<- this does not exists :(")
 
+    print("document----")
+    print("size: ", len(document_list))
+
     # todo: akár refaktorozhatnád is...
     tokenized_documents = [[word for word in document.get('text') \
         .replace(",", " ") \
@@ -123,8 +126,45 @@ def topic_model_index_hu():
         .replace("'", " ") \
         .lower().split() if word not in stopwordlist] for document in document_list]
 
+
+
+
+
+    # ---------------------------- TUTORIALOS BETANÍTÓ ---------------------------------------
+    # documents = ["Human machine interface for lab abc computer applications",
+    #              "A survey of user opinion of computer system response time",
+    #              "The EPS user interface management system",
+    #              "System and human system engineering testing of EPS",
+    #              "Relation of user perceived response time to error measurement",
+    #              "The generation of random binary unordered trees",
+    #              "The intersection graph of paths in trees",
+    #              "Graph minors IV Widths of trees and well quasi ordering",
+    #              "Graph minors A survey"]
+    #
+    # # remove common words and tokenize
+    # stoplist = set('for a of the and to in'.split())
+    # texts = [[word for word in document.lower().split() if word not in stoplist]
+    #          for document in documents]
+    #
+    # # remove words that appear only once
+    # from collections import defaultdict
+    # frequency = defaultdict(int)
+    # for text in texts:
+    #     for token in text:
+    #         frequency[token] += 1
+    #
+    # tokenized_documents = [[token for token in text if frequency[token] > 1]
+    #          for text in texts]
+    #
+    # from pprint import pprint  # pretty-printer
+    # pprint(texts)
+    #
+    # dictionary = corpora.Dictionary(texts)
+    # ---------------------------- TUTORIALOS BETANÍTÓ ---------------------------------------
+
     print("tokenizált:----")
     print(tokenized_documents)
+    print("elemszám:", tokenized_documents.__len__())
 
     # 3 ezen a ponton tudjuk, hogy a lementett dokumentumtér indexei megegyeznek a most megnyitott dokumentumtér indexjeivel. Erog majd amellé kell beszúrni
 
@@ -148,8 +188,7 @@ def topic_model_index_hu():
     # for doc in corpus_tfidf:
     #     print(doc)
 
-    print("corpus_tfidf-----")
-    print(corpus_tfidf)
+
 
 
 
@@ -213,54 +252,93 @@ def topic_model_index_hu():
     # nézzük meg a legközelebbi dokumentumot
     corpus_lsi_dim2 = lsi_model_dim2[corpus_tfidf] # create a double wrapper over the original corpus: bow->tfidf->fold-in-lsi
 
-    print("corpus_lsi_dim2----")
-    print (corpus_lsi_dim2)
-    print("docs-----")
-    lowest_value_0 = 0.0
-    lowest_value_1 = 0.0
-    lowest_index_0 = 0
-    lowest_index_1 = 0
-    highest_value_0 = 0.0
-    highest_value_1 = 0.0
-    highest_index_0 = 0
-    highest_index_1 = 0
-
-    for doc in corpus_lsi_dim2:
-        print(doc)
-
-    print("---trágya-----")
-
-    for index, doc in enumerate(corpus_lsi_dim2):
-        print(index, doc)        # print("val:", doc[0][1])
-        if(doc):
-            if(doc[0][1]>highest_value_0):
-                highest_value_0 = doc[0][1]
-                highest_index_0 = index
-            if(doc[0][1]<lowest_value_0):
-                lowest_value_0 = doc[0][1]
-                lowest_index_0 = index
-
-            if(doc[1][1]>highest_value_1):
-                highest_value_1 = doc[1][1]
-                highest_index_1 = index
-            if(doc[1][1]<lowest_value_1):
-                lowest_value_1 = doc[1][1]
-                lowest_index_1 = index
 
 
-    print("topic 0, lowest:",lowest_value_0, lowest_index_0, document_list[lowest_index_0].get("text"))
-    print("topic 0, highest:", highest_value_0, highest_index_0, document_list[highest_index_0].get("text"))
 
-    print("topic 1, lowest:",lowest_value_1, lowest_index_1, document_list[lowest_index_1].get("text"))
-    print("topic 1, highest:", highest_value_1, highest_index_1, document_list[highest_index_1].get("text"))
+    # -----------------------------------------------
+    # --------- TFIDF + LSI bukása ------------------
+    # -----------------------------------------------
+    # print("corpus_lsi_dim2----")
+    # print (corpus_lsi_dim2)
+    # print("docs-----")
+    # lowest_value_0 = 0.0
+    # lowest_value_1 = 0.0
+    # lowest_index_0 = 0
+    # lowest_index_1 = 0
+    # highest_value_0 = 0.0
+    # highest_value_1 = 0.0
+    # highest_index_0 = 0
+    # highest_index_1 = 0
+    #
+    # print("---corpus-----")
+    #
+    # for index, doc in enumerate(corpus_lsi_dim2):
+    #     print(index, doc)        # print("val:", doc[0][1])
+    #     if(doc):
+    #         if(doc[0][1]>highest_value_0):
+    #             highest_value_0 = doc[0][1]
+    #             highest_index_0 = index
+    #         if(doc[0][1]<lowest_value_0):
+    #             lowest_value_0 = doc[0][1]
+    #             lowest_index_0 = index
+    #
+    #         if(doc[1][1]>highest_value_1 and doc[1][1]>0.8):
+    #             highest_value_1 = doc[1][1]
+    #             highest_index_1 = index
+    #         if(doc[1][1]<lowest_value_1):
+    #             lowest_value_1 = doc[1][1]
+    #             lowest_index_1 = index
+    #
+    # print("Témakörök:-----")
+    # print("topic 1 szavak:", lsi_topics_dim2[1])
+    # print("topic 2 szavak:", lsi_topics_dim2[2])
+    #
+    # print("Eredmények:------")
+    # print("topic 0, lowest:",lowest_value_0, lowest_index_0, document_list[lowest_index_0].get("text"))
+    # print("topic 0, highest:", highest_value_0, highest_index_0, document_list[highest_index_0].get("text"))
+    #
+    # print("topic 1, lowest:",lowest_value_1, lowest_index_1, document_list[lowest_index_1].get("text"))
+    # print("topic 1, highest:", highest_value_1, highest_index_1, document_list[highest_index_1].get("text"))
+    #
+    # winnerDocumentForTopic1 = document_list[highest_index_1]
+    # winnerDocumentForTopic2 = document_list[lowest_index_1]
+    #
+    # lsi_topics_dim2[1].append(winnerDocumentForTopic1)
+    # lsi_topics_dim2[2].append(winnerDocumentForTopic2)
+    #
+    # print("tosave:", lsi_topics_dim2)
 
-    print(document_list)
 
 
-    lsi_topics_dim2[1].append(document_list[highest_index_0])
-    lsi_topics_dim2[2].append(document_list[lowest_index_1])
 
-    print("tosave:", lsi_topics_dim2)
+    print("counting words: -----")
+    topic1WordCountOnDocuments= [0] * tokenized_documents.__len__()
+    for word in lsi_topics_dim2[1]:
+        for index, text in enumerate(tokenized_documents):
+            topic1WordCountOnDocuments[index] += tokenized_documents[index].count(word)
+    topic2WordCountOnDocuments= [0] * tokenized_documents.__len__()
+    for word in lsi_topics_dim2[2]:
+        for index, text in enumerate(tokenized_documents):
+            topic2WordCountOnDocuments[index] += tokenized_documents[index].count(word)
+
+
+    maxValue = max(topic1WordCountOnDocuments)
+    indexOfMaxValue = topic1WordCountOnDocuments.index(maxValue)
+    document = document_list[indexOfMaxValue]
+    print("Winner today:", document)
+
+    lsi_topics_dim2[1].append(document)
+
+    maxValue = max(topic2WordCountOnDocuments)
+    indexOfMaxValue = topic2WordCountOnDocuments.index(maxValue)
+    document = document_list[indexOfMaxValue]
+    print("Winner 2 today:", document)
+    lsi_topics_dim2[2].append(document)
+
+
+
+
+
 
     if (os.path.isfile(IndexTopicsPath2)):
         os.remove(IndexTopicsPath2)
@@ -269,3 +347,11 @@ def topic_model_index_hu():
 
 
 topic_model_index_hu()
+
+#  finomhangolás lépései:
+# 1. kütöttem egy csomó felesleges blogot
+# 2. kiütöttem a hírfolyamot, mert nem lhet crawlorni
+# 3. kiszedtem a kiugróan jól ileszkedő egykarakteres sövegektt, és a nagyon nagyon hosszú cikkeket, pl totalcarosok.
+# 4. levojuk a tanulságot: 1. néha hülye témák jönnek ki. 2. mindig másfelé mutatnak a vektorok.
+
+# 5. helyette milye algoritmust használok? -> legfontosabb szavak előfordulási gyakorisága...

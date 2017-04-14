@@ -18,67 +18,37 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="static_parse_page.html" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page.html">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="630">
-                    <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="index_frontpage_parse.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/scripts/index_frontpage_parse.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="60">
-                    <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="topicmodellerServices.py" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/editor/topicmodeller/topicmodellerServices.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="765">
-                    <caret line="57" column="9" lean-forward="true" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="LabelerApp" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index_crawler.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index_crawler.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/index_crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-230">
-              <caret line="19" column="89" lean-forward="false" selection-start-line="19" selection-start-column="89" selection-end-line="19" selection-end-column="89" />
+            <state relative-caret-position="420">
+              <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexHuTopicModelling.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="static_parse_page.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="302">
+              <caret line="33" column="55" lean-forward="false" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="indexHuTopicModelling.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/indexHuTopicModelling.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2001">
-              <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="229">
+              <caret line="329" column="13" lean-forward="false" selection-start-line="329" selection-start-column="8" selection-end-line="329" selection-end-column="13" />
               <folding>
                 <element signature="e#24#35#0" expanded="true" />
               </folding>
@@ -89,31 +59,70 @@
       <file leaf-file-name="tutorial_quotes_spider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/tutorial_quotes_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-560">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="static_parse_page_index_topics.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_topics.html">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="28" column="22" lean-forward="true" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+            <state relative-caret-position="425">
+              <caret line="226" column="60" lean-forward="false" selection-start-line="226" selection-start-column="60" selection-end-line="226" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="static_parse_page_wiki_topics.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_wiki_topics.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="692">
+              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="62" column="40" lean-forward="false" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wikiHuTopicModelling.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="676">
+              <caret line="185" column="11" lean-forward="false" selection-start-line="185" selection-start-column="11" selection-end-line="185" selection-end-column="11" />
               <folding>
-                <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="e#24#35#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexTopics2.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/editor/topicmodeller/documents/indexTopics2.json">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="24656" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="24656" />
+            <state relative-caret-position="435">
+              <caret line="37" column="93" lean-forward="true" selection-start-line="37" selection-start-column="93" selection-end-line="37" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="consts.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/topicmodeller/utils/consts.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="55" lean-forward="false" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -131,12 +140,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tmp/onlab</find>
-      <find>mouse</find>
-      <find>title</find>
-      <find>documents</find>
-      <find>post_new</find>
-      <find>yieldLabels</find>
       <find>editor</find>
       <find>k</find>
       <find>author</find>
@@ -150,10 +153,23 @@
       <find>]</find>
       <find>print</find>
       <find>corpus</find>
-      <find>corpus_tfidf</find>
       <find>t</find>
       <find>document</find>
       <find>99909870301679526</find>
+      <find>túl</find>
+      <find>99430685604710567</find>
+      <find>1, 0.9</find>
+      <find>1, 0.049</find>
+      <find>0, -0.4</find>
+      <find>46746431297031588</find>
+      <find>lsi_model_dim2</find>
+      <find>0, 0.3</find>
+      <find>corpus_tfidf</find>
+      <find>0, -0.3</find>
+      <find>lsi_topics_dim2</find>
+      <find>tokenized_documents</find>
+      <find>miat</find>
+      <find>Topic</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -186,7 +202,6 @@
         <option value="$PROJECT_DIR$/editor/langdetect/langdetectServices.py" />
         <option value="$PROJECT_DIR$/editor/topicmodeller/topicmodellerServices_old.py" />
         <option value="$PROJECT_DIR$/editor/topicmodeller/topicmodellerServices.py" />
-        <option value="$PROJECT_DIR$/editor/templates/base.html" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index.html" />
         <option value="$PROJECT_DIR$/static/css/editor.css" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_wiki.html" />
@@ -200,16 +215,17 @@
         <option value="$PROJECT_DIR$/editor/topicmodeller/utils/helpers.py" />
         <option value="$PROJECT_DIR$/editor/webcrawler/webcrawler/scripts/index_frontpage_parse.py" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_wiki_dictionary.html" />
-        <option value="$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py" />
+        <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_dictionary.html" />
+        <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_topics.html" />
         <option value="$PROJECT_DIR$/editor/urls.py" />
         <option value="$PROJECT_DIR$/editor/topicmodeller/utils/consts.py" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page.html" />
-        <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_wiki_topics.html" />
-        <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_dictionary.html" />
+        <option value="$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py" />
+        <option value="$PROJECT_DIR$/editor/templates/base.html" />
         <option value="$PROJECT_DIR$/editor/views.py" />
-        <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_topics.html" />
-        <option value="$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/index_crawler.py" />
+        <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_wiki_topics.html" />
         <option value="$PROJECT_DIR$/editor/topicmodeller/services/indexHuTopicModelling.py" />
+        <option value="$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/index_crawler.py" />
       </list>
     </option>
   </component>
@@ -248,6 +264,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -400,55 +417,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webcrawler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webcrawler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LabelerApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LabelerApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="editor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="topicmodeller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LabelerApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LabelerApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="editor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="topicmodeller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -471,28 +440,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LabelerApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LabelerApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="editor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="topicmodeller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="documents" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -552,7 +499,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -576,17 +522,17 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/engine/webcrawler/webcrawler/scripts" />
+      <recent name="$PROJECT_DIR$/engine/webcrawler" />
+      <recent name="$PROJECT_DIR$/editor/app" />
+      <recent name="$PROJECT_DIR$/editor" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/editor/templates/webparser" />
       <recent name="$PROJECT_DIR$/editor/topicmodeller/services" />
       <recent name="$PROJECT_DIR$/editor/topicmodeller/utils" />
       <recent name="$PROJECT_DIR$/../old/LabelerApp" />
-      <recent name="$PROJECT_DIR$/editor" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/engine/webcrawler/webcrawler/scripts" />
-      <recent name="$PROJECT_DIR$/engine/webcrawler" />
-      <recent name="$PROJECT_DIR$/editor/app" />
       <recent name="$PROJECT_DIR$/editor" />
     </key>
   </component>
@@ -862,8 +808,8 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29045862" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29006085" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48478702" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34888437" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3336714" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -912,24 +858,23 @@
           <line>60</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/editor/topicmodeller/services/indexHuTopicModelling.py</url>
+          <line>207</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="label" />
-        <watch expression="lsi_topics_dim2" language="Python" />
+        <watch expression="topic1WordCountOnDocuments" language="Python" />
+        <watch expression="tokenized_documents.count(word)" language="Python" />
+        <watch expression="lsi_model_dim2" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/documents/labelerAppLabels">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharmEdu3.5/system/python_stubs/-1247972723/sys.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1078,13 +1023,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="60" column="24" lean-forward="false" selection-start-line="60" selection-start-column="54" selection-end-line="60" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/editor/topicmodeller/utils/helpers.py" />
     <entry file="file://$PROJECT_DIR$/editor/topicmodeller/documents/wikiFrequency">
       <provider selected="true" editor-type-id="text-editor">
@@ -1137,6 +1075,21 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/topicmodeller/documents/indexTopics4.json" />
+    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_dictionary.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="4" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="25" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/gensim-0.10.3-py2.7-linux-x86_64.egg/gensim/models/lsimodel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="437" column="0" lean-forward="false" selection-start-line="437" selection-start-column="0" selection-end-line="437" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/editor/topicmodeller/topicmodellerServices.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -1145,32 +1098,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page.html">
+    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_topics.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-          <folding />
+        <state relative-caret-position="271">
+          <caret line="28" column="22" lean-forward="false" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_documents.html">
+    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/documents/indexTopics2.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_dictionary.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="4" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="25" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="34" column="100" lean-forward="false" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
+        <state relative-caret-position="0">
+          <caret line="0" column="39571" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="39571" />
           <folding />
         </state>
       </provider>
@@ -1183,81 +1125,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py">
+    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_documents.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="45" column="45" lean-forward="true" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
+        <state relative-caret-position="315">
+          <caret line="21" column="20" lean-forward="true" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="37" column="93" lean-forward="true" selection-start-line="37" selection-start-column="93" selection-end-line="37" selection-end-column="93" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/topicmodeller/utils/consts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="420">
+          <caret line="28" column="55" lean-forward="false" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/gensim-0.10.3-py2.7-linux-x86_64.egg/gensim/models/lsimodel.py">
+    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="437" column="0" lean-forward="false" selection-start-line="437" selection-start-column="0" selection-end-line="437" selection-end-column="0" />
+        <state relative-caret-position="302">
+          <caret line="33" column="55" lean-forward="false" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="185" column="11" lean-forward="false" selection-start-line="185" selection-start-column="11" selection-end-line="185" selection-end-column="11" />
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="62" column="40" lean-forward="false" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="249" column="80" lean-forward="false" selection-start-line="249" selection-start-column="80" selection-end-line="249" selection-end-column="80" />
-          <folding>
-            <element signature="e#62#73#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/index_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-230">
-          <caret line="19" column="89" lean-forward="false" selection-start-line="19" selection-start-column="89" selection-end-line="19" selection-end-column="89" />
+        <state relative-caret-position="425">
+          <caret line="226" column="60" lean-forward="false" selection-start-line="226" selection-start-column="60" selection-end-line="226" selection-end-column="60" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_topics.html">
+    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_wiki_topics.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="28" column="22" lean-forward="true" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/documents/indexTopics2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="24656" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="24656" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/tutorial_quotes_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-560">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="692">
+          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/indexHuTopicModelling.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2001">
-          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="229">
+          <caret line="329" column="13" lean-forward="false" selection-start-line="329" selection-start-column="8" selection-end-line="329" selection-end-column="13" />
           <folding>
             <element signature="e#24#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/tutorial_quotes_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/index_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
