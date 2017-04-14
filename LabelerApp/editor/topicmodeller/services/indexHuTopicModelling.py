@@ -134,20 +134,30 @@ def topic_model_index_hu():
     # 4. tokenizált dokumentum vektor megjelenítése
 
     corpus = [dictionary.doc2bow(text) for text in tokenized_documents]
+    print("corpus-----")
     print(corpus)
     # print(u'b\xedr\xf3s\xe1g') - letesztelve, működik eddig
 
     # 5 Jöhet a tfidf betanítása
     tfidf = models.TfidfModel(corpus)  # step 1 -- initialize a model
+    print("tfidf-----")
+    print(tfidf)
 
     # 6. Transzformáljuk a coprus-t
     corpus_tfidf = tfidf[corpus]
     # for doc in corpus_tfidf:
     #     print(doc)
 
+    print("corpus_tfidf-----")
+    print(corpus_tfidf)
+
+
+
     # 7. megvan a súlyozott vektortér, jöhet az LSI kétdimenziós témaátalakítás todo: legyen több diemnzió
     lsi_model_dim2 = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=2)  # initialize an LSI transformation
 
+    print("LSI_MODEL_KÉTDÉ-----")
+    print(lsi_model_dim2)
     print(lsi_model_dim2.show_topic(0))
     print(lsi_model_dim2.show_topic(1))
 
@@ -158,9 +168,7 @@ def topic_model_index_hu():
 
     print("---")
 
-    masikstring = "xyíx"
 
-# todo: tegyél bele pár linket is, a legjobban jellemző cikkekkel HOLNAP TODO
     lsi_topics_dim2 = {
         1:
             [
@@ -186,14 +194,10 @@ def topic_model_index_hu():
     # lsiTopicsWith4D = lsi_model_dim4.print_topics(4)
     # lsi_model_dim8 = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=8) # initialize an LSI transformation
     # lsiTopicsWith8D = lsi_model_dim8.print_topics(8)
-    # # corpus_lsi_dim2 = lsi_model_dim2[corpus_tfidf] # create a double wrapper over the original corpus: bow->tfidf->fold-in-lsi
-    #
+
     # #8 tádá - a két topicot kiírja és a hozzá kapcsolódó szavakat
     #
-    if (os.path.isfile(IndexTopicsPath2)):
-        os.remove(IndexTopicsPath2)
-    with open(IndexTopicsPath2, 'w') as f:
-        json.dump(lsi_topics_dim2, f, sort_keys=True)
+
     #
     # if (os.path.isfile(IndexTopicsPath4)):
     #     os.remove(IndexTopicsPath4)
@@ -206,4 +210,62 @@ def topic_model_index_hu():
     #     json.dump(lsiTopicsWith8D, f)
 
 
-# topic_model_index_hu()
+    # nézzük meg a legközelebbi dokumentumot
+    corpus_lsi_dim2 = lsi_model_dim2[corpus_tfidf] # create a double wrapper over the original corpus: bow->tfidf->fold-in-lsi
+
+    print("corpus_lsi_dim2----")
+    print (corpus_lsi_dim2)
+    print("docs-----")
+    lowest_value_0 = 0.0
+    lowest_value_1 = 0.0
+    lowest_index_0 = 0
+    lowest_index_1 = 0
+    highest_value_0 = 0.0
+    highest_value_1 = 0.0
+    highest_index_0 = 0
+    highest_index_1 = 0
+
+    for doc in corpus_lsi_dim2:
+        print(doc)
+
+    print("---trágya-----")
+
+    for index, doc in enumerate(corpus_lsi_dim2):
+        print(index, doc)        # print("val:", doc[0][1])
+        if(doc):
+            if(doc[0][1]>highest_value_0):
+                highest_value_0 = doc[0][1]
+                highest_index_0 = index
+            if(doc[0][1]<lowest_value_0):
+                lowest_value_0 = doc[0][1]
+                lowest_index_0 = index
+
+            if(doc[1][1]>highest_value_1):
+                highest_value_1 = doc[1][1]
+                highest_index_1 = index
+            if(doc[1][1]<lowest_value_1):
+                lowest_value_1 = doc[1][1]
+                lowest_index_1 = index
+
+
+    print("topic 0, lowest:",lowest_value_0, lowest_index_0, document_list[lowest_index_0].get("text"))
+    print("topic 0, highest:", highest_value_0, highest_index_0, document_list[highest_index_0].get("text"))
+
+    print("topic 1, lowest:",lowest_value_1, lowest_index_1, document_list[lowest_index_1].get("text"))
+    print("topic 1, highest:", highest_value_1, highest_index_1, document_list[highest_index_1].get("text"))
+
+    print(document_list)
+
+
+    lsi_topics_dim2[1].append(document_list[highest_index_0])
+    lsi_topics_dim2[2].append(document_list[lowest_index_1])
+
+    print("tosave:", lsi_topics_dim2)
+
+    if (os.path.isfile(IndexTopicsPath2)):
+        os.remove(IndexTopicsPath2)
+    with open(IndexTopicsPath2, 'w') as f:
+        json.dump(lsi_topics_dim2, f, sort_keys=True)
+
+
+topic_model_index_hu()

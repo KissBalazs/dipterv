@@ -17,7 +17,7 @@ class IndexCrawler(scrapy.Spider):
 
     def parse(self, response):
         for href in response.css('a::attr(href)').re(r'.*dex.*'): # 1. kiszedjük a valid linkeket
-            if not ("szerzo" in href) and not("mailto" in href) and ("id" in href): # 2. megszűrjük, csak a cikkekre mutatójk maradnak
+            if not ("szerzo" in href) and not("mailto" in href) and not ("velvet" in href)and ("id" in href): # 2. megszűrjük, csak a cikkekre mutatójk maradnak
                 yield scrapy.Request(response.urljoin(href), callback=self.parse_article)
                 # yield {
                 #     'link': href,
