@@ -32,6 +32,7 @@ WikiTopicsPath2 = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodelle
 
 linkListPath = "/home/forestg/projects/dipterv/LabelerApp/data/linkLinst.json"
 linkListDocumentsPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/dynamicDocuments.json"
+DynamicTopicsPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/dynamicTopics.json"
 
 
 

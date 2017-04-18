@@ -21,10 +21,16 @@
         </td>
     </tr>
     <tr>
-        <td>Elemzés</td>
-        <td>Utolsó futtatás:</td>
+        <td>Dokumentumtér</td>
+        <td>Utolsó futtatás: {{create_date_dynamic_doc}}</td>
         <td> <a href="{% url 'editor.views.dynamic_parse_page_document_parse' %}" class="top-menu2">Frissítés</a></td>
         <td> <a href="{% url 'editor.views.dynamic_parse_page_document_list' %}" class="top-menu2">Megtekintés</a></td>
+    </tr>
+    <tr>
+        <td>Webelemzés</td>
+        <td>Utolsó futtatás: {{create_date_dynamic_topicmodel}}</td>
+        <td> <a href="{% url 'editor.views.dynamic_parse_page_topicmodel_create' %}" class="top-menu2">Frissítés</a></td>
+        <td> <a href="{% url 'editor.views.dynamic_parse_page_topicmodel_list' %}" class="top-menu2">Megtekintés</a></td>
     </tr>
 </table>
 

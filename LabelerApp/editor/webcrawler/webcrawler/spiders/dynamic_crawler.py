@@ -55,8 +55,6 @@ class DynamicCrawler(scrapy.Spider):
             'lang':detect(text_final),
             'url':response.url,
             'text':text_final,
-            'category':"TBD",
-            'label':"TBD",
         }
         # for href in response.css('a::attr(href)').re(r'.*dex.*'): # 1. kiszedjük a valid linkeket
         #     if not ("szerzo" in href) and not("mailto" in href) and not ("velvet" in href)and ("id" in href) \

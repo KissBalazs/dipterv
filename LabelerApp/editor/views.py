@@ -10,11 +10,11 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from gensim import corpora
 
-from editor.topicmodeller.services.dynamicServices import linkListHandling, parseWebsitesFromLinkList
+from editor.topicmodeller.services.dynamicServices import linkListHandling, parseWebsitesFromLinkList, topicModelDynamic
 from editor.topicmodeller.services.indexHuTopicModelling import create_dictionary_index, topic_model_index_hu
 from editor.topicmodeller.services.wikiHuTopicModelling import create_dictionary_wiki, topic_model_wiki_hu
 from editor.topicmodeller.utils.consts import IndexDocumentsPath, IndexDictionaryPath, IndexFrequenciesPath, \
-    WikiFrequenciesPath, IndexTopicsPath2, WikiTopicsPath2, linkListPath, linkListDocumentsPath
+    WikiFrequenciesPath, IndexTopicsPath2, WikiTopicsPath2, linkListPath, linkListDocumentsPath, DynamicTopicsPath
 from editor.webcrawler.webcrawler.scripts.index_frontpage_parse import parse_index_hu
 from editor.webcrawler.webcrawler.scripts.wiki_frontpage_parse import parse_wiki_hu
 from .models import MyPost
@@ -295,7 +295,7 @@ def static_parse_page_index_show_topicmodel(request):
 
 
 
-
+# DINAMIKUS
 
 def dynamic_parse_page(request):
     if (os.path.isfile(linkListPath)):
@@ -303,7 +303,13 @@ def dynamic_parse_page(request):
             linksCount = len(json.load(data_file))
     else:
         linksCount = 0
-    return render(request, 'webparser/dynamic_parse_page.html', {'linksCount':linksCount})
+    if (os.path.isfile(linkListDocumentsPath)):
+        create_date_dynamic_doc = datetime.datetime.fromtimestamp(
+            int(os.path.getmtime(linkListDocumentsPath))
+        ).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        create_date_index = "nem létezik a fájl"
+    return render(request, 'webparser/dynamic_parse_page.html', {'linksCount':linksCount, 'create_date_dynamic_doc':create_date_dynamic_doc})
 
 def dynamic_parse_page_links_new(request):
     if request.method == "POST":
@@ -335,4 +341,17 @@ def dynamic_parse_page_document_list(request):
         document_array = {"nem létezik még az fájl"}
     return render(request, 'webparser/dynamic_parse_page_document_list.html', {'document_array':document_array})
 
+
+def dynamic_parse_page_topicmodel_create(request):
+    topicModelDynamic()
+    return redirect('dynamic_parse_page_topicmodel_list')
+
+def dynamic_parse_page_topicmodel_list(request):
+    path = DynamicTopicsPath
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            topic_array = json.load(data_file)
+    else:
+         topic_array = {"nem létezik még az fájl"}
+    return render(request, 'webparser/dynamic_parse_page_topicmodel_list.html',{'topic_array':topic_array})
 
