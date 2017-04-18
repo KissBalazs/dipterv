@@ -38,6 +38,14 @@ urlpatterns = patterns('',
     url(r'^static_parse_page/static_parse_page_index_topicmodel_start', views.static_parse_page_index_topicmodel_start, name='static_parse_page_index_topicmodel_start'),
     url(r'^static_parse_page/static_parse_page_index_show_topicmodel', views.static_parse_page_index_show_topicmodel, name='static_parse_page_index_show_topicmodel'),
 
+
+
+    url(r'dynamic_parse_page$', views.dynamic_parse_page, name='dynamic_parse_page'),
+    url(r'dynamic_parse_page/dynamic_parse_page_links_new', views.dynamic_parse_page_links_new, name='dynamic_parse_page_links_new'),
+    url(r'dynamic_parse_page/dynamic_parse_page_links_list', views.dynamic_parse_page_links_list, name='dynamic_parse_page_links_list'),
+    url(r'dynamic_parse_page/dynamic_parse_page_document_parse', views.dynamic_parse_page_document_parse, name='dynamic_parse_page_document_parse'),
+    url(r'dynamic_parse_page/dynamic_parse_page_document_list', views.dynamic_parse_page_document_list, name='dynamic_parse_page_document_list'),
+
 )
 
 

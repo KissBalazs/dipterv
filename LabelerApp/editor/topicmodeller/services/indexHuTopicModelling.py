@@ -346,7 +346,7 @@ def topic_model_index_hu():
         json.dump(lsi_topics_dim2, f, sort_keys=True)
 
 
-topic_model_index_hu()
+# topic_model_index_hu()
 
 #  finomhangolás lépései:
 # 1. kütöttem egy csomó felesleges blogot

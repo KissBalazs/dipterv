@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends 'base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Dinamikus parse</title>
+</head>
+<body>
+{% block content %}
+    <h1>Dinamikus parse-olás</h1>
+
+
+<table class="table table-striped table-rows">
+    <tr>
+        <td>Linkek megadása</td>
+        <td>{{linksCount}} darab</td>
+        <td> <a href="{% url 'editor.views.dynamic_parse_page_links_new' %}" class="top-menu2">Módosítás</a></td>
+        <td>
+            <a href="{% url 'editor.views.dynamic_parse_page_links_list' %}" class="top-menu2">Megtekintés</a>
+        </td>
+    </tr>
+    <tr>
+        <td>Elemzés</td>
+        <td>Utolsó futtatás:</td>
+        <td> <a href="{% url 'editor.views.dynamic_parse_page_document_parse' %}" class="top-menu2">Frissítés</a></td>
+        <td> <a href="{% url 'editor.views.dynamic_parse_page_document_list' %}" class="top-menu2">Megtekintés</a></td>
+    </tr>
+</table>
+
+
+{% endblock %}
+</body>
+</html>

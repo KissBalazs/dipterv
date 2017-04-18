@@ -10,10 +10,11 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from gensim import corpora
 
+from editor.topicmodeller.services.dynamicServices import linkListHandling, parseWebsitesFromLinkList
 from editor.topicmodeller.services.indexHuTopicModelling import create_dictionary_index, topic_model_index_hu
 from editor.topicmodeller.services.wikiHuTopicModelling import create_dictionary_wiki, topic_model_wiki_hu
 from editor.topicmodeller.utils.consts import IndexDocumentsPath, IndexDictionaryPath, IndexFrequenciesPath, \
-    WikiFrequenciesPath, IndexTopicsPath2, WikiTopicsPath2
+    WikiFrequenciesPath, IndexTopicsPath2, WikiTopicsPath2, linkListPath, linkListDocumentsPath
 from editor.webcrawler.webcrawler.scripts.index_frontpage_parse import parse_index_hu
 from editor.webcrawler.webcrawler.scripts.wiki_frontpage_parse import parse_wiki_hu
 from .models import MyPost
@@ -286,3 +287,52 @@ def static_parse_page_index_show_topicmodel(request):
         indexTopics = {["nem létezik még az fájl",""]}
     print(indexTopics)
     return render(request, 'webparser/static_parse_page_index_topics.html',{'indexTopics':indexTopics})
+
+
+
+
+
+
+
+
+
+
+def dynamic_parse_page(request):
+    if (os.path.isfile(linkListPath)):
+        with open(linkListPath) as data_file:
+            linksCount = len(json.load(data_file))
+    else:
+        linksCount = 0
+    return render(request, 'webparser/dynamic_parse_page.html', {'linksCount':linksCount})
+
+def dynamic_parse_page_links_new(request):
+    if request.method == "POST":
+        linkListHandling(request.POST["linkTexts"])
+        return redirect('dynamic_parse_page_links_list')
+    else:
+        form = MultiplePostParse()
+    return render(request, 'webparser/dynamic_parse_page_links_new.html', {'form': form})
+
+def dynamic_parse_page_links_list(request):
+    path = linkListPath
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            links = json.load(data_file)
+    else:
+        links = {["nem létezik még az fájl"]}
+    return render(request, 'webparser/dynamic_parse_page_links_list.html', {'links':links})
+
+def dynamic_parse_page_document_parse(request):
+    parseWebsitesFromLinkList()
+    return redirect('dynamic_parse_page_document_list')
+
+def dynamic_parse_page_document_list(request):
+    path = linkListDocumentsPath
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            document_array = json.load(data_file)
+    else:
+        document_array = {"nem létezik még az fájl"}
+    return render(request, 'webparser/dynamic_parse_page_document_list.html', {'document_array':document_array})
+
+

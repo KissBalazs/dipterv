@@ -29,6 +29,5 @@ class MyParse(models.Model):
 class MyMultiParse(models.Model):
     linkTexts = models.TextField()
 
-
 admin.site.register(MyPost, PostAdmin)
 

@@ -8,7 +8,6 @@ from .models import MyParse
 from .models import MyMultiParse
 
 class PostForm(forms.ModelForm):
-
     class Meta:
         model = MyPost
         fields = ('title', 'body', 'category', 'labels',)
@@ -27,3 +26,5 @@ class webArticle(forms.ModelForm):
     class article(models.Model):
         textBody = models.TextField()
         category = models.CharField(max_length = 100)
+
+

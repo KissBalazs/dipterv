@@ -30,5 +30,8 @@ WikiDictionaryPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmode
 WikiFrequenciesPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/wikiFrequency"
 WikiTopicsPath2 = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/wikiTopics2.json"
 
+linkListPath = "/home/forestg/projects/dipterv/LabelerApp/data/linkLinst.json"
+linkListDocumentsPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/dynamicDocuments.json"
+
 
 

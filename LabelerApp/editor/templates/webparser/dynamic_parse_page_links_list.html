@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Linkek </h1>
+<table class="table table-striped table-rows" style="table-layout: fixed;width: 1500px;">
+    <col width="2">
+    <col width="10">
+    <tr>
+        <th>Sorszám</th>
+        <th>Link</th>
+    </tr>
+    {% for link in links %}
+    <tr>
+        <td> {{forloop.counter}}</td>
+        <td> {{link}}</td>
+        <!--<td style="word-wrap:break-word">{{document.text}}</td>-->
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
