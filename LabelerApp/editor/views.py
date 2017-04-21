@@ -14,7 +14,8 @@ from editor.topicmodeller.services.dynamicServices import linkListHandling, pars
 from editor.topicmodeller.services.indexHuTopicModelling import create_dictionary_index, topic_model_index_hu
 from editor.topicmodeller.services.wikiHuTopicModelling import create_dictionary_wiki, topic_model_wiki_hu
 from editor.topicmodeller.utils.consts import IndexDocumentsPath, IndexDictionaryPath, IndexFrequenciesPath, \
-    WikiFrequenciesPath, IndexTopicsPath2, WikiTopicsPath2, linkListPath, linkListDocumentsPath, DynamicTopicsPath
+    WikiFrequenciesPath, IndexTopicsPath2, WikiTopicsPath2, linkListPath, linkListDocumentsPath, DynamicTopicsPath, \
+    DynamicTopicsWordsStatisticsPath
 from editor.webcrawler.webcrawler.scripts.index_frontpage_parse import parse_index_hu
 from editor.webcrawler.webcrawler.scripts.wiki_frontpage_parse import parse_wiki_hu
 from .models import MyPost
@@ -360,5 +361,12 @@ def dynamic_parse_page_topicmodel_list(request):
             topic_array = json.load(data_file)
     else:
          topic_array = {"nem létezik még az fájl"}
-    return render(request, 'webparser/dynamic_parse_page_topicmodel_list.html',{'topic_array':topic_array})
+
+    path = DynamicTopicsWordsStatisticsPath
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            word_statistics = json.load(data_file)
+    else:
+         word_statistics = {"nem létezik még az fájl"}
+    return render(request, 'webparser/dynamic_parse_page_topicmodel_list.html',{'topic_array':topic_array, 'word_statistics':word_statistics})
 
