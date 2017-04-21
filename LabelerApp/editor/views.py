@@ -308,8 +308,15 @@ def dynamic_parse_page(request):
             int(os.path.getmtime(linkListDocumentsPath))
         ).strftime('%Y-%m-%d %H:%M:%S')
     else:
-        create_date_index = "nem létezik a fájl"
-    return render(request, 'webparser/dynamic_parse_page.html', {'linksCount':linksCount, 'create_date_dynamic_doc':create_date_dynamic_doc})
+        create_date_dynamic_doc = "nem létezik a fájl"
+
+    if (os.path.isfile(DynamicTopicsPath)):
+        create_date_dynamic_topics = datetime.datetime.fromtimestamp(
+            int(os.path.getmtime(DynamicTopicsPath))
+        ).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        create_date_dynamic_topics = "nem létezik a fájl"
+    return render(request, 'webparser/dynamic_parse_page.html', {'linksCount':linksCount, 'create_date_dynamic_doc':create_date_dynamic_doc, 'create_date_dynamic_topics': create_date_dynamic_topics})
 
 def dynamic_parse_page_links_new(request):
     if request.method == "POST":
