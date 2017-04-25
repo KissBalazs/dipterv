@@ -11,6 +11,15 @@ from w3lib.html import remove_tags, remove_tags_with_content
 
 
 class DynamicCrawler(scrapy.Spider):
+    # https://doc.scrapy.org/en/latest/topics/settings.html#download-timeout
+    custom_settings = {
+        'DNS_TIMEOUT' : 2,
+        'RETRY_ENABLED': False,
+        'RETRY_TIMES' : 0,
+        'DOWNLOAD_TIMEOUT': 1,
+        'LOG_LEVEL':'ERROR'
+    }
+
     name = "dynamic" # must be unique
     counter = -1
 

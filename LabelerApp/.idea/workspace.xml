@@ -24,14 +24,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dynamicServices.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/dynamicServices.py">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="446" column="49" lean-forward="false" selection-start-line="446" selection-start-column="49" selection-end-line="446" selection-end-column="49" />
-              <folding>
-                <element signature="e#24#42#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -40,7 +38,29 @@
         <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/scripts/dynamic_linklist_parse.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dynamic_crawler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/dynamic_crawler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+              <folding>
+                <element signature="e#24#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index_frontpage_parse.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/scripts/index_frontpage_parse.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="18" column="116" lean-forward="false" selection-start-line="18" selection-start-column="116" selection-end-line="18" selection-end-column="116" />
               <folding />
             </state>
           </provider>
@@ -49,8 +69,8 @@
       <file leaf-file-name="dynamic_parse_page_topicmodel_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/templates/webparser/dynamic_parse_page_topicmodel_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1146">
-              <caret line="124" column="21" lean-forward="true" selection-start-line="124" selection-start-column="21" selection-end-line="124" selection-end-column="21" />
+            <state relative-caret-position="1680">
+              <caret line="112" column="19" lean-forward="false" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
               <folding>
                 <element signature="n#style#0;n#table#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#hr#0;n#body#0;n#!!top" expanded="true" />
@@ -61,10 +81,10 @@
                 <element signature="n#style#0;n#table#3;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#hr#3;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#table#4;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#5;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#6;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#7;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#8;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#9;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,8 +93,28 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="339" column="23" lean-forward="false" selection-start-line="339" selection-start-column="23" selection-end-line="339" selection-end-column="23" />
+            <state relative-caret-position="506">
+              <caret line="351" column="0" lean-forward="true" selection-start-line="350" selection-start-column="0" selection-end-line="351" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="indexHuTopicModelling.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/indexHuTopicModelling.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3546">
+              <caret line="91" column="24" lean-forward="false" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wikiHuTopicModelling.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-619">
+              <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -83,7 +123,7 @@
       <file leaf-file-name="consts.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/topicmodeller/utils/consts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
+            <state relative-caret-position="1140">
               <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding />
             </state>
@@ -102,10 +142,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>t</find>
-      <find>document</find>
-      <find>99909870301679526</find>
-      <find>túl</find>
       <find>99430685604710567</find>
       <find>1, 0.9</find>
       <find>1, 0.049</find>
@@ -132,12 +168,15 @@
       <find>corpus</find>
       <find>view</find>
       <find>dynamic_parse_page_document</find>
+      <find>User_age</find>
+      <find>TIMEOUT</find>
+      <find>counting words</find>
+      <find>dynamic_parse_page</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/engine/webcrawler/webcrawler/data/index.json" />
         <option value="$PROJECT_DIR$/engine/langdetect/__init__.py" />
         <option value="$PROJECT_DIR$/engine/webcrawler/webcrawler/spiders/index_crawler.py" />
         <option value="$PROJECT_DIR$/engine/topicmodeller/topicmodellerServices.py" />
@@ -162,7 +201,6 @@
         <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_dictionary.html" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_index_topics.html" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page.html" />
-        <option value="$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/static_parse_page_wiki_topics.html" />
         <option value="$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/index_crawler.py" />
         <option value="$PROJECT_DIR$/editor/models.py" />
@@ -176,7 +214,6 @@
         <option value="$PROJECT_DIR$/editor/templates/post_list.html" />
         <option value="$PROJECT_DIR$/editor/templates/base.html" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/dynamic_parse_page_document_list.html.html" />
-        <option value="$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/dynamic_crawler.py" />
         <option value="$PROJECT_DIR$/editor/urls.py" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/dynamic_parse_page_document_list.html" />
         <option value="$PROJECT_DIR$/npm-debug.log" />
@@ -185,17 +222,20 @@
         <option value="$PROJECT_DIR$/editor/topicmodeller/utils/consts.py" />
         <option value="$PROJECT_DIR$/editor/views.py" />
         <option value="$PROJECT_DIR$/editor/topicmodeller/documents/dynamicDocuments.json" />
+        <option value="$PROJECT_DIR$/editor/webcrawler/webcrawler/settings.py" />
+        <option value="$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/dynamic_crawler.py" />
         <option value="$PROJECT_DIR$/editor/webcrawler/webcrawler/scripts/dynamic_linklist_parse.py" />
         <option value="$PROJECT_DIR$/editor/templates/webparser/dynamic_parse_page_topicmodel_list.html" />
         <option value="$PROJECT_DIR$/editor/topicmodeller/services/dynamicServices.py" />
+        <option value="$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1366" />
-    <option name="y" value="24" />
-    <option name="width" value="1920" />
-    <option name="height" value="1056" />
+    <option name="x" value="1552" />
+    <option name="y" value="114" />
+    <option name="width" value="1910" />
+    <option name="height" value="998" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -558,18 +598,18 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/engine/webcrawler/webcrawler/scripts" />
-      <recent name="$PROJECT_DIR$/engine/webcrawler" />
-      <recent name="$PROJECT_DIR$/editor/app" />
-      <recent name="$PROJECT_DIR$/editor" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/editor/templates/webparser" />
       <recent name="$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders" />
       <recent name="$PROJECT_DIR$/editor/topicmodeller/services" />
       <recent name="$PROJECT_DIR$/editor/topicmodeller/utils" />
       <recent name="$PROJECT_DIR$/../old/LabelerApp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/engine/webcrawler/webcrawler/scripts" />
+      <recent name="$PROJECT_DIR$/engine/webcrawler" />
+      <recent name="$PROJECT_DIR$/editor/app" />
+      <recent name="$PROJECT_DIR$/editor" />
     </key>
   </component>
   <component name="RunManager" selected="Python.dynamicServices">
@@ -838,15 +878,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1366" y="24" width="1920" height="1056" extended-state="6" />
+    <frame x="1552" y="114" width="1910" height="998" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28096995" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13793103" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28245893" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4279919" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39148074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42190668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -856,10 +894,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293348" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991276" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20182556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42190668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
@@ -911,20 +951,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/editor/templates/webparser/static_parse_page_wiki_documents.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="27" column="35" lean-forward="true" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/wiki.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/linkListHandler.py" />
     <entry file="file://$PROJECT_DIR$/editor/forms.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -956,13 +982,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/webcrawler/asdasd.json" />
-    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/scripts/index_frontpage_parse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="112" lean-forward="false" selection-start-line="18" selection-start-column="112" selection-end-line="18" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.local/lib/python2.7/site-packages/cssselect/parser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -988,13 +1007,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
           <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-720">
-          <caret line="27" column="57" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1155,18 +1167,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/dynamic_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/gensim-0.10.3-py2.7-linux-x86_64.egg/gensim/models/lsimodel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="503" column="8" lean-forward="false" selection-start-line="503" selection-start-column="8" selection-end-line="503" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1184,27 +1188,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/linkLinst.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/editor/topicmodeller/documents/dynamicTopics_first_bigger.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/indexHuTopicModelling.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="216" column="42" lean-forward="false" selection-start-line="216" selection-start-column="42" selection-end-line="216" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1212,22 +1199,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/utils/consts.py">
+    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/dynamicServices.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="446">
+          <caret line="463" column="21" lean-forward="true" selection-start-line="463" selection-start-column="21" selection-end-line="463" selection-end-column="21" />
+          <folding>
+            <element signature="e#24#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/views.py">
+    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="339" column="23" lean-forward="false" selection-start-line="339" selection-start-column="23" selection-end-line="339" selection-end-column="23" />
+        <state relative-caret-position="0">
+          <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1235,15 +1223,33 @@
     <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/scripts/dynamic_linklist_parse.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/spiders/dynamic_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/webcrawler/webcrawler/scripts/index_frontpage_parse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="116" lean-forward="false" selection-start-line="18" selection-start-column="116" selection-end-line="18" selection-end-column="116" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/templates/webparser/dynamic_parse_page_topicmodel_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1146">
-          <caret line="124" column="21" lean-forward="true" selection-start-line="124" selection-start-column="21" selection-end-line="124" selection-end-column="21" />
+        <state relative-caret-position="1680">
+          <caret line="112" column="19" lean-forward="false" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
           <folding>
             <element signature="n#style#0;n#table#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#hr#0;n#body#0;n#!!top" expanded="true" />
@@ -1254,21 +1260,59 @@
             <element signature="n#style#0;n#table#3;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#hr#3;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#4;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#5;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#6;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#7;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#8;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#9;n#tr#1;n#table#4;n#body#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/dynamicServices.py">
+    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/utils/consts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="446" column="49" lean-forward="false" selection-start-line="446" selection-start-column="49" selection-end-line="446" selection-end-column="49" />
-          <folding>
-            <element signature="e#24#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1140">
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="351" column="0" lean-forward="true" selection-start-line="350" selection-start-column="0" selection-end-line="351" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/indexHuTopicModelling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3546">
+          <caret line="91" column="24" lean-forward="false" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/linkLinst.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1890">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/documents/dynamicTopics.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/topicmodeller/services/wikiHuTopicModelling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-619">
+          <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>

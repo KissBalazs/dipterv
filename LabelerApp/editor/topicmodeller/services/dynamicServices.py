@@ -104,8 +104,7 @@ def topicModelDynamic():
     lsi_model_dim2 = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=2)  # initialize an LSI transformation
     lsi_model_dim4 = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=4)  # initialize an LSI transformation
     lsi_model_dim8 = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=8)  # initialize an LSI transformation
-    lsi_model_dim12 = models.LsiModel(corpus_tfidf, id2word=dictionary,
-                                      num_topics=12)  # initialize an LSI transformation
+    lsi_model_dim12 = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=12)  # initialize an LSI transformation
 
 
     wordStatisticsObject = {
@@ -115,7 +114,7 @@ def topicModelDynamic():
                 "dimension": 2,
                 "topics": [
                     {
-                        "no": 1,
+                        "no": 0,
                         "words": [
                             lsi_model_dim2.show_topic(0)[0][1],
                             lsi_model_dim2.show_topic(0)[1][1],
@@ -125,7 +124,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 2,
+                        "no": 1,
                         "words": [
                             lsi_model_dim2.show_topic(1)[0][1],
                             lsi_model_dim2.show_topic(1)[1][1],
@@ -141,7 +140,7 @@ def topicModelDynamic():
                 "dimension": 4,
                 "topics": [
                     {
-                        "no": 1,
+                        "no": 0,
                         "words": [
                             lsi_model_dim4.show_topic(0)[0][1],
                             lsi_model_dim4.show_topic(0)[1][1],
@@ -151,7 +150,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 2,
+                        "no": 1,
                         "words": [
                             lsi_model_dim4.show_topic(1)[0][1],
                             lsi_model_dim4.show_topic(1)[1][1],
@@ -161,7 +160,7 @@ def topicModelDynamic():
                         ]
                     },
                     {
-                        "no": 3,
+                        "no": 2,
                         "words": [
                             lsi_model_dim4.show_topic(2)[0][1],
                             lsi_model_dim4.show_topic(2)[1][1],
@@ -171,7 +170,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 4,
+                        "no": 3,
                         "words": [
                             lsi_model_dim4.show_topic(3)[0][1],
                             lsi_model_dim4.show_topic(3)[1][1],
@@ -187,7 +186,7 @@ def topicModelDynamic():
                 "dimension": 8,
                 "topics": [
                     {
-                        "no": 1,
+                        "no": 0,
                         "words": [
                             lsi_model_dim8.show_topic(0)[0][1],
                             lsi_model_dim8.show_topic(0)[1][1],
@@ -197,7 +196,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 2,
+                        "no": 1,
                         "words": [
                             lsi_model_dim8.show_topic(1)[0][1],
                             lsi_model_dim8.show_topic(1)[1][1],
@@ -207,7 +206,7 @@ def topicModelDynamic():
                         ]
                     },
                     {
-                        "no": 3,
+                        "no": 2,
                         "words": [
                             lsi_model_dim8.show_topic(2)[0][1],
                             lsi_model_dim8.show_topic(2)[1][1],
@@ -217,7 +216,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 4,
+                        "no": 3,
                         "words": [
                             lsi_model_dim8.show_topic(3)[0][1],
                             lsi_model_dim8.show_topic(3)[1][1],
@@ -228,7 +227,7 @@ def topicModelDynamic():
                     },
 
                     {
-                        "no": 5,
+                        "no": 4,
                         "words": [
                             lsi_model_dim8.show_topic(4)[0][1],
                             lsi_model_dim8.show_topic(4)[1][1],
@@ -238,7 +237,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 6,
+                        "no": 5,
                         "words": [
                             lsi_model_dim8.show_topic(5)[0][1],
                             lsi_model_dim8.show_topic(5)[1][1],
@@ -248,7 +247,7 @@ def topicModelDynamic():
                         ]
                     },
                     {
-                        "no": 7,
+                        "no": 6,
                         "words": [
                             lsi_model_dim8.show_topic(6)[0][1],
                             lsi_model_dim8.show_topic(6)[1][1],
@@ -258,7 +257,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 8,
+                        "no": 7,
                         "words": [
                             lsi_model_dim8.show_topic(7)[0][1],
                             lsi_model_dim8.show_topic(7)[1][1],
@@ -274,7 +273,7 @@ def topicModelDynamic():
                 "dimension": 12,
                 "topics": [
                     {
-                        "no": 1,
+                        "no": 0,
                         "words": [
                             lsi_model_dim12.show_topic(0)[0][1],
                             lsi_model_dim12.show_topic(0)[1][1],
@@ -284,7 +283,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 2,
+                        "no": 1,
                         "words": [
                             lsi_model_dim12.show_topic(1)[0][1],
                             lsi_model_dim12.show_topic(1)[1][1],
@@ -294,7 +293,7 @@ def topicModelDynamic():
                         ]
                     },
                     {
-                        "no": 3,
+                        "no": 2,
                         "words": [
                             lsi_model_dim12.show_topic(2)[0][1],
                             lsi_model_dim12.show_topic(2)[1][1],
@@ -304,7 +303,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 4,
+                        "no": 3,
                         "words": [
                             lsi_model_dim12.show_topic(3)[0][1],
                             lsi_model_dim12.show_topic(3)[1][1],
@@ -314,7 +313,7 @@ def topicModelDynamic():
                         ]
                     },
                     {
-                        "no": 5,
+                        "no": 4,
                         "words": [
                             lsi_model_dim12.show_topic(4)[0][1],
                             lsi_model_dim12.show_topic(4)[1][1],
@@ -324,7 +323,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 6,
+                        "no": 5,
                         "words": [
                             lsi_model_dim12.show_topic(5)[0][1],
                             lsi_model_dim12.show_topic(5)[1][1],
@@ -334,7 +333,7 @@ def topicModelDynamic():
                         ]
                     },
                     {
-                        "no": 7,
+                        "no": 6,
                         "words": [
                             lsi_model_dim12.show_topic(6)[0][1],
                             lsi_model_dim12.show_topic(6)[1][1],
@@ -344,7 +343,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 8,
+                        "no": 7,
                         "words": [
                             lsi_model_dim12.show_topic(7)[0][1],
                             lsi_model_dim12.show_topic(7)[1][1],
@@ -354,7 +353,7 @@ def topicModelDynamic():
                         ]
                     },
                     {
-                        "no": 9,
+                        "no": 8,
                         "words": [
                             lsi_model_dim12.show_topic(8)[0][1],
                             lsi_model_dim12.show_topic(8)[1][1],
@@ -364,7 +363,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 10,
+                        "no": 9,
                         "words": [
                             lsi_model_dim12.show_topic(9)[0][1],
                             lsi_model_dim12.show_topic(9)[1][1],
@@ -374,7 +373,7 @@ def topicModelDynamic():
                         ]
                     },
                     {
-                        "no": 11,
+                        "no": 10,
                         "words": [
                             lsi_model_dim12.show_topic(10)[0][1],
                             lsi_model_dim12.show_topic(10)[1][1],
@@ -384,7 +383,7 @@ def topicModelDynamic():
                         ],
                     },
                     {
-                        "no": 12,
+                        "no": 11,
                         "words": [
                             lsi_model_dim12.show_topic(11)[0][1],
                             lsi_model_dim12.show_topic(11)[1][1],
@@ -399,7 +398,7 @@ def topicModelDynamic():
     }
 
 
-    corpus_lsi_2 = lsi_model_dim2[corpus_tfidf]
+    corpus_lsi_2 = lsi_model_dim2[corpus_tfidf]# create a double wrapper over the original corpus: bow->tfidf->fold-in-lsi
     corpus_lsi_4 = lsi_model_dim4[corpus_tfidf]
     corpus_lsi_8 = lsi_model_dim8[corpus_tfidf]
     corpus_lsi_12 = lsi_model_dim12[corpus_tfidf]
@@ -414,16 +413,24 @@ def topicModelDynamic():
     for index,doc in enumerate(corpus_lsi_2):
         max_value_index = max(doc, key=itemgetter(1))[0]
         corpus_category_lsi2.append(max_value_index)
+
     for index,doc in enumerate(corpus_lsi_4):
         max_value_index = max(doc, key=itemgetter(1))[0]
         corpus_category_lsi4.append(max_value_index)
+
     for index,doc in enumerate(corpus_lsi_8):
         max_value_index = max(doc, key=itemgetter(1))[0]
         corpus_category_lsi8.append(max_value_index)
+
     for index,doc in enumerate(corpus_lsi_12):
         max_value_index = max(doc, key=itemgetter(1))[0]
         corpus_category_lsi12.append(max_value_index)
+        print(index, ":", doc)
 
+
+    print("doc10:", corpus[10])
+    print("doc10:", document_array[10])
+    print("val12:", corpus_lsi_12)
 
 
     if (os.path.isfile(DynamicTopicsWordsStatisticsPath)):
@@ -457,10 +464,6 @@ def findMostImportantWord(text):
     return "TODO!!!!"
 
 
-def findTopic(text):
-    return "TODO!!!!"
-
-
 def getMostFrequentWord(text):
     from sklearn.feature_extraction import stop_words
     frequencies_dict = defaultdict(int)
@@ -484,5 +487,5 @@ def getMostFrequentWord(text):
     return (max(frequencies_dict.iteritems(), key=operator.itemgetter(1))[0])
 
 
-topicModelDynamic()
+# topicModelDynamic()
 # getMostFrequentWord(u'ablak zsiráf ablak megint, és egy kicsiz zsiráf zsiráf zsiráf is.')

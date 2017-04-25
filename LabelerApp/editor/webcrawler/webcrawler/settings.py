@@ -18,6 +18,9 @@ NEWSPIDER_MODULE = 'webcrawler.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'webcrawler (+http://www.yourdomain.com)'
 
+#todo: http://stackoverflow.com/questions/30028585/how-to-prevent-a-twisted-internet-error-connectionlost-error-when-using-scrapy erről is írthatsz
+USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
+
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
