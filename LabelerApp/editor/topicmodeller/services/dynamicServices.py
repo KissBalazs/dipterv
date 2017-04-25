@@ -399,6 +399,33 @@ def topicModelDynamic():
     }
 
 
+    corpus_lsi_2 = lsi_model_dim2[corpus_tfidf]
+    corpus_lsi_4 = lsi_model_dim4[corpus_tfidf]
+    corpus_lsi_8 = lsi_model_dim8[corpus_tfidf]
+    corpus_lsi_12 = lsi_model_dim12[corpus_tfidf]
+
+    from operator import itemgetter
+
+    corpus_category_lsi2 = []
+    corpus_category_lsi4 = []
+    corpus_category_lsi8 = []
+    corpus_category_lsi12 = []
+
+    for index,doc in enumerate(corpus_lsi_2):
+        max_value_index = max(doc, key=itemgetter(1))[0]
+        corpus_category_lsi2.append(max_value_index)
+    for index,doc in enumerate(corpus_lsi_4):
+        max_value_index = max(doc, key=itemgetter(1))[0]
+        corpus_category_lsi4.append(max_value_index)
+    for index,doc in enumerate(corpus_lsi_8):
+        max_value_index = max(doc, key=itemgetter(1))[0]
+        corpus_category_lsi8.append(max_value_index)
+    for index,doc in enumerate(corpus_lsi_12):
+        max_value_index = max(doc, key=itemgetter(1))[0]
+        corpus_category_lsi12.append(max_value_index)
+
+
+
     if (os.path.isfile(DynamicTopicsWordsStatisticsPath)):
         os.remove(DynamicTopicsWordsStatisticsPath)
     with open(DynamicTopicsWordsStatisticsPath, 'w') as f:
@@ -406,7 +433,7 @@ def topicModelDynamic():
 
     # 3. TopicModel fájl lementése
     topic_model = []
-    for document in document_array:
+    for index,document in enumerate(document_array):
         element = dict()
         element['lang'] = document['lang']
         element['url'] = document['url']
@@ -414,7 +441,10 @@ def topicModelDynamic():
         element['id'] = document['id']
         element['topImportantWord'] = findMostImportantWord(document['text'])
         element['mostFrequentWord'] = getMostFrequentWord(document['text'])
-        element['topic'] = findTopic(['text'])
+        element['topic2'] = corpus_category_lsi2[index]
+        element['topic4'] = corpus_category_lsi4[index]
+        element['topic8'] = corpus_category_lsi8[index]
+        element['topic12'] = corpus_category_lsi12[index]
         topic_model.append(element)
 
     if (os.path.isfile(DynamicTopicsPath)):

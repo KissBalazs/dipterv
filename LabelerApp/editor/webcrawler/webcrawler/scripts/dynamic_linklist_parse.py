@@ -15,3 +15,5 @@ def parse_dynamic_linklist():
 
 
     os.system("cd /home/forestg/projects/dipterv/LabelerApp/editor/webcrawler; scrapy crawl dynamic -o "+ linkListDocumentsPath)
+
+# parse_dynamic_linklist()
