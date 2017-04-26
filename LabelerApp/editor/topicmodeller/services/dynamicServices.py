@@ -10,8 +10,10 @@ import itertools
 from gensim import corpora
 from gensim import models
 
+from editor.langdetect.langdetectServices import langdetect
 from editor.topicmodeller.utils.consts import linkListPath, linkListDocumentsPath, DynamicTopicsPath, stopwordlist, \
-    DynamicDictPath, english_stopwords, DynamicTopicsWordsStatisticsPath
+    DynamicDictPath, english_stopwords, DynamicTopicsWordsStatisticsPath, DynamicDictPathEng, \
+    DynamicTopicsWordsStatisticsPathEng, DynamicTopicsPathEng
 from editor.webcrawler.webcrawler.scripts.dynamic_linklist_parse import parse_dynamic_linklist
 
 __author__ = 'forestg'
@@ -48,7 +50,7 @@ def parseWebsitesFromLinkList():
     parse_dynamic_linklist()
 
 
-def topicModelDynamic():
+def topicModelDynamic(englishOnly = False):
     # 1. megnyitjuk a dokumentumteret.
     path = linkListDocumentsPath
     if (os.path.exists(path)):
@@ -56,6 +58,14 @@ def topicModelDynamic():
             document_array = json.load(data_file)
     else:
         raise ValueError(path + "<- this does not exists :(")
+
+    # Spec: ha csak angol doksikra vágyunk
+    if(englishOnly):
+        document_array2 = []
+        for document in document_array:
+            if(langdetect(document['text']) == 'en'):
+                document_array2.append(document)
+        document_array = document_array2
 
     # 2. tokenizáljuk, megtisztítjuk a dokumentteret.
     tokenized_documents = [[word for word in document.get('text') \
@@ -70,6 +80,11 @@ def topicModelDynamic():
         .replace("?", " ") \
         .replace("'", " ") \
         .lower().split() if word not in stopwordlist] for document in document_array]
+
+
+
+
+
     # 3. megszámoljuk az összes szó előfordulási gyakoriságát
     from collections import defaultdict
     frequencies_dict = defaultdict(int)
@@ -80,8 +95,14 @@ def topicModelDynamic():
     tokenized_filtered_documents = [[token for token in text if frequencies_dict[token] > 1]
                                     for text in tokenized_documents]
     # 5. Ezen a ponton kész a dokumentumtér tokenizációja. Jöhet a szótár
+
+
     dictionary = corpora.Dictionary(tokenized_filtered_documents)
-    dictionary.save(DynamicDictPath)
+
+    if(englishOnly):
+        dictionary.save(DynamicDictPathEng)
+    else:
+        dictionary.save(DynamicDictPath)
 
     print("------")
     print("Documents:", tokenized_documents)
@@ -433,10 +454,16 @@ def topicModelDynamic():
     print("val12:", corpus_lsi_12)
 
 
-    if (os.path.isfile(DynamicTopicsWordsStatisticsPath)):
-        os.remove(DynamicTopicsWordsStatisticsPath)
-    with open(DynamicTopicsWordsStatisticsPath, 'w') as f:
-        json.dump(wordStatisticsObject, f)
+    if(englishOnly):
+        if (os.path.isfile(DynamicTopicsWordsStatisticsPathEng)):
+            os.remove(DynamicTopicsWordsStatisticsPathEng)
+        with open(DynamicTopicsWordsStatisticsPathEng, 'w') as f:
+            json.dump(wordStatisticsObject, f)
+    else:
+        if (os.path.isfile(DynamicTopicsWordsStatisticsPath)):
+            os.remove(DynamicTopicsWordsStatisticsPath)
+        with open(DynamicTopicsWordsStatisticsPath, 'w') as f:
+            json.dump(wordStatisticsObject, f)
 
     # 3. TopicModel fájl lementése
     topic_model = []
@@ -454,10 +481,16 @@ def topicModelDynamic():
         element['topic12'] = corpus_category_lsi12[index]
         topic_model.append(element)
 
-    if (os.path.isfile(DynamicTopicsPath)):
-        os.remove(DynamicTopicsPath)
-    with open(DynamicTopicsPath, 'w') as f:
-        json.dump(topic_model, f)
+    if(englishOnly):
+        if (os.path.isfile(DynamicTopicsPathEng)):
+            os.remove(DynamicTopicsPathEng)
+        with open(DynamicTopicsPathEng, 'w') as f:
+            json.dump(topic_model, f)
+    else:
+        if (os.path.isfile(DynamicTopicsPath)):
+            os.remove(DynamicTopicsPath)
+        with open(DynamicTopicsPath, 'w') as f:
+            json.dump(topic_model, f)
 
 
 def findMostImportantWord(text):
@@ -487,5 +520,5 @@ def getMostFrequentWord(text):
     return (max(frequencies_dict.iteritems(), key=operator.itemgetter(1))[0])
 
 
-# topicModelDynamic()
+# topicModelDynamic(True)
 # getMostFrequentWord(u'ablak zsiráf ablak megint, és egy kicsiz zsiráf zsiráf zsiráf is.')

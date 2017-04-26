@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dinamikus eredmények</title>
+</head>
+<body>
+{% block content %}
+
+<h1>Elemzések- ANGOLUL</h1>
+
+<h2>Témakörök</h2>
+<h3>2 témakörös bontás</h3>
+<table class="table table-striped, table-rows" style="table-layout: fixed;width: 1500px;">
+    <col width="1">
+    <col width="5">
+
+    <tr>
+        <th>id</th>
+        <th>Fő szavak</th>
+    </tr>
+    {% for data in word_statistics.models.0.topics %}
+    <tr>
+        <td>{{data.no}}</td>
+
+        <td>
+            {% for word in data.words %}
+            {{word}},
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr style="height:5px;background-color:red;border:none;" noshade/>
+
+<h3>4 témakörös bontás</h3>
+<table class="table table-striped, table-rows" style="table-layout: fixed;width: 1500px;">
+    <col width="1">
+    <col width="5">
+
+    <tr>
+        <th>id</th>
+        <th>Fő szavak</th>
+    </tr>
+    {% for data in word_statistics.models.1.topics %}
+    <tr>
+        <td>{{data.no}}</td>
+
+        <td>
+            {% for word in data.words %}
+            {{word}},
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr style="height:5px;background-color:red;border:none;" noshade/>
+
+<h3>8 témakörös bontás</h3>
+<table class="table table-striped, table-rows" style="table-layout: fixed;width: 1500px;">
+    <col width="1">
+    <col width="5">
+
+    <tr>
+        <th>id</th>
+        <th>Fő szavak</th>
+    </tr>
+    {% for data in word_statistics.models.2.topics %}
+    <tr>
+        <td>{{data.no}}</td>
+
+        <td>
+            {% for word in data.words %}
+            {{word}},
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr style="height:5px;background-color:red;border:none;" noshade/>
+
+<h3>12 témakörös bontás</h3>
+<table class="table table-striped, table-rows" style="table-layout: fixed;width: 1500px;">
+    <col width="1">
+    <col width="5">
+
+    <tr>
+        <th>id</th>
+        <th>Fő szavak</th>
+    </tr>
+    {% for data in word_statistics.models.3.topics %}
+    <tr>
+        <td>{{data.no}}</td>
+
+        <td>
+            {% for word in data.words %}
+            {{word}},
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr style="height:5px;background-color:red;border:none;" noshade/>
+
+<h3>Dokumentumok:</h3>
+<table class="table table-striped table-rows" style="table-layout: fixed;width: 1500px;">
+    <col width="1">
+    <col width="1">
+    <col width="1">
+    <col width="2">
+    <col width="1">
+    <col width="1">
+    <col width="1">
+    <col width="1">
+    <col width="1">
+    <tr>
+        <th>id</th>
+        <th>Url</th>
+        <th>Lang</th>
+        <th>Text</th>
+        <th>MstFrqvntWrd</th>
+        <th>Topic from 2</th>
+        <th>Topic from 4</th>
+        <th>Topic from 8</th>
+        <th>Topic from 12</th>
+    </tr>
+    {% for document in topic_array %}
+    <tr>
+        <td> {{document.id}}</td>
+        <td style="word-wrap:break-word"><a href="{{document.url}}">{{document.url}}</a></td>
+        <td style="word-wrap:break-word">{{document.lang}}</td>
+        <td style="word-wrap:break-word">{{document.text|truncatechars:100}}</td>
+        <td style="word-wrap:break-word">{{document.mostFrequentWord}}</td>
+        <td style="word-wrap:break-word">{{document.topic2}}</td>
+        <td style="word-wrap:break-word">{{document.topic4}}</td>
+        <td style="word-wrap:break-word">{{document.topic8}}</td>
+        <td style="word-wrap:break-word">{{document.topic12}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+</body>

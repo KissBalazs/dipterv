@@ -15,7 +15,7 @@ from editor.topicmodeller.services.indexHuTopicModelling import create_dictionar
 from editor.topicmodeller.services.wikiHuTopicModelling import create_dictionary_wiki, topic_model_wiki_hu
 from editor.topicmodeller.utils.consts import IndexDocumentsPath, IndexDictionaryPath, IndexFrequenciesPath, \
     WikiFrequenciesPath, IndexTopicsPath2, WikiTopicsPath2, linkListPath, linkListDocumentsPath, DynamicTopicsPath, \
-    DynamicTopicsWordsStatisticsPath
+    DynamicTopicsWordsStatisticsPath, DynamicTopicsPathEng, DynamicTopicsWordsStatisticsPathEng
 from editor.webcrawler.webcrawler.scripts.index_frontpage_parse import parse_index_hu
 from editor.webcrawler.webcrawler.scripts.wiki_frontpage_parse import parse_wiki_hu
 from .models import MyPost
@@ -370,3 +370,24 @@ def dynamic_parse_page_topicmodel_list(request):
          word_statistics = {"nem létezik még az fájl"}
     return render(request, 'webparser/dynamic_parse_page_topicmodel_list.html',{'topic_array':topic_array, 'word_statistics':word_statistics})
 
+def dynamic_parse_page_topicmodel_create_eng(request):
+    topicModelDynamic(True)
+    return redirect('dynamic_parse_page_topicmodel_list_eng')
+
+
+def dynamic_parse_page_topicmodel_list_eng(request):
+    path = DynamicTopicsPathEng
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            topic_array = json.load(data_file)
+    else:
+         topic_array = {"nem létezik még az fájl"}
+
+    path = DynamicTopicsWordsStatisticsPathEng
+    if (os.path.exists(path)):
+        with open(path) as data_file:
+            word_statistics = json.load(data_file)
+    else:
+         word_statistics = {"nem létezik még az fájl"}
+
+    return render(request, 'webparser/dynamic_parse_page_topicmodel_list_eng.html',{'topic_array':topic_array, 'word_statistics':word_statistics})

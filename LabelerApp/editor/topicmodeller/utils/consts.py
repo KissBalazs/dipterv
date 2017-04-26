@@ -79,4 +79,8 @@ DynamicTopicsPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodel
 DynamicTopicsWordsStatisticsPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/dynamicTopicsWordsStatisticsPath.json"
 DynamicDictPath = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/dynamicDictionary.dict"
 
+DynamicDictPathEng = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/dynamicDictionaryEng.dict"
+DynamicTopicsWordsStatisticsPathEng = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/dynamicTopicsWordsStatisticsPathEng.json"
+DynamicTopicsPathEng = "/home/forestg/projects/dipterv/LabelerApp/editor/topicmodeller/documents/dynamicTopicsEng.json"
+
 

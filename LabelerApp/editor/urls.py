@@ -46,9 +46,11 @@ urlpatterns = patterns('',
     url(r'dynamic_parse_page/dynamic_parse_page_document_parse', views.dynamic_parse_page_document_parse, name='dynamic_parse_page_document_parse'),
     url(r'dynamic_parse_page/dynamic_parse_page_document_list', views.dynamic_parse_page_document_list, name='dynamic_parse_page_document_list'),
 
+    url(r'dynamic_parse_page/dynamic_parse_page_topicmodel_create_eng', views.dynamic_parse_page_topicmodel_create_eng, name='dynamic_parse_page_topicmodel_create_eng'),
+    url(r'dynamic_parse_page/dynamic_parse_page_topicmodel_list_eng', views.dynamic_parse_page_topicmodel_list_eng, name='dynamic_parse_page_topicmodel_list_eng'),
+
     url(r'dynamic_parse_page/dynamic_parse_page_topicmodel_create', views.dynamic_parse_page_topicmodel_create, name='dynamic_parse_page_topicmodel_create'),
     url(r'dynamic_parse_page/dynamic_parse_page_topicmodel_list', views.dynamic_parse_page_topicmodel_list, name='dynamic_parse_page_topicmodel_list'),
-
 )
 
 
