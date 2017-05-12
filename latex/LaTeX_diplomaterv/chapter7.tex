@@ -1,0 +1,43 @@
+% !TeX encoding = ISO-8859-2
+%----------------------------------------------------------------------------
+\chapter{Összefoglalás, értékelés}\label{sect:summary}
+%----------------------------------------------------------------------------
+A Diplomamunkám során egy több iterációból és al-feladatokból álló, komplex webes szöveg- és adatbányászati szoftvert készítettem el.
+
+A mûködéshez webes segédkönyvtárakat, általam írt algoritmusokat, webcrawlereket és egy komplett webes keretrendszert használtam fel. 
+
+A feladat során több elemzést is elvégeztem, eredményeiket, megfigyeléseimet értelmeztem, beépítettem a szoftverbe. Több lépés során jutottam el a végsõ algoritmusokig, hol a sikeres elemzéseket továbbfejlesztve, hol pedig a hibás elgondolásokat újratervezve. 
+Elkészítettem egy mûködõ webalkalmazást, amely keretrendszerként többféle web, adat- és szövegbányászati feladatra is felhasználható.
+
+Mindezen eredményeket egy komplex webalkalmazásba ültettem át, mely segítségével az elemzések könnyedén reprodukálhatóak. A szöveg- és adatbányászati elemzések több lépése és a kód futtatása teljesen automatikusan történik.
+
+A tervezés lépései során kialakított algoritmusok kimenetei hasznos és helyes információval szolgálnak. Kutatásaim és munkám során a szövegbányászat eszközeirõl igazoltam, hogy felhasználhatóak a magyar nyelvû weboldalak esetében is. 
+
+A feladat során összesen ~3000 sor kódot írtam Python, HTML és egyéb scriptnyelveken. Elmélyítettem ismereteimet a Django keretrendszer mûködésében, saját modult és felületeket terveztem. Több segédkönyvtár és eszköz mûködését megismertem, elsajátítottam, azokat a feladat megoldásához felhasználtam. 
+
+Az idõm jelentõs hányadát tette ki az adatbányászati modul, és a szövegbányászati lépések megtervezése, tesztelése. Az elkészült programkódokat alapos tesztelés után beillesztettem a webalkalmazásba. 
+
+%----------------------------------------------------------------------------
+\section{Továbbfejlesztési lehetõségek}
+%----------------------------------------------------------------------------
+
+A webalkalmazás továbbfejlesztéséhez az egyik lehetséges út a felhasznált adatbányászati eljárások finomítása, fõleg a dinamikus modul esetében. Más adatbányászati elemzések kipróbálása, neurális hálók alkalmazása, weboldalak közötti egyéb összefüggések (pl. egymásra mutató linkek, címkék) kutatása.
+
+Jelenleg nem létezik ingyenesen elérhetõ és hatékony magyar szótövezési eljárás - ennek kidolgozása nagyban növelné az algoritmus hatékonyságát. 
+
+Az elemzések testreszabhatóságát növelné, ha a különbözõ webes elemzések precíziós paramétereit a felhasználó beállíthatná a webalkalmazás felületén. 
+
+A másik útvonal a weboldalaktól való függetlenedés: olyan menüpont elkészítése, amellyel dinamikusan tudunk megadni új hírforrásokat az alkalmazás számára.
+
+Másik ötlet, hogy a fájlok memóriában, majd pedig a diszken történõ szöveges fájlokként való tárolása helyett inkább egy adatbázist építsek fel a rendszer mögé. Az adattárolási réteg a skálázhatóságot és a szoftver feldolgozó erejét növelhetné, illetve a párhuzamos webcrawl esetén a hardveres szûk keresztmetszetet csökkentené esetleg egy elosztott rendszerrel történõ web bejárás.
+
+Nagyszabású projekt a statikus elemzések során, ha több hasonló oldalra is felkészítjük az alkalmazást, pl. több más magyar hírportált is együttesen elemeznénk, és ebbõl állapítanánk meg egy nap legfontosabb híreit - akár angol vagy más nyelveken is.
+
+A szövegbányászati és topic modelling eszközök közül még jó pár létezik, melyeket nem használtam fel, nem próbáltam ki: ilyen az LSI helyett Random Pojections, RP \cite{gensimMain},  osztályozásnál a k-nn módszer, vagy a klaszterezésnél a k-medoid klaszterezés \cite{AbonyiAdatb}, \cite{TikkSzovegb}.
+
+%----------------------------------------------------------------------------
+\section{Köszönetnyilvánítás}
+%----------------------------------------------------------------------------
+Köszönöm konzulensemnek, Nagy Gábornak az általános segítséget és a téma mesterképzésen átívelõ vezetését. Kazi Sándornak a szövegbányászati, python és \LaTeX\ segítségnyújtást. Köszönöm a lektorálást Ökrös Tamásnak, Módly Márknak, Mérész Dánielnek és Pálmai Nórának. 
+
+

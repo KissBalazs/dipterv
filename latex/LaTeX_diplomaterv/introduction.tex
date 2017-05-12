@@ -1,0 +1,48 @@
+%----------------------------------------------------------------------------
+\chapter*{Bevezetõ}\addcontentsline{toc}{chapter}{Bevezetõ}
+%----------------------------------------------------------------------------
+
+A diplomám elkészítése során a következõ kérdésre kerestem a választ: tisztán adat- és szövegbányászati eszközök segítségével milyen mélységig és milyen eszközök segítségével lehet internetes tartalmat automatikusan feltérképezni?
+A kérdés megválaszolása érdekében több különbözõ szövegbányászati és adatbányászati feladatot oldottam meg, körbejárva a témakört. 
+
+Munkámat a korábbi szövegbányászati munkáim eredményeibõl kiindulva, azokat felhasználva készítettem el. Létrehoztam egy webes felületen keresztül irányítható alkalmazást, mely megvalósítja az adat- és szövegbányászati elemzéseket. Így a feladatom nem csupán az elemzések, algoritmusok megalkotásából állt, hanem ezek egy közös alkalmazásba rendezésébõl, webes technológiák mélyreható felhasználásával.
+
+A kutatásaimra épült végleges webalkalmazás két nagy feladatra alkalmas:
+\begin{enumerate}
+	\item Segítségével nagyméretû internetes tartomány térképezhetõ fel, úgy, hogy a weboldalak szöveges tartalma alapján egy általános elemzést, kategorizálást végez el.
+	\item A szoftver képes (elõre kiválasztott) specifikus weboldalak mélyreható vizsgálata, tartalmuk alapos elemzésére.
+\end{enumerate}
+
+Mivel természetesen az egész internetet emberi értelmezés nélkül a jelenleg rendelkezésre álló eszközökkel feltérképezni nem lehet, így az általános feltérképezõ modul nem ad olyan részletes elemzést, mint az elõre kijelölt weboldalak specifikus tartalmára felkészített második modul. Itt hírportálok részletes elemzését jelöltem ki, mint megvalósítandó feladat: elsõsorban a hírportálra érkezõ cikkek kategorizálását, automatikus beolvasását, adatbányászati elemzését tûztem ki célul, erre hasznos webes funkcionalitást építve. 
+
+A nagyméretû webtartomány automatikus feltérképezése segítséget nyújthat a webes tartalmak kategorizálásához, válogatásához, veszélyes weblapok kiszûréséhez.  
+
+A részletes webes elemzõ segítségére lehet az újságíróknak a napi aktualitások gyors megállapítására, új cikkek írásakor a megfelelõ kategóriába történõ besoroláshoz.
+
+Önálló kutatásaim keretein belül már végeztem kimutatást a magyar nyelvû szövegbányászat ilyen jellegû alkalmazásainak eredményességérõl\cite{KissOnlab1} Ekkor elsõsorban internetes hírportál cikkeit összefoglaló kulcsszavak, azaz címkék meghatározásának lehetõségeit vizsgáltam.
+
+Eredményeim arra mutattak, hogy a magyar nyelvû szövegbõl kinyerhetõek azon fontos kulcsszavak, amelyek a legjobban jellemeznek egy adott szöveget. Elsõsorban a szövegbányászat webes környezetben történõ alkalmazása, és a késõbbiekben felhasznált keretrendszer bevezetõ megismerése jelentette a kihívást.
+
+Második önálló laboratórium tárgyam során egy olyan, a mostani feladatomat megalapozó alkalmazást készítettem el, amely segítségével cikkek közötti kapcsolatok alapján ajánlásokat tett egy új írás címkéire\cite{KissOnlab2}. Azt kerestem, hogy az új szöveg mely szavai a legjellemzõbbek az adott bejegyzésre és hogy adatbányászati értelemben mely más dokumentumok tartalma hasonlít a legjobban az új íráshoz. Így a két kutatás eredményének uniója adta a megoldás halmazát a cikkek címkéinek.
+
+Diplomamunkámnak egy olyan komplex webes alkalmazás elkészítését vállaltam, amely az említett eredményekre épülve képes automatikusan felolvasni webes tartalmakat, és azokat megszûri, kategorizálja illetve elemzi. A feladat kihívása abban rejlik, hogy megismerjem az ehhez szükséges web-crawler technológiákat\cite{webcrawling}, megállapítsam, milyen elemzéseken és milyen komplexitásig lehet elvégezni a rendelkezésre álló eszközökkel, és hogy megalkossam a dokumentum feldolgozási- és adatbányászati modelleket, melyek elvégzik magát  a kutatást.
+
+A munkám során tovább mélyítettem a felhasznált technológiák ismeretét, jelentõsen bõvítettem a korábbi szoftveremet, mely végül alkalmassá vált komplex dokumentumelemzési feladatokra. 
+
+%----------------------------------------------------------------------------
+\chapter*{A feladat}\addcontentsline{toc}{chapter}{Feladat}
+%----------------------------------------------------------------------------
+A diplomamunkám célja, hogy egy komplex szöveg- és adatbányászati elemzõszoftvert valósítsak meg, mely beépül egy webes szoftverbe. Az alkalmazás komplex szöveg és dokumentumelemzési feladatait böngészõn keresztül irányíthatja a felhasználó.
+
+A munkám során három fõ feladatot kellett megvalósítanom:
+\begin{enumerate}
+	\item A magyar nyelvû internetes tartalom témaelemzési megvalósíthatóságának vizsgálata egy konkrét példán keresztül (\ref{sect:documentMinePlanning}. fejezet).
+	\item Ismeretlen webes tartalom feltérképezése, kategorizálása automatikus tartalomkinyerés segítségével (\ref{sect:webmapping}. fejezet).
+	\item Elõkészített webtartalom elemzése kijelölt weboldalak esetében (\ref{sect:documentMinePlanning}. fejezet).	
+\end{enumerate}
+
+A feladatok egymásra épülnek. A megoldáshoz szükséges eszközök megismerése, az algoritmusok megtervezése és implementálása, a kapott eredmények fényében a módszerek kiválasztása és módosítása, saját algoritmusok és eszközök elkészítése mind a feladat részét képzik. 
+
+Kihívás a megfelelõ módszerek kiválasztása a cél érdekében, ezek implementálása az adott webes keretrendszerben, és az eredmények értelmezése, elemzése.
+
+A végsõ szoftverek alkalmasnak kell lennie komplex adatbányászati folyamatok megvalósítására. 

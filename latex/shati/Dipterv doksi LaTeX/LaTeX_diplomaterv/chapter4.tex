@@ -1,0 +1,362 @@
+%----------------------------------------------------------------------------
+\chapter{A mobilapplikáció fejlesztése és tesztelése}
+%----------------------------------------------------------------------------
+A következõkben megvizsgálom a Xamarin keretrendszer fejlesztési lehetõségeit.
+Ezután kitérek a fejlesztés során használt fõbb programozási paradigmákra, majd ismertetem az alkalmazáslogika struktúráját, és az annak implementálása során felmerült kihívásokat.
+Bemutatom a felhasználói felület készítésekor használt Xamarin.Forms könyvtár lényegesebb elemeit, valamint azon hibáikat, amikkel a fejlesztés során találkoztam.
+Végül kitérek arra, milyen módokon teszteltem az applikációt az elkészítése során.
+
+%----------------------------------------------------------------------------
+\section{A Xamarin multi-platform fejlesztési lehetõségei}\label{sect:XamarinMultiplatformOptions}
+%----------------------------------------------------------------------------
+A multi-platform kód elkészítésére a keretrendszer két különbözõ megközelítést kínál: a megosztott projekteket (shared project) \cite{SharedProjOverview} és a hordozható osztálykönyvtárakat (portable class library, PCL) \cite{PCLOverview}.
+
+Megosztott projekt használatakor a közös funkciók mellett a platformspecifikus kódrészletek is ugyanabban a forrásfájlban kapnak helyet.
+A \Csharp~fordító preprocesszora számára\linebreak\textit{\texttt{\#}if PLATFORM ... \texttt{\#}endif} utasításokkal jelezzük, melyik cél-operációsrendszeren milyen kódot kell futtatnia.
+Az így körülvett kódrészben használhatjuk az adott platform specifikus könyvtárait is.
+Adott platformra fordításkor csak az ahhoz tartozó kód kerül beépítésre a végleges alkalmazáscsomagba (\figref{SharedProjFigure} ábra). Ennek a megközelítésnek hátránya, hogy a forrásfájl nehezen olvashatóvá válhat.
+
+Hordozható osztálykönyvtár esetén a közös kód egy külön DLL-ben\footnote{Dynamic Link Library, dinamikus csatolású könyvtár: olyan alkalmazás-segédfájl, ami többek között eljárásokat, kompatibilitást segítõ eszközöket vagy úgynevezett "erõforrásokat" (pl. képeket, hangokat, lokalizált sztringeket) tárolhat.} kap helyet. Ekkor a megosztott kódban nem használhatunk egyedi platformkönyvtárakat, hanem interfészeket definiálunk a platformspecifikus funkciók elérésére, amiket a cél-operációsrendszerek saját projektjeiben valósítunk meg (\figref{PCLFigure} ábra).
+\newpage
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=150mm, keepaspectratio]{figures/SharedAssetProject.png}
+	\caption{Megosztott projektet használó alkalmazás struktúrája \cite{XamarinCodeSharing}}
+	\label{fig:SharedProjFigure}
+\end{figure}
+\begin{figure}[!hb]
+	\centering
+	\includegraphics[width=150mm, keepaspectratio]{figures/PCLProject.png}
+	\caption{Hordozható osztálykönyvtárat használó alkalmazás struktúrája \cite{XamarinCodeSharing}}
+	\label{fig:PCLFigure}
+\end{figure}
+\FloatBarrier
+
+A közös kódban a Xamarin \textit{DependencyService} osztályának használatával hívhatjuk meg az operációsrendszer-specifikus függvényeket.
+Az alábbi kódrészlet egy SQLite adatbázis megnyitását mutatja az \textit{ISQLite} interfész használatával:
+\begin{lstlisting}[frame=single]
+var SQLiteDb = DependencyService.Get<ISQLite>().GetConnection();
+\end{lstlisting}
+
+A \textit{Device} osztály nyújt funkciókat a programot futtató eszközrõl információ szerzésére, mint például a platform (Android, iOS vagy Windows Phone), az idióma (asztali számítógép, telefon vagy tablet) vagy a nevesített betûméretekhez (micro, kicsi, közepes, nagy, alapértelmezett) tartozó számszerûsített betûméret.
+%----------------------------------------------------------------------------
+\section{A fejlesztés során használt fõbb programozási paradigmák}
+%----------------------------------------------------------------------------
+%----------------------------------------------------------------------------
+\subsection{Az MVVM}\label{sect:MVVM}
+%----------------------------------------------------------------------------
+Az MVVM egy szoftverarchitektúra-tervezési minta, feloldása "Model-View-View Model".
+Ez a tervezési minta az MVC (Model-View-Control) minta egy módosított változata, amit a Microsoft fejlesztõi a .NET keretrendszer grafikus rendszerének (WPF\footnote{A Windows Presentation Foundation egy egységesített programozási modell grafikus alkalmazások készítésére \CsharpDotNet-ben.}) figyelembe vételével készítettek az eseményalapú felhasználói felület fejlesztésének megkönnyítésére \cite{MicrosoftMVVM}.
+
+A \textit{View} komponens határozza meg a grafikus felület struktúráját, kiosztását és megjelenését. Üzleti logikát nem tartalmaz, csak a felhasználói interakciók (például kattintás) értelmezése történik, majd az eseményt közli a View Modellel.
+
+A \textit{Model} feladata az adatok reprezentálása, valamint a validációs- és üzleti logika megvalósítása. Itt történik a kommunikáció az alkalmazáson kívüli komponensekkel is, például az adatok szinkronizálása egy távoli szerverrel.
+
+A \textit{View Model} az összekötõ kapocs a Model és a View között. Feladata, hogy a Model által nyújtott adatokat a View számára alkalmas formára hozza, illetve a felhasználói interakciók hatását érvényesítse a Modelben. Ezek mellett a View állapotgépeként is szolgál, például hosszan tartó mûveletek esetén utasíthatja a View-t, hogy egy töltõképernyõt jelenítsen meg.
+
+%----------------------------------------------------------------------------
+\subsection{\Csharp~grafikus elemek leírása XAML-ben, adatkötés}\label{sect:XamlDataBinding}
+%----------------------------------------------------------------------------
+A \Csharp-ban írt grafikus felületek struktúrájának átláthatóságára a Microsoft kifejlesztette a XAML-t\footnote{Extensible Application Markup Language, azaz bõvíthetõ alkalmazásleíró nyelv.}, ami egy olyan, XML alapú leíró nyelv, ami az objektumok inicializálásán és tagváltózóinak beállításán kívül könnyen láthatóvá teszi az objektumok közötti hierarchiát \cite{MicrosoftXAML}.
+Lehetõség van a beépített típusokon túl további típusokkal és bõvítményekkel kiegészíteni az alkalmazásunk igényeinek megfelelõen, akárcsak a szokványos \Csharp~kódot.
+
+Egy XAML nézetleíró két részbõl áll: magából a leírásból és a hozzá tartozó mögöttes kódból (Code-Behind).
+A mögöttes kódból elérhetõek a XAML leírásban deklarált objektumok, és fordítva, ezzel meghagyva a fejlesztõ szabadságát, hogy a különbözõ tulajdonságok beállítását melyik nyelv használatával végzi el.
+A mögöttes kód feladata az eseménykezelõk megvalósítása, viszont minél kevesebb alkalmazáslogika kerüljön ide.
+
+A View Model által megjelenítésre alkalmas (vagy ahhoz nagyon közeli) formára hozott adatokat a grafikus elemekhez rendeljük, úgynevezett adatkötést (data binding) végzünk.
+A kötés típusa Xamarinban lehet egyirányú az adattól a megjelenített elem irányába, vagy vissza, illetve kétirányú, ekkor az adat frissülhet a View Model és a View irányából is.
+Ha a View-beli elem adatforrása nem a View-t megvalósító osztály tagváltozója, akkor Xamarinban az elem \textit{BindingContext} (kötési kontextus) tulajdonságának értékül kell adni azt az objektumot, amiben a kötésre szánt adat található.
+A kötési kontextus automatikusan öröklõdik, azaz ha a View-t implementáló osztály BindingContextjének adjuk értékül (tipikusan) a View Modelt, akkor az összes benne elhelyezett elem is ugyanazt a kötési kontextust kapja, kivéve, ha felüldefiniáljuk azt.
+Ezután az adatkötésnél már csak a kötésikontextus-osztály tagjaira hivatkozunk, amiknek publikus láthatóságúnak kell lenniük.
+
+Ahhoz, hogy a kötött adat frissítésérõl a View értesítést kapjon, és frissítse\linebreak a megjelenített elemet, a View Modelnek implementálnia kell a\linebreak\textit{System.ComponentModel.INotifyPropertyChanged} interfészt, valamint a kötött adat változásakor meg kell hívnia saját \textit{OnPropertyChanged} implementációját.
+A függelék \sectref{SearchExample} pontjának kódrészletei a mobilapp barátkeresés funkcióján keresztül szemléltetik az adatkötést.
+Mivel a keresõsáv egy beviteli mezõ, ezért kötése a \textit{SearchFilter} taggal automatikusan kétirányú, így a megfelelõ \textit{set} eljárás használatával kényelmi funkcióként már a keresõszó megadása alatt, minden karakter bevitele után lefut egy szûrés a barátlistára.
+
+%----------------------------------------------------------------------------
+\subsection{Aszinkron mechanizmusok}\label{sect:AsyncMechanisms}
+%----------------------------------------------------------------------------
+A grafikus felülettel rendelkezõ alkalmazásoknál kiemelkedõen fontos, hogy a fõ programszálon, ami a felhasználói interfész (angolul user interface, UI) megjelenítéséért is felel, a lehetõ legkevesebb feladatot futtassuk.
+Ezzel biztosítjuk a felület reszponzivitását, azaz az animációk folyamatosságát és a felhasználói input feldolgozásának gyors megkezdését.
+
+A .NET keretrendszer a 4-es verziótól kezdve rendelkezik egy feladat-párhuzamosítási könyvtárral (Task Parallel Library, TPL), ami a korábban is létezõ párhuzamosítási mechanizmusokat egy erõforrás-hatékonyabb, jobban skálázódó és nagyobb kontrollt nyújtó keretbe fogja össze.
+Ennek alapegysége a feladat (Task osztály), amin többek között a szokásos szálkezelési mûveleteket is végrehajthatjuk (például indítás, várakozás, megszakítás, a visszatérési érték és kilépési kód lekérdezése).
+
+Az egyértelmûen idõigényes mûveleteket - például fájl- és adatbázis-mûveletek, kommunikáció más folyamatokkal és szolgáltatásokkal vagy internetes lekérdezések - mindenképp érdemes háttérszálakon futtatni.
+Ha a kézi tesztelés során azt tapasztaljuk, hogy egy mûvelet érezhetõ ideig blokkolja a fõ szálat, azt is futtathatjuk taszkként.
+Kritikus azonban, hogy az adatkötött változók értékmódosítását mindenképpen a fõ szálban végezzük, mert az adatkötés nem szálbiztos mechanizmus, és csak ezzel biztosítható az új adatok megjelenése a felületen (lásd a \sectref{ElementPlacement} pont ObservableCollection használatáról szóló részét).
+A fõ szál hívását Xamarinban a \textit{Device.BeginInvokeOnMainThread()} függvénnyel tehetjük meg, azonban erre a taszkra nem lehet várakozni, ezért célszerû a mûveleteket úgy ütemezni, hogy a kötések frissítése legyen az utolsó. Ajánlatos továbbá, hogy a fõ szálban logikai mûveletet már ne, hanem csak az értékadást végezzük, ezzel is rövidítve annak blokkolási idejét.
+
+%----------------------------------------------------------------------------
+\section{Az alkalmazáslogika}
+%----------------------------------------------------------------------------
+Az alkalmazás elkészítéséhez a PCL megközelítést választottam, mert számomra az interfészek használata tisztább és átláthatóbb, mint az egy forrásfájlban preprocesszor-utasításokkal tagolt részek.
+
+Az alkalmazás felhasználóifelület-rétegének fejlesztési lehetõségeit a \sectref{XamarinResearch} pontban ismertettem.
+A platformonként egyedi, ottani dizájn-irányelveknek teljesen megfelelõ felhasználói felületek elkészítését a szakdolgozat keretein túlmutató feladatnak tekintettük konzulensemmel.
+A Xamarin.Forms multi-platform felületprogramozási könyvtár használata mellett döntöttünk, ami egységesebb kinézetet nyújt, és a hordozható osztálykönyvtár DLL-ben foglal helyet.
+
+A \figref{AppStructure} ábrán látható az alkalmazás struktúrája, amit az MVVM tervezési minta (\sectref{MVVM}  pont) figyelembe vételével alkottam meg.
+A következõkben ismertetem az alkalmazáslogika egyes részeinek mûködését, a felhasznált könyvtárakat, és a felmerült kihívásokat a megvalósítás során.
+\begin{figure}[!h]
+	\includegraphics[width=150mm, keepaspectratio]{figures/AppStructure.png}
+	\caption{A mobilalkalmazás struktúrája}
+	\label{fig:AppStructure}
+\end{figure}
+
+%----------------------------------------------------------------------------
+\subsection{Kommunikáció a webszerverrel}
+%----------------------------------------------------------------------------
+A távoli szerverrel történõ üzenetváltáshoz HTTP REST\footnote{A Representational State Transfer architektúrában a HTTP webprotokoll URI (Uniform Resource Identifier, egy rövid karaktersorozat, amelyet egy webes erõforrás azonosítására használunk, pl. egy honlapcím) elemét kihasználva lehet kommunikálni. Megfelelõen felépített URI-k használatával például a GET üzenet lekérdezésre, a POST adatküldésre használható.} üzeneteket használ az alkalmazás.
+A szerver a szinkronizálandó adatokat JSON\footnote{A JavaScript Object Notation egy egyszerûen felépített adatcserére használható formátum. Alapegysége az objektum, ami egy kulcs-érték párból áll. A kulcs mindig egy sztring. Az érték lehet objektum, értékeket tartalmazó tömb, sztring, szám, igaz-hamis érték vagy nullelem \cite{JsonOrg}.} formátumban küldi át.
+Ennek feldolgozására a .NET keretrendszer nyújt egy könyvtárat, de én a több lehetõséget kínáló Newtonsoft Json.NET-et \cite{NewtonSoftJSON} választottam.
+Ebben ugyanis ha rendelkezünk egy \Csharp~osztállyal, aminek a struktúrája és tagváltozónevei megegyeznek a JSON struktúrájával és kulcssztringjeivel, akkor a rendszer képes azonnal deszerializálni azt.
+A kulcssztring - tagváltozónév különbségek feloldhatók a tagváltozók megfelelõ attribútumokkal történõ ellátásával.
+
+%----------------------------------------------------------------------------
+\subsection{Az adatok perzisztálása}
+%----------------------------------------------------------------------------
+A szinkronizált adatok helyi tárolását elõször a .NET keretrendszer szerializálási eljárásaival akartam megvalósítani, azonban kiderült, hogy erre hordozható osztálykönyvtárban nincs lehetõség.
+Megoldásként egy SQLite adatbázis létrehozását választottam.
+
+Az SQLite egy egyszerû felépítésû, szerver-kliens kialakítást nem igénylõ, kevés külsõ függõséggel rendelkezõ, akár elõzetes konfigurálás nélkül is használható tranzakcionális SQL adatbázismotor \cite{SQLite}.
+A teljes adatbázist egy fájl tárolja, ami tartalmazza a sémát, a kényszereket és a rekordokat is.
+Ez kiválóan alkalmassá teszi beágyazott és mobileszközökben történõ használatra.
+További érv a választás mellett, hogy az Android és iOS operációs rendszerekben integrálva van az SQLite adatbázismotor, így azt csak a Microsoft mobil operációs rendszereihez kell külön referálni (beszerzésüket lásd a \sectref{CompileSettings} pontban).
+
+Többféle NuGet csomag kínál programkönyvtárat SQLite adatbázisok .NET-ben történõ multi-platform menedzseléséhez.
+Elõször a kapcsolódó Xamarin útmutatóban \cite{XamarinDbGuide} használt \textit{SQLite-net PCL} \cite{SQLite-netKrueger} csomagot telepítettem.
+Ennek használatát körülményesnek találtam a kapcsolatok számosságának megadása szempontjából, mert megkövetelte, hogy az adatokat reprezentáló osztályaimat adatbázisbeli azonosítókat tároló tagváltozókkal egészítsem ki.
+Ezen kívül stabilitási problémákba ütköztem az olyan tagváltozók kezelésekor, amik típusa nem érték, hanem referenciatípus, például egy saját osztály.
+
+Megoldásként áttértem a hasonló nevû \textit{SQLite.Net-PCL} \cite{SQLite.netOystein} csomag aszinkron verziójára.
+Ez az elõzõ projekt elágaztatottja (angolul fork), és célja a kódminõség javítása, valamint annak a legújabb multi-platform technológiákhoz igazítása, mint például a hordozható osztálykönyvtárak.
+Ezt a kapcsolatszámosság kezelését megkönnyítõ \textit{SQLite-Net Extensions} \cite{SQLite-NetExtensions} csomaggal egészítettem ki, aminél csak az objektum saját azonosítóját kell érték típusú tagváltozóban tárolni.
+A kapcsolatokat a fûzõdõ osztály egy példánya (egy számosság) vagy egy azokból készített lista (több számosság) reprezentálja, csökkentve ezzel az adatbázis-lekérdezések számát.
+A csomag képes a körkörös referenciák kezelésére is.
+
+Az adatbázisfájl kezeléséhez a \sectref{XamarinMultiplatformOptions} pontban említett DependencyService metodikát használtam. Az \textit{ISQLite} interfész egy függvénybõl áll, ami egy platformspecifikus\linebreak\textit{SQLiteAsyncConnection} osztálypéldánnyal tér vissza a natív kódból.
+A további mûveletek már végezhetõek ezen a példányon a hordozható osztálykönyvtárban.
+
+%----------------------------------------------------------------------------
+\subsection{Az üzleti logika vezérlése}
+%----------------------------------------------------------------------------
+A vezérlõ komponens feladata View Model felõl érkezõ kérések kiszolgálása.
+A magasabb absztrakciójú mûveletek itt kerültek megvalósításra az alkalmazáslogika egyéb komponenseinek használatával, mint például a felhasználó hitelesítése, vagy az adatok szinkronizálása a webszerverrel és ez alapján a helyi adatbázis frissítése.
+
+A \sectref{AsyncMechanisms} pontban ismertetettek alapján a vezérlés kizárólag aszinkron mûveletekkel dolgozik, ezzel megõrizve a felhasználói felület reszponzivitását.
+
+%----------------------------------------------------------------------------
+\section{A felhasználói felület elkészítése Xamarin.Forms-ban}
+%----------------------------------------------------------------------------
+A Xamarin.Forms egy olyan osztálykönyvtár, ami az egyes platformok natív megjelenési elemei (pl. gombok, listák) köré egy úgynevezett csomagolót (angolul wrapper) tesz. Ezzel struktúrailag egységes felhasználói felületet hozhatunk létre úgy, hogy az egyes UI elemek a platform sajátjaiként néznek ki.
+
+%----------------------------------------------------------------------------
+\subsection{Alkalmazásoldalak}\label{sect:PageTypes}
+%----------------------------------------------------------------------------
+Xamarin.Formsban az alkalmazás megjelenési fõ egysége az oldal, amik között kontextusismerõ navigációval válthatunk.
+Utóbbi jelentése, hogy nem rendelkezik minden oldal saját navigációs objektummal, hanem az app fõoldalának navigációs objektumát érjük el minden más oldalból is, és manipulálhatjuk annak navigációs vermét (angolul navigation stack), ezzel szabályozva például azt, hogy a vissza gomb megnyomásával milyen oldalra jutunk.
+
+A könyvtár 6 elõre elkészített alkalmazásoldal-típust nyújt \cite{XamarinPages}:
+\begin{itemize}
+	\item \textit{ContentPage}: Egy üres oldal, amibe egy darab Xamarin View elemet (lásd \sectref{ElementPlacement} pont) helyezhetünk. Ez tipikusan valamilyen elrendezési konténer.
+	\item \textit{TemplatedPage}: A legegyszerûbb oldaltípus. Tartalom közvetlenül nem helyezhetõ bele, hanem egy úgynevezett \textit{ControlTemplate} sablonnal adhatjuk meg az oldal alapvetõ kiosztását. Ez az osztály a ContentPage õsosztálya is.
+	\item \textit{TabbedPage}: Füleket megjelenítõ oldal, amiben a fülek oldal objektumokat tartalmaznak.
+	\item \textit{MasterDetailPage}: Az információt két panelen jeleníti meg. A fõ panelen egy elemet kiválasztva láthatóvá válik - balról beúszik - az elemhez tartozó részleteket mutató panel.
+	\item \textit{CarouselPage}: Aloldalakat tartalmaz, amik között elhúzás gesztussal válthatunk, mint például egy fotógaléria alkalmazásban. A TabbedPage-dzsel ellentétben itt az aloldalak nevei nem látszódnak.
+	\item \textit{NavigationPage}: Ez az oldaltípus nem jelenít meg tartalmat, feladata a navigációs verem kezelése.
+\end{itemize}
+Az \sectref{RequirementsChange} pontban bemutatott koncepciórajzoknak megfelelõen az applikáció elkészítése során a NavigationPage, ContentPage és TabbedPage oldaltípusokat használtam.
+
+A felhasználói felület implementálása során a TabbedPage megjelenésével többször is hibákba ütköztem.
+A munka kezdetekori legfrissebb Xamarin NuGet verzió, a 2.1.0.6529-es\linebreak rendelkezik egy hibával, ami miatt a Microsoft mobil operációs rendszereken a\linebreak TabbedPage oldalcíme hiányzik, csak a fülek nevei jelennek meg (\figref{TabbedPageTitleMissing} ábra).
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=70mm, keepaspectratio]{figures/TabbedPageTitleMissing_wp81.png}\hspace{5mm}
+	\includegraphics[width=70mm, keepaspectratio]{figures/TabbedPageTitleMissing_wp10.png}\hspace{5mm}
+	\caption{Hiányzó TabbedPage oldalcím Windows Phone 8.1 és Windows 10 Mobile rendszereken} 
+	\label{fig:TabbedPageTitleMissing}
+\end{figure}
+\FloatBarrier
+
+A probléma megoldására elõször átállítottam a platformspecifikus projektekben a Xamarin NuGet verziót 2.0.1.6505-re, ezzel a címprobléma megszûnt (\figref{TabbedPageTitleOk} ábra).
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=70mm, keepaspectratio]{figures/TabbedPageTitleOk_wp81.png}\hspace{5mm}
+	\includegraphics[width=70mm, keepaspectratio]{figures/TabbedPageTitleOk_wp10.png}\hspace{5mm}
+	\caption{Helyes TabbedPage oldalcím Windows Phone 8.1 és Windows 10 Mobile rendszereken} 
+	\label{fig:TabbedPageTitleOk}
+\end{figure}
+\linebreak Kézi teszteléskor azonban azt tapasztaltam, hogy Windows Phone 8.1-en ez a keretrendszer-verzió hibát tartalmaz a keresõsáv elemben, a keresõszó helyett üres sztringet ad vissza lekérdezéskor. Az idõközben kiadott 2.2.0.31-es Xamarin verzió változtatásai között szerepel a TabbedPage oldalcímének újbóli bevezetése a két platformon, így azokat frissítettem.
+Ekkor a keresõsáv újra megfelelõen mûködött Windows Phone 8.1-en, viszont az oldalcím betûtípusa túl nagy lett (\figref{TabbedPageTitleTooBig} ábra), de úgy döntöttem, a mûködõ keresõsáv fontosabb, ezért ennél a verziónál maradtam.
+Windows Mobile 10-en a frissítéstõl eltûnt a gombok kerete (\figref{ButtonFrameMissing} ábra).
+A gombkeret explicit meghatározásával sem sikerült helyre állítanom azokat, így végül visszaálltam a 2.0.1.6505-ös verzióra ezen a platformon.
+
+Ezekbõl is látszik, hogy a Xamarin egy nagyon újszerû és dinamikusan fejlõdõ keretrendszer, illetve a multi-platform technológia számos kihívást nyújt még.
+\begin{figure}[!h]
+	\centering
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=70mm, keepaspectratio]{figures/TabbedPageTitleTooBig_wp81.png}\hspace{5mm}
+		}
+		{
+			\caption{Túl nagy TabbedPage oldalcím}
+			\label{fig:TabbedPageTitleTooBig}
+		}
+		\ffigbox {
+			\includegraphics[width=55mm]{figures/ButtonFrameMissing_wp10.png}\\\vspace{3mm}
+			\includegraphics[width=55mm]{figures/ButtonFrameOk_wp10.png}\hspace{50mm}
+		}
+		{
+			\caption{Hiányzó és meglévõ gombkeret}
+			\label{fig:ButtonFrameMissing}
+		}
+	\end{floatrow}
+\end{figure}
+\FloatBarrier
+%----------------------------------------------------------------------------
+\subsection{Elemek elhelyezése az oldalakon}\label{sect:ElementPlacement}
+%----------------------------------------------------------------------------
+A legtöbb oldaltípus rendelkezik egy \textit{Content} tagváltozóval, aminek a típusa\linebreak \textit{Xamarin.Forms.View}.
+Ez az osztály az õse az összes megjeleníthetõ vizuális és vezérlõelemnek.
+Mivel oldalanként csak egy Content tag van, ha több elemet kívánunk elhelyezni, egy elrendezési konténert (angolul layout) kell használni, amibe aztán a többi elem kerülhet.
+Mivel ezek az osztályok is Xamarin View-k, ezért tetszõleges mélységben és variációban ágyazhatóak egymásba komplex elrendezések megvalósítására.
+A keretrendszer 9 konténert kínál \cite{XamarinLayouts}, ezek közül én a GridLayout, StackLayout és ScrollView osztályokat használtam.
+
+A \textit{StackLayout} a legegyszerûbb elrendezési forma.
+Beállítástól függõen függõlegesen vagy vízszintesen helyezi egymás mellé a benne tárolt elemeket, ezen túl csak az elemek közötti térköz állítható.
+
+\textit{GridLayout} használatakor meghatározhatunk egy rácsszerkezetet annak sorainak és oszlopainak számával.
+Megadhatjuk a sorok és oszlopok méreteit, akár a teljes rendelkezésre álló terület százalékos eloszlásában is.
+Ez különösen hasznos a grafikusfelület-programozásban kezdõknek, akik számára a pixelekben történõ pozicionálás igen nehézkes.
+
+A \textit{ScrollView} listák megjelenítésére használható. A cella kinézetét sablonnal\linebreak határozzuk meg, adatait adatkötésbõl nyeri (lásd \sectref{XamlDataBinding} pont), amihez\linebreak tipikusan rendezett listát használnak.
+A listák kötésében segít a\linebreak\textit{System.Collections.ObjectModel.ObservableCollection<T>} sablonosztály, mert ennek mûveletei az elemeken automatikusan frissítési mechanizmust váltanak ki.
+
+Az ObservableCollection-ök használatakor két gyakran, de véletlenszerûen felbukkanó hibával találkoztam. 
+Az egyik, hogy a ScrollView a várttal ellentétben nem frissül. 
+Ennek megoldásaként az objektumot csak a futás kezdetekor inicializálom, majd még teljes frissítéskor sem cserélem le azt egy másik osztálypéldányra, hanem az objektum \textit{Clear()}, majd \textit{Add()} metódusait használom az új elemek beillesztésére. Ennek hátterében az áll, hogy az objektum cseréjével felbomlanak a meglévõ adatkötések, amik megújítására nincs mód \cite{ObservableCollectionMistakes}.\linebreak
+A másik probléma a megjelenített lista részleges frissülése volt.
+Ennek megoldásakor derült fény az adatkötés szálbiztosságának hiányára (lásd \sectref{AsyncMechanisms} pont).
+Az adatok szûréséhez és rendezéséhez LINQ\footnote{A Language-Integrated Query könyvtár hatékony kollekciómanipulálási funkciókat nyújt szinte bármilyen adatforráshoz \cite{MicrosoftLINQ}.} lekérdezéseket használ a program, amik a \Csharp~nyelv \textit{yield return} funkcióját kihasználva elõre nem, hanem csak akkor hozzák létre az eredményhalmaz-kollekciót, amikor azon iterálni kezdünk.
+Ez a mechanizmus olyan állapot idézhet elõ, amikor a grafikus felület ScrollView-ja még az adatkötött ObservableCollection frissítésének befejezése elõtt végrehajtja a megjelenített lista frissítését.
+Ennek az állapotnak az elkerülésére az eredményhalmazt még a háttérszálban egy \textit{System.Collections.Generic.List<T>} objektumba enumerálom, és felülvizsgálva az alkalmazás szálkezelését módosításokat eszközöltem, hogy az adatkötések frissítése mindig az utolsó lépés legyen az adott mûveletsorban.
+
+Az applikációban használt diagramokat kezdetben a nyílt forráskódú OxyPlot \cite{OxyPlot} csomaggal kezdtem megvalósítani.
+Ez a rendszer stílusozhatósági képességeiben nem felelt meg a követelményeknek, valamint súlyos stabilitási problémákkal rendelkezik Windows 10 Mobile-on, ezért a Syncfusion Essential Studio for Xamarin \cite{SyncFusionXamarin} programcsomagra váltottam.
+A Syncfusion könyvtárai tisztán XAML-ben, adatkötéssel programozhatóak, így a diagramok integrálása és stílusozása gyors és problémamentes volt.
+
+%----------------------------------------------------------------------------
+\subsection{Stílusozás}\label{sect:Styling}
+%----------------------------------------------------------------------------
+A Xamarin.Forms vizuális elemei külön beállítás nélkül az operációs rendszer alapértelmezett stílusával jelennek meg.
+Lehetõség van azonban az egyes grafikuselem-típusokhoz XAML stílusdefiníciók írására, amivel biztosítható az alkalmazás egységes kinézete \cite{XamarinStyles}.
+
+A stílus lehet adott grafikus elemhez írott vagy globálisan elérhetõ, illetve explicit vagy implicit.
+Explicit stílusoknál az objektum \textit{Style} tulajdonságát hozzá kell kötni a stílushoz, míg az implicit stílusdefiníció automatikusan érvényesítve lesz minden olyan objektumra, aminek típusát az implicit stílus célozza (hacsak felül nem bíráljuk azt az objektumon).
+Az implicit stílusokkal nem sikerült látható eredményt elérnem, ezért az alkalmazás explicit stílusokat használ.
+
+A különbözõ platformokon használt stílusozási ajánlások különbözõ betûméretekkel dolgoznak, illetve az elemek alap kinézete is jelentõsen különbözhet, az alkalmazás kinézetét ehhez igazítani igen körülményes.
+Ezen egyszerûsít a XAML \textit{x:Static} leíróbõvítménye, amivel lehetséges \Csharp-ban deklarált publikus statikus változókat adatkötni.
+A függelék \sectref{xStaticExample} pontjában lévõ kódrészletek szemléltetik, ahogy a \textit{Device.OnPlatform()} függvény a kívánt megjelenést biztosító értékre állítja a statikus változót, majd a XAML kód XML névtérként (\textit{local}) hivatkozza a \Csharp~névteret, és a statikus változó értékét köti a stílus betûméret tulajdonságához.
+
+Az x:Static használatával nem csak stílustulajdonságokhoz köthetünk statikus változókat. A gombok alapértelmezett kinézete iOS rendszeren nem megfelelõ az alkalmazás színsémájához, mert nem különbözik az egyszerû szövegtõl (\figref{ButtonDefaultIOS} ábra).
+Keret hozzáadásával azonban a szöveg túl közel helyezkedik el a kerethez (\figref{ButtonFrameIOS} ábra).
+Megoldásul csak ennél a platformnál a szöveg elejére és végére is egy-egy szóközt raktam a megfelelõ megjelenéshez (\figref{ButtonFrameAndTextIOS} ábra). A kapcsolódó kódrészletek a függelék \sectref{xStaticButtonExample} pontjában találhatók.
+
+\begin{figure}[!h]
+	\centering
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[keepaspectratio]{figures/IOSButtonDefault.png}
+		}
+		{
+			\caption{iOS gomb alapértelmezett kinézete}
+			\label{fig:ButtonDefaultIOS}
+		}
+		\ffigbox {
+			\includegraphics[keepaspectratio]{figures/IOSButtonFrame.png}
+		}
+		{
+			\caption{iOS gomb kerettel}
+			\label{fig:ButtonFrameIOS}
+		}
+	\end{floatrow}
+	\vspace{3mm}
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[keepaspectratio]{figures/IOSButtonFrameAndText.png}
+		}
+		{
+			\caption{iOS gomb platformspecifikus szöveggel és kerettel}
+			\label{fig:ButtonFrameAndTextIOS}
+		}
+	\end{floatrow}
+\end{figure}
+\FloatBarrier
+
+A stílusozás folyamán is problémákba ütköztem a TabbedPage osztállyal.
+A \figref{TabbedPageTitleOk} ábrán látható, hogy Windows 10 Mobile rendszeren az oldalcím és a fülek nevei fekete színûek.
+A \figref{TabBarWrongColorAndroid} ábra pedig a fülsáv-stílusozás hiányát mutatja Android operációs rendszeren.
+Mindkét probléma arra vezethetõ vissza, hogy jelenleg a TabbedPage osztály nem rendelkezik tulajdonságokkal a fülsáv stílusozására.
+A 2.0-ás verzió elõtt ez lehetséges volt a \textit{TabBar} tagváltozó megfelelõ tulajdonságainak beállításával, azonban ezt a funkciót eltávolították.
+A nyílt forráskódú Xamarin-Forms-Labs \cite{XamarinFormsLabs} projekt korábban egy kerülõ megoldást nyújtott \textit{ExtendedTabbedPage} osztályával, azonban 2015 folyamán a stílusozás funkció hatástalanná vált, mára pedig a forráskód is törölve lett a projekt GitHub tárhelyérõl.
+Ezek miatt a stílushibák a végleges alkalmazásban is jelen vannak.
+\begin{figure}[!h]
+	\includegraphics[width=70mm, keepaspectratio]{figures/TabBarWrongColorAndroid.png}
+	\caption{A stílushoz nem illeszkedõ fülsáv Android rendszeren}
+	\label{fig:TabBarWrongColorAndroid}
+\end{figure}
+
+%----------------------------------------------------------------------------
+\section{Az alkalmazás tesztelése}
+%----------------------------------------------------------------------------
+A tesztelési feladatokon túl már az implementáció során szerettem volna csökkenteni a hibák számát, ezért a munka megkezdésekor telepítettem a JetBrains Resharpert \cite{ReSharper}.
+Ez egy gazdag funkcionalitású automatikus kódkiegészítõ és folyamatos futású statikushiba-keresõ program.
+Nem csak szintaktikai, de egyes szemantikai hibákat is képes jelezni, valamint javaslatokat tesz kódrészletek optimalizálási lehetõségeire, ezzel javítva a kódminõséget.
+
+%----------------------------------------------------------------------------
+\subsection{Unit tesztek}\label{sect:UnitTests}
+%----------------------------------------------------------------------------
+A unit tesztek készítése során az alkalmazás funkcióinak függvényszintû mûködését ellenõrizzük pozitív és negatív tesztesetekkel.
+Másképp fogalmazva a függvényeknek szabályos vagy szabálytalan inputot adunk, és a tesztben azt ellenõrizzük, hogy a bemenetet a várt módon kezeli-e a függvény.
+A unit tesztek hasznosságát bizonyítja a tesztközpontú fejlesztés (Test Driven Development, TDD) megjelenése és térnyerése is.
+A TDD-ben az osztálystruktúra megtervezése és vázának elkészítése után elõször az átfogó unit tesztek készülnek el, csak ezután történik meg a funkciók implementációja.
+
+A .NET keretrendszerben írt kódok unit tesztelésére mára kvázi szabvánnyá vált a nyílt forráskódú NUnit \cite{NUnitHome}.
+A rendszernek létezik Xamarinhoz optimalizált verziója, ekkor a tesztfuttató környezet egy, a telefonra települõ program, ami elindításakor lefuttatja a teszteket, majd egy összefoglalót nyújt az eredményekrõl (\figref{NunitMobileRun} ábra).
+\begin{figure}[!h]
+	\includegraphics[width=65mm, keepaspectratio]{figures/Nunit_wp10.png}
+	\caption{Egy NUnit tesztfutás eredménye Windows 10 Mobile-on}
+	\label{fig:NunitMobileRun}
+\end{figure}
+
+A hordozható osztálykönyvtárbeli kód Visual Studioban futtatható tesztelésére létrehoztam egy asztali .NET alkalmazást célzó projektet, a tesztkódot pedig egy megosztott projektbe helyeztem. Így már használható tetszõleges unittesztfuttató-környezet a tesztek Visual Studioban történõ futtatására és kiértékelésére.
+
+Erre a célra a JetBrains dotCover \cite{DotCover} futtatókörnyezetet választottam, ami a teszteredmények megjelenítésén túl képes kódlefedettség-vizsgálatra is, azaz megmutatja, hogy a tesztek során a termékkód mely sorai kerültek lefutásra.
+Egy ilyen vizsgálat eredményét mutatja a \figref{DotCoverResult} ábra. Minél több kódot fedünk le minél sokrétûbb tesztekkel, annál biztosabbak lehetünk, hogy az applikáció az elvárt viselkedést produkálja szélsõséges körülmények között is.
+\begin{figure}[!h]
+	\includegraphics[width=150mm, keepaspectratio]{figures/TestCoverage.png}
+	\caption{Egy dotCover kódlefedettség-vizsgálat eredménye a HttpRestClient osztályon}
+	\label{fig:DotCoverResult}
+\end{figure}
+
+Az applikációhoz 16 unit tesztet készítettem, amik az üzleti logika viselkedését ellenõrzik.
+NUnit tesztekkel önmagában a grafikus felület mûködése nem ellenõrizhetõ.
+Erre a Xamarin a TestCloud termékét kínálja, amihez a Xamarin.UITest könyvtár használatával lehet írni teszteket.
+Ilyen teszteket nem állt módomban készíteni, mert a Xamarin Student Partner Programban\footnote{A program honlapja: \url{https://www.xamarin.com/student}} igényelt TestCloud hozzáférés-kérelmemet nem bírálták el kellõ idõben.
+
+%----------------------------------------------------------------------------
+\subsection{Manuális tesztek}
+%----------------------------------------------------------------------------
+A grafikus alkalmazások fejlesztése megköveteli az írott kód folyamatos ellenõrzését.
+A Xamarin.Forms a Microsoft WPF-fel szemben még nem rendelkezik úgynevezett betekintõnézet funkcióval, azaz csak úgy látható a vizuális elemek implementációjának eredménye, ha az alkalmazást lefordítjuk, majd futtatjuk például egy emulátorban (lásd \sectref{EmulatorUsage} pont).
+Mivel az applikáció multi-platform, ezért minden ellenõrzést négy emulátorban kellett elvégeznem, hogy a platformspecifikus hibákra is fény derüljön.
+
+A fejlesztés során két ismerõsömet kértem meg, hogy teszteljék az alkalmazást az emulátorokban.
+Õk funkcionális gondokat nem, csak platformspecifikus megjelenési hibákat jeleztek, mint például kilógó szövegek, vagy a TabbedPage osztály azon hibája, amit a \sectref{PageTypes} pontban részletesen ismertetettem.
+Ezeket a hibákat - a lehetõségekhez mérten - javítottam.
+Az alkalmazás végleges androidos verzióját valódi telefonon is teszteltem.
+Egy Android 6.0 "Marshmallow" rendszert futtató LG G3 (D855) készülékre telepítettem az appot.
+Az applikáció a vártaknak megfelelõen viselkedett, nem mutatott eltérést az emulátorban tapasztaltakhoz képest.

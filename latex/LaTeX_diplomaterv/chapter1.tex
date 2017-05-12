@@ -1,0 +1,185 @@
+%----------------------------------------------------------------------------
+\chapter{Adat- és szövegbányászat}\label{sect:dataAndTextMining}
+%----------------------------------------------------------------------------
+\section{Bevezetés}
+%----------------------------------------------------------------------------
+Az adatbányászat\cite{AbonyiAdatb} modern korunk adatfeldolgozási módszereinek egyik legújabb és legfontosabb területe. A témáról korábbi önálló laboratóriumi beszámolóimban és szakdolgozatomban[5] írtam részletesebben. Itt csak a jelen feladatom megoldásához szükséges alapfogalmakra, és a feladatban érintett témakörökre térek ki.
+
+Ahogy Abonyi János fogalmaz\cite{AbonyiAdatb}: "Az adatbányászat egy olyan döntéstámogatást szolgáló folyamat, mely érvényes, hasznos, és elõzõleg nem ismert, tömör információt tár fel nagy adathalmazból".
+
+A szövegbányászat\cite{TikkSzovegb} szorosan kapcsolódik az adatbányászathoz. Csak ellenben az adatbányászattal, ahol általában valamilyen matematikai struktúrában tárolt adatokat elemzünk, a szövegbányászat során adathalmazunk jellemzõen strukturálatlan. Nevébõl adódóan általános jellegû, értelmes szövegek gépi feldolgozására vonatkozik. A szövegbányászat feladata, hogy elõkészítse ezt a rendezetlen adathalmazt késõbbi adatbányászati elemzésekhez. A kihívás az emberi nyelvtan összefüggéseinek matematikai módszerekkel történõ feldolgozásában rejlik, illetve hogy eme információkat rendezzük és kiemeljük a késõbbi kutatásokhoz.
+
+%----------------------------------------------------------------------------
+\section{Adatbányászat}
+%----------------------------------------------------------------------------
+Az adatbányászat célja tehát, hogy egy strukturált adathalmazon matematikai eszközökkel keressünk összefüggéseket, mintázatokat. A feltárt összefüggések értelmezése különösképp fontos a hasznos információ kinyeréséhez. Modern korunk számítási sebesség növekedésének köszönhetõen rengeteg új matematikai eszköz és lehetõségünk nyílik erre \cite{AbonyiAdatb}.
+%----------------------------------------------------------------------------
+\subsection{Adatbányászat lépései}
+%----------------------------------------------------------------------------
+Az adatbányászat általános lépései \aref{DataMiningSteps} ábrán láthatóak.
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=150mm, keepaspectratio]{figures/DataMiningSteps.png}
+	\caption{Az adatbányászat általános lépései} 
+	\label{DataMiningSteps}
+\end{figure}
+
+\textbf{Adatgyûjtés}: kritikus lépés a megfelelõ adatok kiválasztása a feladat megoldásához. Az adatgyûjtés során törekednünk kell arra, hogy releváns adatot gyûjtsünk össze a késõbbi elemzéshez. Már ebben a lépésben érdemes figyelnünk arra, hogy lehetõleg minél tisztább, az elemzés tárgyára fókuszáló dokumentumokat gyûjtsünk össze. Feladatom során az adatgyûjtés is automatikus megvalósítással történt.
+
+\textbf{Adatbázis} létrehozása: meg kell határoznunk a késõbbi módszerek számára emészthetõ olyan formátumot, mely segítségével matematikailag strukturált adattárolást hajtunk végre. A kompatibilitás és a feldolgozás megvalósíthatósága illetve sebessége múlik ezen. Konkrét fizikai adatbázist a feladat megoldása során nem használtam, hiszen a szövegbányászat jellemzõi miatt egyszerûbb volt a kapott szövegekbõl képzett adatmodellt a szoftver belsõ adatstruktúrájában értelmzett mátrixokként tárolni a memóriában.
+
+\textbf{Adatfeltárás}: ebben a lépésben történik meg az adatok tisztítása, mely során törekedünk a célterület minél erõsebb szûkítésére, felesleges információ eltávolítására. Adattisztítás során olyan zajokra kellett figyelnem, mint például a felesleges meta-adatok leválasztása vagy a weboldalakon szereplõ reklámok.
+
+\textbf{Adatbányászat}: ekkor már a pontosan elõkészített anyag áll rendelkezésre az adatbányászati eszközök futtatásához. A különbözõ módszerek segítségével típusproblémákra tudunk megoldásokat találni. A feladatomhoz használt konkrét eszközöket a vonatkozó fejezetekben fejtem ki.
+
+\textbf{Megjelenítés, döntés}: végül pedig kritikus az is, ahogy az eredményeket értelmezzük: nem szabad elfelejtenünk, hogy elsõsorban a valóságra vetített igazságtartalmára vagyunk kíváncsiak az eredményeknek, nem csak a számokra. Könnyû a metrikákat félreértelmezni: elengedhetetlen, hogy ellenõrizzük és magasabb szintû (pl. üzleti) elemzéseknek megfelelõen elõkészítsük az eredményeket. 
+
+Az adatbányászat egyik gyakran elõforduló feladata, hogy a rendelkezésre álló adatokat valamilyen módon csoportosítsa. Ennek két tipusa lehet.
+\begin{enumerate}
+	\item Csoportosítás / klaszterezés: az adatok feldolgozása során, egy fokozatosan kialakuló szabályrendszer alapján daraboljuk fel az adathalmazt csoportokra. Ekkor a klaszterek határai nem ismertek, errõl információt csak az algoritmus futásával párhuzamosan tudunk mi magunk kialakítani, nekünk kell "megtanulni" lépésrõl lépésre. A csoportosítási feladatokat szokás még felügyelet nélküli tanulási folyamatoknak hívni. 
+	\item Osztályozás: akkor beszélünk osztályozásról, ha a csoportjaink már a feldolgozás elsõ pillanatában ismertek. Ilyenkor a csoporthatárok kialakítása nem a mi feladatunk, csak az elemek folyamatos bekategorizálása. Ezt hívjuk felügyelt tanulási folyamatnak.
+\end{enumerate}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=100mm, keepaspectratio]{figures/ClusteringAndClassification.png}
+	\caption{Klaszterezés és osztályozás \cite{clustVsClass}} 
+	\label{ClusteringAndClassification}
+\end{figure}
+
+%----------------------------------------------------------------------------
+\subsection{Adatbányászati módszerek: osztályozás}
+%----------------------------------------------------------------------------
+Az adatbányászat több különbözõ problémával is foglalkozik. Ezek közé tartoznak például az osztályozási módszerek, a besorolás, vagy a prediktív analízis. Feladatom során osztályozási feladatokkal is szembe kerültem.
+Az osztályozás \cite{AbonyiAdatb} lényege, hogy elõre definiált csoportokba kell valamilyen módszer alapján elhelyezni az újonnan felvitt adatokat. Erre több módszer is létezik. 
+
+Az osztályozás olyan összefüggések kutatása az újonnan a rendszerbe kerülõ adat és a már kategorizált adathalmaz között, mely valamilyen hasonlóságot reprezentál. A hasonlóság jellemzõje általában valamilyen távolság érték, vektor. 
+
+Ahhoz, hogy eme távolságokat értelmezni tudjuk, az adatokat általában vektortérben helyezzük el, különbözõ jellemzõik segítségével: például ha szeretnénk meghatározni két autó távolságát, akkor a közös jellemzõik (teljesítmény) lesznek egy-egy dimenzió, míg az adott jellemzõ paraméterei (lóerõ) pedig a dimenzióban értelmezett értékek, pontok. Így több jellemzõ mentén komplex, többdimenziós vektorokat tudunk meghatározni, melyek között már könnyedén tudunk távolságot számolni. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=100mm, keepaspectratio]{figures/Classification.png}
+	\caption{Osztályozás \cite{OraClassifi}} 
+	\label{Classification}
+\end{figure}
+
+
+Az így meghatározott vektorokról már rendelkezünk egy bizonyos tudással, osztállyal: elõzõ példánkat tekintve például legyen az osztályozás tárgya a sport- és családi autók. Tételezzük fel 500 autóról, hogy a kettõ közül mely kategóriákba tartozik bele mindegyik. Az így létrejövõ csoportokba próbál meg az osztályozás egy új autót beilleszteni. Paramétereit hozzávetve a már meghatározott többi autóhoz megmondhatjuk az új elemrõl, hogy hol helyezkedik el a vektortérben, és nagy valószínûség szerint melyik osztályba tartozik. 
+
+Az osztályozási módszereket két csoportra szokás bontani:
+\begin{itemize}
+	\item	\textbf{Modell alapú eljárások}: ha az adott osztályokat jól el tudjuk határolni egymástól. A fenti autós példa is ide tartozik.
+	\item	\textbf{Modell független eljárások}: ha az osztályok határai nem élesek az egyes egyedek között: itt nem feltétlenül a területeket vesszük figyelembe, hanem az új elem közvetlen környezetét vizsgáljuk, a környékén lévõ már osztályozott egyedekhez hasonlítunk.
+\end{itemize}
+
+A feladatom során modell független eljárást alkalmaztam, amikor egy nagyméretû, felcímkézett internetes cikkekbõl álló dokumentumtérhez érkezõ új elemekhez kellett címkéket rendelni. A beérkezõ cikkhez megkerestem a legjobban hasonlító elemet a már feldolgozottak közül, és ennek a kategóriáját adtam vissza. Ezt az úgynevezett Cosinus hasonlóság[9] segítségével valósítottam meg, melynek központi gondolata, hogy euklideszi távolságot számol a vektorok között. 
+
+%----------------------------------------------------------------------------
+\subsection{Adatbányászati módszerek: klaszterezés}
+%----------------------------------------------------------------------------
+Dokumentumhalmaz rendszerezésének alternatívája az osztályozáson kívül a klaszterezés (csoportosítás).
+
+Cél, hogy az egy csoportba kerülõ elemek minél jobban hasonlítsanak egymásra, és a különbözõ csoportba kerülõ elemek között minél nagyobb legyen az eltérés. 
+Az osztályozáshoz képest a fõ különbség, hogy nincsenek ismert osztályozású adatok és elõre rögzített csoportszám sem.
+
+Így a fõ nehézséget az jelenti, hogy nincs olyan tanítóhalmaz, mint az osztályozás során a tanítókörnyezet. Emiatt a klaszterezés ún. felügyelet nélküli gépi tanuló módszer \cite{AbonyiAdatb}.
+
+A klaszterezõ eljárásoknak két alapvetõ típusa létezik:
+\begin{enumerate}
+	\item \textbf{Particionáló módszerek}: segítségükkel a dokumentumok egy olyan felosztását adhatjuk meg, ahol az egyedek függetlenek egymástól. Tipikus particionálás a dokumentumokat nyelv, témakör vagy stílus alapján felosztani. Elõnye, hogy jellemzõen hatékony algoritmusok állnak rendelkezésünkre alacsony számításidõvel, viszont hátrány a rugalmatlanság, mivel a csoportok számát bizonyos korlátozásokkal illetni kell, ahogy hamarosan látni fogjuk. 
+	\item \textbf{Hierarchikus klaszterezés}: lehetséges csoportok egymása ágyazott sorozatát adják eredményül. Egy-egy elem itt tehát több csoportba is tartozhat. Így az algoritmus rugalmasabb, viszont cserébe jóval nagyobb számításigényû. Tipikus ilyen elemzés például a dokumentumok címkézése. 
+\end{enumerate}
+
+A klaszterezés alkalmazása során felmerülõ alapvetõ probléma a csoportok várható méretének meghatározása. Például ha kétdimenziós klaszterezést várunk el az algoritmustól akkor hasonló megoldásra számítunk, mint ami \aref{Clustering1} ábrán látható.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=100mm, keepaspectratio]{figures/Clustering1.png}
+	\caption{Klaszterezés két dimenzió mentén} 
+	\label{Clustering1}
+\end{figure}
+
+Míg ha részletesebb elemzést, ezáltal magasabb csoportszámot is megengedünk, akkor új, pontosabb eredményre jutunk, ahogyan \aref{Clustering2} ábrán látszik. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=100mm, keepaspectratio]{figures/Clustering2.png}
+	\caption{Klaszterezés több dimenzió mentén} 
+	\label{Clustering2}
+\end{figure}
+
+Viszont elméletben a legpontosabb klaszterezés a dokumentumtér elemszáma, melyben minden elem egyedi - ezt láthatjuk \aref{Clustering3} ábrán - ez viszont számunkra nem hordoz információt.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=100mm, keepaspectratio]{figures/Clustering3.png}
+	\caption{Klaszterezés túl pontos kategória határokkal} 
+	\label{Clustering3}
+\end{figure}
+
+Így a klaszterezõ algoritmus paraméterezése az eredmények szubjektív hasznosságát megítélve a tervezõ feladata. 
+A weboldalak kategorizálásánál egy saját klaszterezõ algoritmust implementáltam, melyben a vektortérbe a dokumentumokban szereplõ "fontos" szavak alapján helyeztem el az elemeket. Fontosak azok a szavak, amelyek egy dokumentumra jellemzõek, de a többire nem (lásd: tf-idf elemzés késõbb). Az elemzés során több maximum csoportszámmal is futtattam az eljárást, hogy ki tudjam választani az optimális legközelebbi csoportlétszámot.
+
+%----------------------------------------------------------------------------
+\section{Szövegbányászat}
+%----------------------------------------------------------------------------
+Az adatbányászat és a szövegbányászat közötti fõ különbség az, hogy a szövegbányászat \textbf{elõkészíti} a strukturálatlan szövegeket olyan adatszerkezetbe, amelyen már értelmezhetõek a korábban említett adatbányászati lépések.
+
+A szövegbányászat feladata, hogy megtalálja, "kibányássza" a feldolgozáshoz szükséges és releváns szövegrészeket. Magas komplexitást igénylõ, (és egyelõre még teljes körûen nem megvalósított) lépése a nyelvtani összefüggések, sajátosságok feltárása. A szöveg jelentésének automatikus feldolgozása jelenleg még az emberi agy számára is nehézséget jelent: elég csak a szavak egymásra gyakorolt hatására gondolnunk, de olyan nyelvi elemek is nehezítik a feldolgozást, mint például ugyanazon szavak ragozott alakjai. A szövegbányászat során próbálunk ezen összefüggések közül minél többet megjelölni, felesleges információkat eltávolítani.
+
+A szövegbányászat potenciálja abban rejlik, hogy az emberek által írt tudásanyagot képes bizonyos fokig automatikusan, természetesen emberi sebességnél jóval gyorsabban feldolgozni. Ügyfélszolgálati, biztonsági, bûnüldözési, üzleti intelligenciai és tudományos kutatásokkal kapcsolatos szövegek kutatása, közöttük lévõ kapcsolatok feltárása korábban nem látott lehetõségeket nyitott meg. Külön területe az internetes keresõmotorok támogatása, ma már a legtöbb ilyen program nagyban támaszkodik a különféle szövegbányászati eszközökre a releváns találatok megjelenítéséhez \cite{DataMiningSearch}.
+
+A szövegbányászati elemzés általános lépései kissé eltérnek az adatbányászatétól, ahogyan ezt \aref{TextMiningSteps} ábra mutatja. 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=150mm, keepaspectratio]{figures/TextMiningSteps.png}
+	\caption{Szövegbányászat általános lépései} 
+	\label{TextMiningSteps}
+\end{figure}
+
+\textbf{Dokumentum gyûjtemény készítése}: elsõként összegyûjtjük azokat a dokumentumokat, melyek az elemzés tárgyát fogják képzeni.
+
+\textbf{Elõfeldolgozás során} olyan adattisztítást végzünk, amely segítségével egy, az adatbányászati lépéseknek is megfelelõ adatstruktúrát hozunk létre. Általában valamiféle halmazt, vektormodellt, mátrixot stb. szeretnénk elõállítani a nyers szövegbõl. Ehhez azonban nem szabad 1:1 leképezést használnunk: hiszen rengeteg nyelvi sajátosság bujkál a szövegben, amely kihívást jelent számunkra. 
+
+A további lépések megegyeznek az adatbányászatban használt lépésekkel. 
+%----------------------------------------------------------------------------
+\subsection{Elõfeldolgozás}
+%----------------------------------------------------------------------------
+Feladatom során webes portálok szövegeit dolgoztam fel, több nyelven.
+
+Mivel az egyes dokumentumok szavai alapján szerettem volna összehasonlítást végezni, különösen fontos volt, hogy csak olyan szavakat tároljak le, amelyek valóban jellemzik az adott szöveget. Ezt az igényt követve válogattam össze a feladat elvégzéséhez szükséges szövegbányászati eszköztárat. 
+%----------------------------------------------------------------------------
+\subsubsection{Fogalmak}
+%----------------------------------------------------------------------------
+\textbf{A Stop-szavak} kiszûrése során egy elõre definiált, többnyelvû stopszótárt \cite{hungarianStopwords} használtam. Ebben az írásban található leggyakoribb, nyelvtani és kötõszavakat gyûjtöttem össze. Amennyiben egy dokumentumban ráakadtam ilyen szavakra, azokat egyszerûen kitöröltem az adott dokumentumból. Ilyen szavak például az "az, és, vagy".
+
+\textbf{Szótár}: az összes, adatbázisban szereplõ cikkbõl készítek egy szótárat, melyben minden szó megtalálható, amelyet a cikkek felhasználnak. Ez maga az értékkészlet, melyekbõl a késõbbi vektorok felépülnek. 
+
+Vegyük a következõ két mondatot:
+\begin{itemize}
+	\item "Megint gólt lõtt Détári" 
+	\item "Sajnos újra lesérült Détári"
+\end{itemize}
+Ezekbõl a mondatokból a következõ szótárt készítettem el a "megint" és az "újra" stop-szavak kiszûrése után:
+
+"Gól, lõ, Détári, lesérül".
+ 
+\textbf{Bag-of-words} \cite{bagOfWords}: Általában egy dokumentumot úgy készítünk elõ az adatbányászati lépésekhez, hogy a benne található szövegeket nem a nyers, "rendezetlen" formájában, hanem valamilyen csoportosítás szerint reprezentáljuk. A feladatom során minden dokumentumban a szavakat elõfordulásuk gyakoriságával megjelölve tárolok le. Vegyük az elõzõ példánkat: ebben az esetben a két mondatom Bag-of-words modellje a következõ: 
+
+\begin{itemize}
+	\item (1,1,1,0) - ("Megint gólt lõtt Détári")
+	\item (0,0,1,1) - ("Sajnos újra lesérült Détári")
+\end{itemize}
+
+\textbf{Corpus}: a már elkészült szótár segítségével, bag-of-words által súlyozott, vektorizált dokumentumtér összessége. A kész corpus-on definiáljuk a matematikai- és adatbányászati elemzéseket. A fenti példánk esetén az ott szereplõ két, egyébként négydimenziós vektor alkotja a corpus-t.
+
+\textbf{Topic modelling} a szövegbányászat egy gyakran használt eszköze. Ez egy statisztikai modellezési \cite{TopicModels} eljárás, mely során kiemeljük a dokumentum tartalmának néhány szava által behatárolt központi elemeit, témáit. Például, ha egy szövegben gyakran elõfordulnak a sportban használt kifejezések, akkor valószínûleg a központi témája a sport rovat. Az így kialakult központi témák segítségével hasonlítottam össze a dokumentumokat.
+  
+\textbf{Term Frequency-inverse Document Frequency (tf-idf)}: ez egy olyan statisztikai érték \cite{TfIDF}, mely meg tudja határozni, az egész corpus-t figyelembe véve, hogy egy-egy szó mennyire befolyásolja egy adott dokumentum végsõ kategóriáját. Ha egyes szavak leginkább ugyanabban a kategóriában szereplõ dokumentumokban fordulnak elõ, akkor nagyobb ez az érték, míg ha több kategóriában is elõfordulhatnak, akkor kisebb (hiszen bizonytalan a hatásuk a végsõ kategória-ítéletre). Például a sportolók nevei magasabb, míg pl. a stadion szó alacsonyabb értéket kap a sportrovat besorolás ítéletében egy mai hírportálon, mivel ez utóbbi szó gyakran jelenik meg belföldi, politikai hírekben is.
+
+\textbf{Latent semantic indexing (LSI)} \cite{TopicModels}: nagyméretû dokumentumok esetén a szótár több tízezer szóból is állhat. Ekkora dimenzió mellett elég nehéz számolnunk: az LSI egy olyan matematikai modell, amely feladata redukálni ezt a dimenziószámot, fõként a nem túl releváns dimenziók kiszûrésével, dimenziók összevonásával, a vektortér transzformálásával. A tf-idf elemzés által kijelölt releváns, súlyozott szavak mentén egy pontosabb adatszerkezetet kaphattam. 
+
+\textbf{Hasonlósági elemzés}: A fenti vektor reprezentációk, súlyozások, transzformációk célja, hogy egy olyan matematikai modellt építhessünk fel, melyen értelmezhetõek az úgynevezett Hasonlósági eljárások  \cite{NaturalLangProc}.
+Ezek célja, hogy az elõállított dokumentumtéren számosítsa a különbözõ dokumentumok közötti tartalmi kapcsolatot, megállapítsa valamely formában, hogy a dokumentumtéren egy elem mely más dokumentumokhoz helyezkedik el "közel" és melyektõl áll "messze".
+Munkám során a más említett Cosinus hasonlósági elemzést használtam fel a távolságok megállapítására. 
+

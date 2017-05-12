@@ -1,0 +1,143 @@
+%----------------------------------------------------------------------------
+\chapter{A SmartActive mobilalkalmazás koncepciója}
+%----------------------------------------------------------------------------
+
+A következõkben bemutatom a mobilalkalmazás tervezésének kezdeti fázisát, a megvalósítandó funkciókat, valamint az applikáció tervezett kinézetét. 
+
+%----------------------------------------------------------------------------
+\section{Kezdeti tervek}
+%----------------------------------------------------------------------------
+Az alkalmazás tervezését azzal kezdtem, hogy kilenc, squash sportot különbözõ szinten ûzõ ismerõsömmel interjút készítettem, hogy milyen funkciókat látnának szívesen egy, a sportról szóló mobilalkalmazásban.
+
+Számos igényt gyûjtöttem, amik figyelembe vételével a szakdolgozat írásának kezdetén az alábbi funkcionális követelményeket támasztottuk az applikációval szemben:
+\begin{itemize}
+	\item Az alkalmazás legyen multi-platform, ezzel a legelterjedtebb okostelefon-\linebreak operációs-rendszereken (Apple iOS, Google Android és Microsoft mobil rendszerek) azonos funkcionalitást és felhasználói élményt nyújtva.
+	\item Lehessen megtekinteni statisztikákat az edzésekrõl:
+	\begin{itemize}
+		\item használt labda típusa (kezdõ, középhaladó, haladó, profi)
+		\item idõtartam
+		\item megtett lépések száma
+		\item megtett táv
+		\item átlagos pulzusszám
+		\item hány ütést érzékelt a rendszer, azokat milyen típusú ütésekbõl (tenyeres, fonák)
+		\item hány melléütés történt
+		\item mekkora volt az ütések átlagos ereje km\texttt{/}h-ban, azaz mekkora sebességre gyorsult fel a labda
+	\end{itemize}
+	\item Lehessen listázni a barátokat.
+	\item A barátokról legyenek elérhetõk részletesebb információk, például e-mail cím, telefonszám.
+	\item Tegye lehetõvé az idõpontra történõ pályafoglalást.
+	\item A lefoglalt pályára lehessen partnert hívni közös sportolásra.
+	\item A felhasználók be tudjanak jelentkezni a SmartActive fiókjukba.
+	\item Az alkalmazás legyen képes szinkronizálni az adatokat a SmartActive szerverrel, és internetkapcsolat hiányában is az eddig szinkronizált adatokat megjeleníteni.
+\end{itemize}
+Az app megjelenített nyelvének az angolt választottam, mivel a szoftverfejlesztésben ez a legelterjedtebb, illetve ez biztosítja a legnagyobb kompatibilitást a grafikusalkalmazás-fejlesztõ keretrendszerekkel.
+
+Fontos kitérni arra, hogy a Windows Phone operációs rendszer 8.1-es és 10-es verziója között jelentõs különbségek vannak mind funkcionalitásban, mind a megjelenített alkalmazáselemek kinézetében, ezért legtöbb esetben két külön célplatformként szokás rájuk tekinteni szoftverfejlesztési szemszögbõl nézve. A Microsoft ezt az álláspontot erõsíti a felhasználók felé azzal is, hogy a legújabb verzió neve már Windows 10 Mobile, így a továbbiakban én is két külön célplatformként hivatkozok rá.
+
+A fentiek alapján készítettem az alkalmazáshoz koncepciórajzokat, úgynevezett mockupokat\footnote{A több helyen is látható fekete szélû, fekete átlókkal rendelkezõ fehér négyzet a képek és ikonok szokványos jelölése a mockupokon.\label{MockupFootnote}}. Ehhez a Balsamiq Mockups 3 \cite{Balsamiq} nevû programot használtam, amihez a program online közössége (MockupsToGo community \cite{MockupsToGo}) által készített sablonokat töltöttem le az alapértelmezettek mellé.
+
+Az alábbiakban ismertetem az alkalmazás kezdeti kinézeti tervét:
+\begin{itemize}
+	\item \textit{Nyitóképernyõ}: az utolsó mérkõzés fent felsorolt statisztikái jelennek meg rajta, illetve az ellenfél neve  (\figref{InitHomeMockup} ábra). A \textit{More} gombra kattintva egy statisztikatörténet érhetõ el a korábbi edzésekrõl.
+	\item \textit{Barátok listája}: a bejelentkezett felhasználó barátainak listája  (\figref{InitFriendsMockup} ábra).
+	\item \textit{Barátrészletezõ oldal}: ez az oldal további részleteket jelenít meg adott ismerõsrõl, továbbá az \textit{Invite to Session} gomb megnyomásával meghívható egy már lefoglalt idõpontra és helyszínre edzeni (\figref{InitFriendsMockup} ábra).
+	\item \textit{Squash termek listája}: azon létesítmények listája, ahol squash pálya foglalható (\figref{InitCourtMockup} ábra).
+	\item \textit{Squashterem-részletezõ oldal}: megtekinthetõ a squash terem helye egy térképen, valamint dátum, ezen belül idõintervallum szerint rendezett listában kiválasztható a szabad idõpontok közül, mikorra foglal termet a felhasználó (\figref{InitCourtMockup} ábra).
+\end{itemize}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_5_home.png}
+	\caption{A kezdeti kezdõképernyõ koncepciórajza} 
+	\label{fig:InitHomeMockup}
+\end{figure}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_5_friendlist.png}\hspace{5mm}
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_5_frienddet.png}
+	\caption{A kezdeti barátkezeléssel kapcsolatos koncepciórajzok} 
+	\label{fig:InitFriendsMockup}
+\end{figure}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_5_courtlist.png}\hspace{5mm}
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_5_courtdet.png}
+	\caption{A kezdeti pályafoglalási koncepciórajzok} 
+	\label{fig:InitCourtMockup}
+\end{figure}
+
+%----------------------------------------------------------------------------
+\section{Követelménymódosulások}\label{sect:RequirementsChange}
+%----------------------------------------------------------------------------
+A SmartActive egy új és összetett projekt, ezért a megvalósítása során bekövetkezhetnek változások az eredeti tervekhez képest, amik oka technikai vagy a nyújtott szolgáltatások finomítása lehet tesztfelhasználói visszajelzések alapján.
+Ilyen okokból a mobilalkalmazással szembeni elvárások több ponton módosultak a munkám során.
+
+A változások listája:
+\begin{itemize}
+	\item A kezdõképernyõn a korábbi edzések listája jelenjen meg, amiket az edzés dátuma és az ellenfél azonosít.
+	\item Az edzésekrõl lehessen megtekinteni az alatta játszott mérkõzéseket, azok eredményeit.
+	\item A statisztikákban legyen grafikonon megtekinthetõ a szívritmus alakulása az edzés folyamán.
+	\item A barátrészletezõ oldalon legyen látható a korábbi közös edzések listája.
+	\item A barátok neve mellett az eddigi közös edzések száma is jelenjen meg.
+	\item Legyen a barátlista kereshetõ.
+	\item Legyen barátfelvételi lehetõség.
+	\item A pályafoglalási funkció helyett az éppen futó bajnokságok listája jelenjen meg.
+	\item Lehessen bajnokságot létrehozni annak idejének, helyének és a résztvevõk maximális számának megadásával.
+	\item Legyenek megtekinthetõk a bajnokság részletei és résztvevõinek listája.
+	\item A felhasználó tudjon csatlakozni bajnoksághoz.
+	\item Csatlakozás után lehessen meghívni barátokat a bajnokságra.
+\end{itemize}
+A megváltozott kinézethez is készítettem koncepciórajzokat, amiket az alábbiakban mutatok be.
+
+Az új kezdõképernyõn (\figref{SessionListMockup} ábra) a korábbi edzések listája tekinthetõ meg, valamint az edzés pár alapvetõ jellemzõje: elégetett kalóriák, az edzés idõtartama, és az edzés során megtett távolság. A listaelemek bal oldalán látható fánk diagramban lévõ szám az edzés alatt játszott meccsek számát, míg a diagram a nyert és vesztes mérkõzések arányát mutatja.
+\begin{figure}[!hb]
+	\centering
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_home_sessionlist.png}
+	\caption{A módosult kezdõképernyõ} 
+	\label{fig:SessionListMockup}
+\end{figure}
+
+Egy edzést kiválasztva arról részletesebb statisztikákat kaphatunk, ezt mutatja a \figref{SessionDetMockup} ábra. A \textit{Matches} fülön láthatóak a lejátszott mérkõzések, azok típusa (legjobb a háromból vagy legjobb az ötbõl), a nyertes, és az egyes szettek eredményei.
+A \textit{Metrics} fülön az edzés szintû statisztikák tekinthetõk meg.
+
+A barátok kezelése a kívánt elemekkel bõvült (\figref{FriendManMockup} ábra), illetve lekerült a közös sportolásra meghívás lehetõsége.
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_sessiondet_matches.png}\hspace{5mm}
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_sessiondet_metrics.png}
+	\caption{Az edzés részletes statisztikái} 
+	\label{fig:SessionDetMockup}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_friendlist.png}\hspace{5mm}
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_frienddet.png}
+	\caption{A bõvített barátkezelés} 
+	\label{fig:FriendManMockup}
+\end{figure}
+
+\newpage
+A bajnokságokat a felhasználó a \textit{Tournaments} fülön tekintheti meg, ugyanitt lehetõsége van új bajnokság létrehozására is (\figref{TournamentListMockup} ábra).
+A bajnokság részletezõoldalának (\figref{TournamentDetMockup} ábra) két állapota lehet: amíg a felhasználó nem csatlakozott, a \textit{Join} gomb jelenik meg, utána az \textit{Invite Friends}, amit választva a barátok meghívási oldalára juthat.
+
+A bajnokságra meghívandó barátokat egy kereshetõ listából választhatja ki a felhasználó (\figref{TournamentInviteMockup} ábra).
+A meghívást végrehajtó gombnak két állapota lehet: ha nincs kijelölve egy ismerõs sem, akkor mindenkit meg lehet hívni egy gombnyomással (\textit{Invite All}), ha a felhasználó kijelöl barátokat, akkor csak õket hívja meg (\textit{Invite}).
+\begin{figure}[!h]
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_tournamentlist.png}
+	\caption{A bajnokságok listája}\label{fig:TournamentListMockup}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_tournamentdet_beforejoin.png}\hspace{5mm}
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_tournamentdet_afterjoin.png}
+	\caption{Egy bajnokság részletei} 
+	\label{fig:TournamentDetMockup}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_tournament_invite_all.png}\hspace{5mm}
+	\includegraphics[height=105mm, keepaspectratio]{figures/Mockup_week_9_tournament_invite_selected.png}
+	\caption{Barátok meghívása bajnokságra} 
+	\label{fig:TournamentInviteMockup}
+\end{figure}

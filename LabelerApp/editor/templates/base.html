@@ -16,43 +16,9 @@
 
             <h3>Kiss Balázs</h3>
         </div>
-        {% if user.is_authenticated %}
-        <!--<div class="col-md-4">-->
 
-            <!--<div>-->
-                <!--&lt;!&ndash;todo: ezt törölni &ndash;&gt;-->
-                <!--<p class="top-menu">user: {{ user.username }}-->
-                    <!--<small>(<a href="{% url 'logout' %}">Log out</a>)</small>-->
-                <!--</p>-->
-                <!--<ul class="list-style">-->
-                    <!--<li>-->
-                        <!--<a href="{% url 'editor.views.post_new' %}" class="top-menu2">-->
-                            <!--<span class="glyphicon glyphicon-plus"></span>-->
-                            <!--Új cikk létrehozása-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="{% url 'editor.views.url_parse' %}" class="top-menu2">-->
-                            <!--<span class="glyphicon glyphicon-plus"></span>-->
-                            <!--URL parse-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="{% url 'editor.views.url_multi_parse' %}" class="top-menu2">-->
-                            <!--<span class="glyphicon glyphicon-plus"></span>-->
-                            <!--Multiple URL parse-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="{% url 'editor.views.parse_index' %}" class="top-menu2">-->
-                            <!--<span class="glyphicon glyphicon-plus"></span>-->
-                            <!--Generate Index parsing-->
-                        <!--</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
+        {% if usenipr.is_authenticated %}
 
-        <!--</div>-->
         <div class="col-md-4">
             <div>
                 <p class="top-menu">Funkciók</p>
@@ -71,7 +37,8 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> <!--asd -->
+
         {% else %}
         <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
         {% endif %}

@@ -1,0 +1,206 @@
+% !TeX encoding = ISO-8859-2
+%----------------------------------------------------------------------------
+\chapter{Ismert dokumentumtér: Programozott webelemzés}\label{sect:documentMinePlanning}
+%----------------------------------------------------------------------------
+A programozott webelemzés során a következõ két weboldalra írtam egy-egy, a weboldal sajátosságainak megfelelõen erõsen specializált webcrawler-t:
+\begin{itemize}
+	\item index.hu
+	\item wikipedia.hu
+\end{itemize}
+
+Az által, hogy a weboldalak sajátosságaira elõre fel tudtam készülni, jóval pontosabb kutatásra volt lehetõségem. A feladat során arra a kérdésre kerestem a választ: a webportálon egy adott napon mely témakör a legfelkapottabb, és mely cikkek tartoznak bele?
+
+Az index.hu egy internetes hírportál, így az adott nap legnépszerûbb témakörét és a hozzá tartozó újságcikkeket kerestem.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/Indexhu.png}
+	\caption{Az index.hu kezdõoldala} 
+	\label{Indexhu}
+\end{figure}
+
+A wikipedia.hu internetes tudásbázis fõoldalán minden nap vegyesen ajánlanak a weboldalon tárolt szócikkek közül, kíváncsi voltam felfedezhetõ-e bennük valamilyen közös téma.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/Wikihu.png}
+	\caption{A wikipedia magyar kezdõoldala} 
+	\label{Wikihu}
+\end{figure}
+
+%----------------------------------------------------------------------------
+\section{Paraméterek}
+%----------------------------------------------------------------------------
+
+Mindkét weboldal feltérképezése során rekurzív módon nyerem ki a fõoldalon található linkeket, melyek közül a weboldalhoz köthetõ hivatkozásokról kinyerem a szöveges tartalmat. Így az index.hu internetes hírportálon az éppen aktuális cikkeket, a wikipedia.hu-n pedig a fõoldalról elérhetõ szócikkeket térképeztem fel. 
+
+%----------------------------------------------------------------------------
+\section{Funkciók tervezése, megvalósítás}
+%----------------------------------------------------------------------------
+A feladat megoldásához a következõ lépéseket terveztem meg:
+
+\begin{enumerate}
+	\item \textbf{Fázis: Dokumentumtér kialakítása.} Ebben a lépésben a weboldal aktuális tartalmát letöltöm, rajta szereplõ linkeken keresztül felolvasom a weboldal hasznos tartalmát.
+	\item \textbf{Fázis: Témaelemzés: }elvégzem a már ismertetett szöveg- és adatbányászati lépéseket, megállapítom témaelemzés segítségével a legjellemzõbb témákat a dokumentumtéren. 
+\end{enumerate}
+
+%----------------------------------------------------------------------------
+\subsection{Dokumentumtér kialakítása}
+%----------------------------------------------------------------------------
+A dokumentumtér kialakításához egy általam írt Scrapy Spider-t használtam fel.
+
+A Spider konfigurálása során törekedtem arra, hogy minden elérhetõ cikket letöltsön a weboldalról, még ha az elsõ alkalommal bármilyen okból nem is sikerül, próbálkozzon újra néhányszor. Ezen felül egyedül az http://index.hu és https://hu.wikipedia.org  címet adtam meg a rekurzió kezdetekor, minden más információt a weboldalról nyerek ki. 
+
+A Spider a következõ lépéseket végzi el:
+\begin{enumerate}
+	\item Letölti a kapott link tartalmát.
+	\item Kiszûri belõle azokat a <a href=".."> tag-eket, melyek az eredeti weboldalhoz tartoznak. (tehát pl. index.hu esetén a fõoldalon linkelt blog cikkeket nem olvasom be.) 
+	\item Meghívja a dokumentum feldolgozó eljárást mindegyik érvényes cikkre.
+\end{enumerate}
+
+A dokumentum feldolgozó eljárás során történik a weboldal-specifikus tartalom kinyerése. A megoldás megtalálása során a Scrapy CLI (Command Line Interface) felületét használva lépésrõl-lépésre nyertem ki a tartalmat, és a végsõ kódsort implementáltam a programba (\ref{cliexample} kódrészlet). 
+
+\begin{lstlisting}[frame=single, label=cliexample, caption=Példa részlet a CLI mûködésébõl  float=!ht]
+ >>> response.css('meta').re(r'.*author.*')[0]
+Out[9]: u'<meta name="author" content="Stubnya Bence">'
+\end{lstlisting}
+
+A specializált webcrawler kódnak köszönhetõen minden dokumentumban csak a konkrét szövegtörzs szerepel (\ref{StaticParseDocuments} ábra). 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/StaticParseDocuments.png}
+	\caption{Az elõkészített dokumentumok} 
+	\label{StaticParseDocuments}
+\end{figure}
+
+%----------------------------------------------------------------------------
+\subsection{Témaelemzés}
+%----------------------------------------------------------------------------
+A témaelemzés során a már ismertetett Topic modelling eljárásokat alkalmaztam. A legfõbb különbségek a Dinamikus webelemzéshez képest a következõk:
+\begin{itemize}
+	\item Szótár létrehozáskor csak a magyar nyelvû STOP-szótáramat használtam fel, hiszen az oldalak nyelve is kizárólag Magyar.
+	\item A legfõbb témakör meghatározásához az optimális módszer a kétdimenziós LSI transzformálás futtatása: így egyértelmûen megállapítható a leginkább kiugró téma. 
+	\item Az elemzés során a cikkeket tovább súlyoztam aszerint, hogy a bennük szereplõ szavak közül melyek fordulnak elõ az algoritmus által meghatározott két fõ téma szavai közül. Ezáltal még jobban megszûrtem a cikkek közül a valóban legfõbb témába vágó oldalakat.
+	\item Az elemzés eredményéül a leginkább a témára jellemzõ, "nap cikke" dokumentumot külön lementettem.
+\end{itemize}
+
+%----------------------------------------------------------------------------
+\subsection{Felhasználói felület }
+%----------------------------------------------------------------------------
+A felület a már megismert sémára épült, összesen három menüpont segítségével érhetõ el az egy-egy weboldal elemzése.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/StaticParseGUI.png}
+	\caption{A statikus webparse-olás kezdõoldala} 
+	\label{StaticParseGUI}
+\end{figure}
+
+A dokumentumtérben a lementett cikkek szerepelnek a már látott módon Sorszám, URL, Cím, Szöveg sorrendben. 
+
+A szótár menüpontban a szavak gyakoriság szerinti csökkenõ sorrendben tekinthetõek meg. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/StaticParseDict.png}
+	\caption{Szótár} 
+	\label{StaticParseDict}
+\end{figure}
+
+Az index.hu-n átlagosan 200-240 cikk szerepel. A wikipedia.hu-n átlagosan ~250 szócikk szerepel a fõoldalon.
+
+
+
+%----------------------------------------------------------------------------
+\section{Eredmények}
+%----------------------------------------------------------------------------
+%----------------------------------------------------------------------------
+\subsection{Hírportál elemzés}
+%----------------------------------------------------------------------------
+Az index.hu hírportálon az adott napok függvényében sikerült pontosan meghatározni a feladatban kijelölt, nap legfontosabb témakörét, és eme témakört legjobban jellemzõ cikket. 
+
+Például 2017.április 13-án a két fõ témakör a \figref{StaticParseTopics} ábrán látható.  
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/StaticParseTopics.png}
+	\caption{Eredmények: fõ témák} 
+	\label{fig:StaticParseTopics}
+\end{figure}
+
+\begin{enumerate}
+	\item Gulyás Gergely és Varga Gergely eljárása rongálásért. Ezt indikálják a kiemelt szavak: "Gulyás", "két", "kormány". 
+	\item Az összes többi cikk. Itt minden szó szinte egyforma, alacsony fontossággal rendelkezik, azok a szavak dominánsak a kategóriában, melyek kizárólag csak egy-egy cikkben szerepelnek: pl. "mûtét", "színház", "györgy"
+\end{enumerate}
+
+A két témakörre legjobban vonatkozó cikkek is ezt mutatják:
+
+\begin{enumerate}
+	\item Az elsõ kategóriát legjobban jellemzõ cikk a bírósági tárgyalásról szóló fõ cikk. A többi, még kategóriába tartozó cikk a kapcsolódó tüntetésekrõl, politikai elemzésekrõl szólnak.
+	\item A második kategóriát legjobban jellemzõ cikk, mivel ez az összes cikk közös gyûjtése, az jellemzi a legjobban, amely az elõzõ kategória témakörétõl a legtávolabb áll. A legerõsebben ez a Cserhalmi György színmûvész mûtétjérõl szóló cikk, de csak nagyon kis értékkel maradnak le a különbözõ magazinok egyéb specifikus cikkei, autókról, bulvárról, technológiai eseményekrõl tudósítva.
+\end{enumerate}
+
+Az eredményeket értelmezve megállapítható, hogy az algoritmus alkalmas arra, hogy megállapítsa, mely a legfontosabb hír egy olyan napon, amikor egy "forró" téma dominál.
+
+%----------------------------------------------------------------------------
+\subsection{Wikipedia elemzés}
+%----------------------------------------------------------------------------
+
+A wikipedia elemzése ugyanazon logika mentén került implementálásra, mint a hírportál elemzése. Itt az eredmények a következõképpen alakultak:
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/StaticParseWikiRes1.png}
+	\caption{A wikipedia fõoldala az elemzés pillanatában} 
+	\label{StaticParseWikiRes1}
+\end{figure}
+
+A wikipedia fõoldala általában egy kiemelt cikkel és a nap képével kezd, majd pedig a mai napon és a mostanában történt aktuális évfordulókkal folytatja a cikkek felsorolását. 
+
+Az eredmény a témaelemzés során a következõ:
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/StaticParseWikiRes2.png}
+	\caption{Témaelemzés eredménye a wikipedia oldalon} 
+	\label{StaticParseWikiRes2}
+\end{figure}
+
+Megfigyelhetjük \aref{StaticParseWikiRes2} ábrán, hogy a Romantika, mint szócikk közvetlen hivatkozásként elérhetõ a nap kiemelt cikkébõl. A nap képe és a kiemelt szócikk egyéb linkjei is különbözõ történelmi korokból szemezget, ahogy az évfordulókról szóló rész is. Ez utóbbinál az évfordulók jelentõs többsége az elmúlt ~200 év eseményei közül válogat.
+
+Így világossá válik számunkra a gyõztes kategóriák eredményei mögött a logika:
+\begin{enumerate}
+	\item Elsõ kategória a 19-20 és 21. század eseményei
+	\item A másik kategória az összes többi cikk.
+\end{enumerate}	
+
+Ezek alapján az eredményrõl azt állapítottam meg, hogy bár az algoritmus jól mûködik, és a dokumentumok ismeretében helyes eredményt ad, a wikipedia.hu-n nem figyelhetõ meg kifejezett "nap témaköre" besorolás.
+
+Több különbözõ napon is lefuttatva az elemzést nagy többségben általában a már fent említett, elmúlt három évszázad jött ki gyõztes kategóriaként: így megállapítható, hogy a weboldal sajátossága, hogy az elmúlt három évszázadból található rajta a legtöbb információ a többihez képest, így ezek a cikkek szerepelnek túlsúlyban az oldalon, ezért kapjuk ezt az eredményt. 
+
+
+%----------------------------------------------------------------------------
+\subsection{Konklúzió}
+%----------------------------------------------------------------------------
+Az elõzetes kutatásaim során megállítottam, hogy magyar nyelvû hírportálok cikkeit sikeresen lehet szöveg-és adatbányászati eljárások segítségével betanítás után automatikusan címkézni. 
+
+Dinamikus szövegbányászati kutatásaim során megállapítottam, hogy egy átfogó, mindent jól bekategorizáló alkalmazás írása túlságosan nagy feladat. A probléma felbontása után sikeres részeredményeket értem el, sikerült angol nyelvû weboldalak esetén hasonló weboldalakt közös kategóriákba helyeznem.
+
+Az elõre felkészített szövegbányászati modul sikeresen állapítja meg az általa elemzett weboldalak legfõbb témaköreit. A specifikus tartalomra felkészített elemzõszoftver precízebb eredményekkel szolgál, mint a dinamikus elemzés során használt társa. 
+
+\begin{center}
+	\begin{tabular}{  | m{3cm} | m{6cm}| m{2.5cm} |} 
+		\hline
+		Feladat & Módszerek & Eredmény \\
+		\hline
+			\hline
+		1. Elõzetes szövegelemzés & Szövegtörzsek hasonlósági témaelemzése & Sikeres magyar nyelven \\ 
+			\hline
+		2. Dokumentum osztályozás & Internetes hírportál cikkek kategorizálása, osztályozás segítségével & Sikeres magyar nyelven \\ 
+			\hline
+		3. Webtérképezés & Ismeretlen weboldalak nyelvi feltérképezése klaszterezéssel  & Részben sikeres angol nyelven \\ 
+			\hline
+		4. Programozott webelemzés & Témaelemzés és fõbb cikkek meghatározása klaszterezéssel & Sikeres magyar nyelven \\ 
+		\hline
+	\end{tabular}
+\end{center}

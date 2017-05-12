@@ -1,0 +1,124 @@
+%----------------------------------------------------------------------------
+\chapter{Felhasznált webes technológiák}\label{sect:usedWebTechs}
+%----------------------------------------------------------------------------
+A feladatom során nagyban építkeztem a korábbi önálló laboratórium során megismert technológiákra. Segítségükkel bõvítettem a korábbi megoldást, és implementáltam új eljárásokat, melyhez szükségem volt új technológiák megismerésére.  
+
+A feladat megoldásához egy olyan könnyen konfigurálható, sokrétû webalkalmazás elkészítésére törekedtem, amely bõvíthetõ, könnyedén beépíthetõ a késõbbiekben más rendszerekbe, illetve természetesen az adat- és szövegbányászati modulok is integrálhatóak legyenek bele. A választott keretrendszer így a Python nyelvre íródott framework \cite{WebFramework}, a Django\cite{django} lett.
+%----------------------------------------------------------------------------
+\section{Python}
+%----------------------------------------------------------------------------
+A Python\cite{pythonBook} egy általános célú, magas szintû programozási nyelv. Elterjedésének okai többek között a jó felhasználhatóság, jó futásidõ-optimalizáció, elegáns megoldások és olvasható kódkép. Én a Python 3.3.3-as verzióját használtam a feladat megvalósítására. 
+
+A nyelv objektumorientált, ingyenesen használható, mûködik a legtöbb modern operációs rendszer felett. Scriptek írásától a komplex, többrétegû alkalmazások implementálásáig használható. 
+
+Kódképe tömör és jól olvasható: szokásos programozási konvencióktól több helyen is eltér az egyszerûség és átláthatóság céljából. A kódban a sortörés kiváltja a pontosvesszõk használatát az utasítások lezárásához, illetve a kódblokkok elválasztó elemei a bekezdések, a szokásos kapcsos zárójelek helyett. 
+
+\begin{lstlisting}[frame=single,caption=A Fibonacci számok kiszámolása Python nyelven, label=pythonfibo, float=!ht]
+>>> def fib(n):
+>>>     a, b = 0, 1
+>>>     while a < n:
+>>>         print(a, end=' ')
+>>>         a, b = b, a+b
+>>>     print()
+>>> fib(1000)
+\end{lstlisting}
+
+Automatikus, és effektív erõforrás kezelést valósít meg, adattípusai magasan fejlettek. Pointerek használata egyáltalán nincs. Könnyedén többszálúsítható, és jól interpretált, compile módú mûködése is lehetséges. Ma már széles fejlesztõi közösség munkálkodik mögötte, melynek köszönhetõen folyamatosan fejlõdik.
+%----------------------------------------------------------------------------
+\section{Webalkalmazások}
+%----------------------------------------------------------------------------
+A feladathoz megalkotott szoftverem egyik jellemzõje, hogy webes alkalmazásként elérhetõ a szabványos böngészõk segítségével.
+
+A szoftver felhasználó felülete így generált HTML weblapokból áll, melyeket egy webszerver állít elõ. Ez a webszerver felelõs az alkalmazás üzleti logikájának futtatásáért, a webes kérések kiszolgálásáért, megjelenítendõ weboldalak elõállításáért és az érkezõ http kérések kiszolgálásáért.
+
+A webszerver HTTP \cite{httpRFC} felett különbözõ csomagokat küld és fogad. A kéréseknek két kategóriáját használtam fel:
+
+\begin{itemize}
+	\item \textbf{GET}: a kliens oldaláról érkezõ http request csomag, mely valamilyen adat lekérdezésére irányul legtöbbször (RESTful\cite{restful} web service esetében). Például az egyes linkekre való kattintás, vagy gombok lenyomása.
+	\item \textbf{POST}: a kliens oldaláról érkezõ, szintén http request típus, amely valamilyen adatot küld feldolgozás céljára. A felhasználó a feladatom során, a webes felületen adhatja meg azt a szöveget, linkeket, melyekre szeretné futtatni az elemzési eljárásokat. Az információt egy POST üzenetben küldi el a szerver számára, mely azt továbbítja az adatbányászati modul felé. 
+\end{itemize}
+
+
+%----------------------------------------------------------------------------
+\section{Django}
+%----------------------------------------------------------------------------
+A Django egy Python webalkalmazás keretrendszer. A többi keretrendszerhez hasonlóan, egy már megvalósított, gyakran újrafelhasznált osztályokat tartalmazó csomag, mely segítségével nem kell nulláról elkezdenünk egy webalkalmazás megírását. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=70mm, keepaspectratio]{figures/DjangoArch.png}
+	\caption{Django architektúra\cite{djangoArch}} 
+	\label{DjangoArch}
+\end{figure}
+
+Az alkalmazás Model-View-Controller \cite{mvcArch} alapokra támaszkodik és fõ célja az új webalkalmazások egyszerû létrehozása: az elõre meghatározott építõelemek segítségével percek alatt képesek vagyunk egy mûködõ webszervert indítani, rajta a telepített alkalmazásunkkal, mely így képes webes kérések kiszolgálására, websevice-ek \cite{webservice} üzemeltetésére.
+
+\Aref{DjangoArch} ábrán látható a szoftver általános szerkezete. Az adatbázis és a model közötti szinkronizáció automatikus. A view réteg dolgozza fel a beérkezõ kéréseket, szólítja meg a belsõ üzleti logikát (ami a mostani esetben az adatbányászati modul függvényei), kommunikál az adatbázissal. Ebbõl a hármasból állítja elõ az elõre definiált weboldal-template-ek kiegészítésével a megjelenítendõ weboldalt. 
+
+Egy tipikus weboldal létrehozása a következõ lépésekbõl állhat:
+\begin{enumerate}
+	\item Architektúra, könyvtárszerkezet kialakítása. A manage.py paraméterezésével könnyedén kialakítható egy elõzetes könyvtárszerkezet, a különbözõ rétegeknek megfelelõen. Az alkalmazás vázának létrehozásakor már képesek vagyunk elindítani az webszervert, kiszolgálni a kéréseket, adminisztrátori felületen belépni, felhasználókat menedzselni: tehát a leggyakoribb feladatokhoz megkapjuk a keretet.
+	\item Model definiálás. A keretrendszer segítségével elõre meghatározott módon tudunk model objektumokat létrehozni, melyekek elõre generált megjelenítõ felületekkel rendelkeznek. A feladatom során olyan dokumentum objektumokat hoztam létre, melyek ilyen módon már elõre rendelkeztek a hozzájuk tartozó megfelelõ model form-mal, és igény szerint akár adatbázis perzisztálással is.
+	\item 	URL-ek megadása: a weboldalak bekötésére külön felület áll rendelkezésre, ahol az egyes kérések belépési pontjait és a válasz oldalak elérhetõségét állíthatjuk be.
+	\item Template-ek létrehozása. A webes megjelenítõ felületre egy saját template nyelv segítségével lehet definiálni a késõbbiekben legenerálandó, statikus és dinamikus tartalommal rendelkezõ oldalakat.
+	\item Control réteg. Itt ér össze az útvonalak és kérések kiszolgálása. A beérkezõ GET és POST http kérésekre az üzleti logikát felhasználva válaszokat állítunk elõ, amelyeket a template-ek, és a bennük található dinamikus változók behelyettesítésével hozunk létre.
+\end{enumerate}
+
+Természetesen ez csak egy felületes áttekintése a keretrendszerben rejlõ lehetõségeknek: a feladatom megoldásához az itt felsorolt lehetõségek elegendõnek is bizonyultak az adatbányászati modul felhasználásához, annak megjelenítéséhez.
+
+%----------------------------------------------------------------------------
+\section{Beautiful Soup}
+%----------------------------------------------------------------------------
+
+A Beautiful Soup \cite{BeautifulSoup} egy Python libary, amit web parse feladatok(azaz weboldal tartalom kinyerésének) könnyû megvalósításához terveztek.
+
+Fõ feladata, hogy képes egyszerû navigációs lépésekre weboldalak lekéréséhez. 
+A lekérdezett weboldalak dokumentum alapú tartalmát egy belsõ fa adatszerkezetben tárolja, melyen különbözõ feldolgozási lépéseket lehet megvalósítani.
+
+Támogatja a tartalmak felolvasását, könnyû és egyszerû szintaktikája segítségével gyorsan elérhetjük az XML fájlok számunkra érdekes részeit. Unicode kódolást támogatva ideális magyar nyelvû szövegek kinyerésére is.
+
+Erõssége abban rejlik, hogy azon parser-eken felül, amelyre építkezik (lxml, html5lib), elõre definiált bejárási eszközökkel is rendelkezik, tehát ezt nem nekünk kell megvalósítani. Ez utóbbi tulajdonsága egyes dokumentumfa bejárási feladatoknál nagyon hasznos.
+
+Az elõzetes kutatás során ezt az eszközt használtam többek között a weboldalak, és azok RSS feed-jének \cite{XmlDesc} lekérésére, ebbõl a linkek kiválogatására. A linkek mögött rejlõ weboldalak szövegét is ennek az eszköznek a segítségével értem el. 
+Például egy weboldalra mutató url-bõl \aref{URLParse} kódrészleten látható módon tudjuk kinyerni a szöveg címét.
+
+\begin{lstlisting}[frame=single, caption=URL parse-olása, label=URLParse,  float=!ht]
+def parse_title(urlText):
+resp = requests.get(urlText)
+soup = BeautifulSoup(resp.text)
+return soup.find('h1').text	
+\end{lstlisting}
+
+Elsõ lépésben a resp objektumban letárolja a lekérdezett HTML oldalt. A soup objektum tárolja a HTML oldal szöveg részét, a felesleges metaadatok nélkül, a már említett fa formátumban. A find függvény visszatér a HTML dokumentum <h1> tag-el jelölt szövegével. 
+
+%----------------------------------------------------------------------------
+\section{Gensim}
+%----------------------------------------------------------------------------
+
+A gensim \cite{gensimMain} egy topic modellezést megvalósító Python programcsomag. Open source projektként a fõ feladata, hogy Python nyelven egy könnyen, de mégis sokrétûen alkalmazható topic modelling eszköz legyen. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=90mm, keepaspectratio]{figures/GensimAbilities.png}
+	\caption{Gensim képességek} 
+	\label{fig:GensimAbilities}
+\end{figure}
+
+A szövegbányászat elõkészítési és adatbányászati lépéseit hivatott megvalósítani. Erõssége abban rejlik, hogy nem kell kézzel végrehajtani a lépéseket, hanem a weboldalba beépülve képes a szerveren elvégezni az összes feladatot. 
+
+A gensim segítségével végzem el a dokumentum vektor transzformációját, a szótár és a corpus létrehozását, a tf-idf elemzést és az LSI transzformációt is.
+
+%----------------------------------------------------------------------------
+\subsection{Gensim funkciók}
+%----------------------------------------------------------------------------
+A gensim a procedurális feldolgozás jegyében a korábban ismertetett adat- és szövegbányászati lépéseket a következõ funkciók segítségével valósítja meg: 
+ 
+\textbf{Corpus és Vektortér kezelés}: A dokumentumok feldolgozásakor String-listákat használ, hiszen ezeket könnyû végigiterálni például a stop-szavak kiszûréséhez. Automatikusan elvégzi a szavak tokenizációját (azaz az összefüggõ szövegbõl a szóközök mentén történõ feldarabolását) és létrehozza a szótárat belõlük. Létrehozza a szógyakoriság-elõfordulás vektort. Képes az említett vektorok összességét (a corpus-t) együtt kezelni.
+
+\textbf{Corpus, mint mátrix}: a mátrix mûveletek segítségével gyorsítja a feldolgozást. A corpus-t a gensim már mint mátrixot tárolja.
+
+\textbf{Matematikai modulok}: a NumPy és SciPy matematikai függvénykönyvtárak felhasználásával végezzük el a különbözõ transzformációkat, mûveleteket. 
+
+\textbf{Transzformációk}: könnyedén tudunk bag of words, tf-idf, vagy bármilyen, saját magunk által definiált vektorteret elõállítani, egyikbõl a másikba transzformálni.
+
+\textbf{Hasonlósági elemzés}: különbözõ vektorok közötti távolság számítását is elvégzi, a hasonlósági mutatók szerint könnyedén kiválaszthatjuk egy dokumentum témaszomszédjait.

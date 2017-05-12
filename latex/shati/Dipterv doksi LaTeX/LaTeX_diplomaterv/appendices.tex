@@ -1,0 +1,410 @@
+%----------------------------------------------------------------------------
+\appendix
+%----------------------------------------------------------------------------
+\chapter*{Függelék}\addcontentsline{toc}{chapter}{Függelék}
+\setcounter{chapter}{6}  % a fofejezet-szamlalo az angol ABC 6. betuje (F) lesz
+\setcounter{equation}{0} % a fofejezet-szamlalo az angol ABC 6. betuje (F) lesz
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{lstlisting}{section}
+%\numberwithin{tabular}{section}
+
+%----------------------------------------------------------------------------
+\section{A Visual Studio 2015 Update 2 komponenstelepítési beállításai}\label{sect:VSCompInstallAppendix}
+%----------------------------------------------------------------------------
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=74mm, keepaspectratio]{figures/VSCustomSelection.png}
+\includegraphics[width=74mm, keepaspectratio]{figures/VSXamarinChecked.png}
+\caption{A telepítendõ komponensek kiválasztása 1}
+\end{figure}
+\begin{figure}[!ht]
+	\centering
+\includegraphics[width=74mm, keepaspectratio]{figures/VSWinPhonesSelected.png}
+\includegraphics[width=74mm, keepaspectratio]{figures/VSWinPhonesDetail.png}
+\caption{A telepítendõ komponensek kiválasztása 2} 
+\end{figure}
+
+%----------------------------------------------------------------------------
+\clearpage\section{A Visual Studio emulátorokat kezelõ szoftverek}\label{EmulatorManagers}
+%----------------------------------------------------------------------------
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=122mm, keepaspectratio]{figures/Emulators_droid.png}
+	\caption{A Visual Studio Emulator for Android program}
+\end{figure}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=122mm, keepaspectratio]{figures/Emulators_wp.png}
+	\caption{A Windows Phone Developer Power Tools 8.1 program} 
+\end{figure}
+
+%----------------------------------------------------------------------------
+\clearpage\section{Példakód az adatkötés (data binding) szemléltetésére}\label{sect:SearchExample}
+%----------------------------------------------------------------------------
+\begin{lstlisting}[frame=single,float=!ht,captionpos=t,caption=A barátlista keresõsávjának deklarációja adatkötéssel XAML-ben]
+<SearchBar x:Name="FriendSearchBar"
+		   Placeholder="Search friend" 
+		   Text="{Binding SearchFilter}"/>
+\end{lstlisting}
+\begin{lstlisting}[frame=single,float=!ht,captionpos=t,caption=A kötött adat a FriendListViewModel osztályban]
+public string SearchFilter
+{
+  get
+  {
+    return _searchFilter;
+  }
+  set
+  {
+    _searchFilter = value;
+    OnPropertyChanged(nameof(SearchFilter));
+    FilterContacts();
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single,float=!ht,captionpos=t,caption=A keresés gomb megnyomásának kezelése a mögöttes kódban]
+public FriendListPage()
+{
+  // ...
+  // kötési kontextus beállítása a View Modelre
+  BindingContext = ViewModel = new FriendListViewModel();
+
+  // feliratkozás a "keresés gomb megnyomása" eseményre
+  FriendSearchBar.SearchButtonPressed += FriendSearchBar_SearchButtonPressed;
+  // ...
+}
+
+// eseménykezelés
+private void FriendSearchBar_SearchButtonPressed(object sender, EventArgs e)
+{
+  ViewModel.SearchFilter = (sender as SearchBar).Text;
+  ViewModel.FilterContacts();
+}
+\end{lstlisting}
+
+%----------------------------------------------------------------------------
+\clearpage\section{Példakód stílustulajdonság adatkötésére statikus változóhoz az x:Static XAML leíróbõvítmény használatával}\label{sect:xStaticExample}
+%----------------------------------------------------------------------------
+\begin{lstlisting}[frame=single,float=!ht,captionpos=t,caption=A feliratok betûméretének platformfüggõ deklarációja statikus változóval \Csharp-ban]
+namespace SmartActive
+{
+  public partial class App : Application
+  {
+    //...
+    public static readonly double SaMediumFontSize = Device.OnPlatform(
+        Android: Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+        WinPhone: Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+        iOS: Device.GetNamedSize(NamedSize.Medium, typeof(Label)));
+    //...
+  }
+}
+\end{lstlisting}
+\begin{lstlisting}[frame=single,float=!ht,captionpos=t,caption=Statikus változó adatkötése a feliratok egy explicit stílusához az x:Static leíróbõvítmény használatával]
+
+<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:local="clr-namespace:SmartActive;assembly=SmartActive"
+          x:Class="SmartActive.App">
+  //...
+  <Style x:Key="SaLabelMediumNoWrapTextStyle" TargetType="Label">
+    <Setter Property="FontSize" Value="{x:Static local:App.SaMediumFontSize}"/>
+    //...
+  </Style>
+  //...
+</Application>
+\end{lstlisting}
+
+%----------------------------------------------------------------------------
+\clearpage\section{Példakód elemtulajdonságok adatkötésére statikus változókhoz az x:Static XAML leíróbõvítmény használatával}\label{sect:xStaticButtonExample}
+%----------------------------------------------------------------------------
+\begin{lstlisting}[frame=single,float=!ht,captionpos=t,caption=Gombtulajdonságok deklarációja statikus változókban]
+namespace SmartActive.Resources
+{
+  public static class ButtonResources
+  {
+    public static readonly double FontSize = Device.OnPlatform(
+        Android: Device.GetNamedSize(NamedSize.Small, typeof(Button)),
+        WinPhone: Device.GetNamedSize(NamedSize.Micro, typeof(Button)),
+        iOS: Device.GetNamedSize(NamedSize.Medium, typeof(Button)));
+
+    public static readonly Color BorderColor = Device.OnPlatform(
+        Android: Color.Default,
+        WinPhone: Color.Default,
+        iOS: (Color)App.Current.Resources["ContentColor"]);
+
+    public static readonly int BorderRadius = Device.OnPlatform(
+        Android: 0,
+        WinPhone: 1,
+        iOS: 15);
+
+    public static readonly double BorderWidth = Device.OnPlatform(
+        Android: 0.0,
+        WinPhone: 2.0,
+        iOS: 1.0);
+    
+    public static readonly string AddFriendButtonText = Device.OnPlatform(
+        Android: "Add Friend",
+        WinPhone: "Add Friend",
+        iOS: " Add Friend ");
+    //...
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single,float=!ht,captionpos=t,caption=Gombtulajdonságok adatkötése az x:Static leíróbõvítmény használatával]
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:res="clr-namespace:SmartActive.Resources;assembly=SmartActive"
+        x:Class="SmartActive.Pages.LoginPage"
+        Style="{StaticResource SaContentPageStyle}">
+  //...
+  <Button x:Name="LoginButton"
+          Text="{x:Static res:ButtonResources.LoginButtonText}"
+          TextColor="{StaticResource ContentColor}"
+          FontSize="{x:Static res:ButtonResources.FontSize}"
+          BorderColor="{x:Static res:ButtonResources.BorderColor}"
+          BorderRadius="{x:Static res:ButtonResources.BorderRadius}"
+          BorderWidth="{x:Static res:ButtonResources.BorderWidth}"/>
+  //...
+</ContentPage>
+\end{lstlisting}
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------
+\clearpage\section{Multi-platform képernyõképek az elkészült alkalmazásról}\label{sect:AppScreenshots}
+%----------------------------------------------------------------------------
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_wp81.png}
+	\caption{A bejelentkezõ-képernyõ}
+	\label{fig:Login}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_IdError_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_IdError_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_IdError_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_IdError_wp81.png}
+	\caption{A bejelentkezõ-oldal hibaüzenete hibás felhasználóazonosító megadásakor}
+	\label{fig:Login_IdError}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_Loading_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_Loading_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_Loading_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/Login_Loading_wp81.png}
+	\caption{Töltési animáció a bejelentkezés alatt}
+	\label{fig:Login_Loading}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionList_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionList_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionList_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionList_wp81.png}
+	\caption{A korábbi edzések listája}
+	\label{fig:SessionList}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionDet_Matches_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionDet_Matches_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionDet_Matches_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionDet_Matches_wp81.png}
+	\caption{Egy edzés meccseinek eredményei}
+	\label{fig:SessionDet_Matches}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionDet_Stats_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionDet_Stats_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionDet_Stats_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionDet_Stats_wp81.png}
+	\caption{Egy edzésrõl készült statisztikák}
+	\label{fig:SessionDet_Stats}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionList_Update_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/SessionList_Update_droid.png}
+	\caption{Az edzéslista szinkronizálása a szerverrel iOS és Android operációs rendszereken}
+	\label{fig:SessionList_Update}		
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_Update_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_Update_droid.png}
+	\caption{A barátlista szinkronizálása a szerverrel iOS és Android operációs rendszereken}
+	\label{fig:FriendList_Update}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_BeforeAdd_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_BeforeAdd_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_BeforeAdd_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_BeforeAdd_wp81.png}
+	\caption{A barátok listája}
+	\label{fig:FriendList_BeforeAdd}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendDet_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendDet_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendDet_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendDet_wp81.png}
+	\caption{Részletes információk egy barátról}
+	\label{fig:FriendDet}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendAdd_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendAdd_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendAdd_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendAdd_wp81.png}
+	\caption{Új barát hozzáadása}
+	\label{fig:FriendAdd}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_AfterAdd_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_AfterAdd_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_AfterAdd_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_AfterAdd_wp81.png}
+	\caption{Hozzáadás után az új barát megjelenik a barátlistában}
+	\label{fig:FriendList_AfterAdd}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_Search_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_Search_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_Search_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/FriendList_Search_wp81.png}
+	\caption{Keresés a barátok között}
+	\label{fig:FriendList_Search}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentList_BeforeAdd_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentList_BeforeAdd_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentList_BeforeAdd_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentList_BeforeAdd_wp81.png}
+	\caption{A bajnokságok oldala}
+	\label{fig:TournamentList_BeforeAdd}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_wp81.png}
+	\caption{Új bajnokság létrehozása}
+	\label{fig:TournamentAdd}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_NativeDate_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_NativeDate_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_NativeDate_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_NativeDate_wp81.png}
+	\caption{A dátum megadása a platform natív grafikus elemeivel történik}
+	\label{fig:TournamentAdd_NativeDate}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_NativeTime_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_NativeTime_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_NativeTime_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_NativeTime_wp81.png}
+	\caption{Az idõ megadása a platform natív grafikus elemeivel történik}
+	\label{fig:TournamentAdd_NativeTime}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Empty_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Empty_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Empty_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Empty_wp81.png}
+	\caption{Az új bajnokság részletei}
+	\label{fig:TournamentDet_Empty}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Joined_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Joined_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Joined_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Joined_wp81.png}
+	\caption{A bajnokságrészletezõ-oldal a csatlakozás után}
+	\label{fig:TournamentDet_Joined}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_InviteAll_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_InviteAll_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_InviteAll_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_InviteAll_wp81.png}
+	\caption{A barátok bajnokságra meghívására szolgáló oldal. Az \textit{Invite All} gombbal az összes ismerõs egyszerre meghívható.}
+	\label{fig:TournamentInvite_InviteAll}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Error_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Error_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Error_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Error_wp81.png}
+	\caption{Ha a bajnokság maximális létszámát túllépné a meghívottak száma, hibaüzenet jelenik meg}
+	\label{fig:TournamentInvite_Error}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Search_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Search_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Search_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Search_wp81.png}
+	\caption{A keresés funkció használata ismerõsök meghívásakor a bajnokságra}
+	\label{fig:TournamentInvite_Search}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Invite_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Invite_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Invite_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Invite_wp81.png}
+	\caption{A kiválasztott barátok meghívása a bajnokságra az \textit{Invite} gombbal tehetõ meg}
+	\label{fig:TournamentInvite_Invite}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Invited_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Invited_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Invited_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Invited_wp81.png}
+	\caption{A meghívott barátok megjelennek a bajnokság résztvevõi között}
+	\label{fig:TournamentDet_Invited}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Full_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Full_droid.png}\\\vspace{\appendicesVSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Full_wp10.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Full_wp81.png}
+	\caption{Egy megtelt bajnokság részletezõoldala}
+	\label{fig:TournamentDet_Full}	
+\end{figure}
+
+\begin{figure}[!h]
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentList_Update_ios.png}\hspace{\appendicesHSpaceLength}
+	\includegraphics[width=\appendicesScreenShotWidth, keepaspectratio]{figures/screens/TournamentList_Update_droid.png}
+	\caption{A bajnokságok szinkronizálása a szerverrel iOS és Android operációs rendszereken}
+	\label{fig:TournamentList_Update}	
+\end{figure}

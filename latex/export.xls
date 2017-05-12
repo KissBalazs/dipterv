@@ -1,0 +1,778 @@
+
+
+
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40" lang="hu">
+
+ 
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head>
+    <title>OTP Direkt</title>	
+	<meta http-equiv="CACHE-CONTROL" content="NO-STORE" />
+    <meta content='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8' http-equiv='Content-type' />
+    <meta name='ProgId' content='Excel.Sheet' />	
+    
+
+    <style type="text/css">
+ 
+    <!--
+
+
+		body {
+			/* default font beállítások */
+			font-family: Verdana, Arial, sans-serif;
+			font-size: 10pt;
+		}
+		
+		h1 {
+			font-size: 1.4em;
+		}
+
+        table {
+        	empty-cells: show;
+        	mso-displayed-decimal-separator:"\,";
+            mso-displayed-thousand-separator:" ";
+       	}
+
+        tr {
+        	mso-height-source:auto;
+        }
+       
+        th {
+        	border: thin #CCCCCC solid;        
+        	vertical-align: top;
+        }
+        
+        td {
+        	border: thin #CCCCCC solid;
+        	vertical-align: top;
+        }
+        
+        col {
+        	mso-width-source:auto;
+        }
+        
+        br {
+        	mso-data-placement:same-cell;
+        }
+        
+        .excel_no_format {
+        	mso-style-parent:style0;
+            mso-number-format:"\@";
+            text-align:left;
+            white-space:normal;
+        }
+            
+        .numerikus {
+			vnd.ms-excel.numberformat:0;
+			text-align: right;
+        }
+        
+        table.allapot_informacio th {
+        	text-align: left;
+        }
+        
+        img {
+        	display: none;
+        }
+        
+        input {
+        	display: none;
+        }
+
+    -->
+    </style>
+</head>	
+<body>
+
+	<h1>		
+		Számlatörténet
+	</h1>
+	
+	<div id="content">
+		
+
+			
+			<!-- tranzakcios oldal -->
+			
+			<!-- hibauzenetek -->
+			
+			
+			
+			    
+			<!-- end hibauzenetek -->
+			
+			<!-- fix adatok -->
+			
+				
+			
+			<!-- end fix adatok -->
+			
+			<!-- eredmeny adatok -->
+			
+			      
+			        
+			        
+
+
+
+<br/>
+
+	
+	
+		
+		 
+		
+		
+
+
+
+ 
+
+
+	<table>
+		<tr>
+			<td>Számlaszám</td>
+			<td>11773391-00491859</td>
+		</tr>
+		<tr>
+			<td>Devizanem</td>
+			<td>HUF</td>
+		</tr>
+		<tr>
+			<td>Számla elnevezése</td>
+			<td>KISSs</td>
+		</tr>
+		<tr>
+			<td>Rendelkezésre álló egyenleg</td>
+			<td class="numerikus">
+				
+					
+						9 179
+					
+					
+					
+				
+			</td>
+		</tr>
+		<tr>
+			<td>Lekérdezés időpontja</td>
+			<td>2017.05.04. 22:46</td>
+		</tr>
+		<tr>
+			<td>Lekérdezés kezdete</td>
+			<td>2017.04.20.</td>
+		</tr>
+		<tr>
+			<td>Lekérdezés vége</td>
+			<td>2017.05.04.</td>
+		</tr>
+	</table>
+	<br/>
+	
+    
+    
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    		
+    	
+    
+    <br/>
+    <table class="allapot_informacio">
+    <tr >
+        <th >
+            Szűrési feltétel
+        </th>
+        <td >
+           	Forgalom típusa:&nbsp;Mind<br/>
+            Ellenoldali számlaszám:&nbsp;
+        </td>
+    </tr>
+    </table>
+    <br/>
+    
+    
+    
+	    
+	    
+
+		    <table class="eredmenytabla">
+				<thead>
+			        <tr>
+			            <th width="35">&nbsp;</th>
+			            <th nowrap="nowrap" width="235">Forgalom típusa</th>
+			            <th nowrap="nowrap" width="115">Könyvelési dátum</th>
+			            <th nowrap="nowrap" width="80">Értéknap</th>
+			            <th nowrap="nowrap" width="115">Összeg</th>
+			            <th nowrap="nowrap" width="130">Új könyvelt egyenleg</th>
+			            <th nowrap="nowrap" >Ellenoldali számlaszám</th>
+			            <th nowrap="nowrap" >Ellenoldali név</th>
+			            <th nowrap="nowrap">Közlemény</th>
+			            <th nowrap="nowrap" width="235">Banki tranzakció azonosító</th>
+			        </tr>
+		        </thead>
+				<tbody>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">1.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.20.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.20.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-1700</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">243308</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CHAM SALATABAR             PPASS&nbsp;&nbsp;2017.04.13 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1767&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">2.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.21.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.21.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-1200</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">242108</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CHAM SALATABAR             PPASS&nbsp;&nbsp;2017.04.18 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1768&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">3.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.21.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.21.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-800</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">241308</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CHAM SALATABAR             PPASS&nbsp;&nbsp;2017.04.18 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1769&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">4.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.21.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.21.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-3647</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">237661</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >SPAR PARTNER               PPASS&nbsp;&nbsp;2017.04.20 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1770&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">5.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.21.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.21.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-768</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">236893</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >ITAL, ILLATSZER, EDES      PPASS&nbsp;&nbsp;2017.04.18 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1771&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">6.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.24.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.24.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-1200</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">235693</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CHAM SALATABAR             PPASS&nbsp;&nbsp;2017.04.20 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1772&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">7.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.25.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.25.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-8967</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">226726</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >SHELL TÖLTŐÁLL.568&nbsp;&nbsp;2017.04.24 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1773&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">8.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.26.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.26.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-800</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">225926</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CHAM SALATABAR             PPASS&nbsp;&nbsp;2017.04.21 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1774&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">9.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.26.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.26.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-3143</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">222783</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >STEAMGAMES.COM&nbsp;9,990EUR  314,5700&nbsp;2017.04.20 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1775&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">10.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.26.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.26.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-1782</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">221001</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >PAYPAL *CHENGFAN&nbsp;5,710EUR    0,&nbsp;2017.04.24 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1776&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">11.</td>
+			                <td nowrap="nowrap" >ÁTUTALÁS (OTP-N BELÜL)&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">35535</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">256536</td>
+			                <td nowrap="nowrap" >11773339-08657572&nbsp;</td>
+			                <td nowrap="nowrap" >NAGY ÁKOS LAJU&nbsp;</td>
+			                <td nowrap="nowrap" >EB Prága&nbsp;&nbsp;&nbsp;</td>
+			                <td nowrap="nowrap" >1777&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">12.</td>
+			                <td nowrap="nowrap" >NAPKÖZBENI ÁTUTALÁS&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">100000</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">356536</td>
+			                <td nowrap="nowrap" >10300002-10453708-49010024&nbsp;</td>
+			                <td nowrap="nowrap" >MÓDLY MÁRK&nbsp;</td>
+			                <td nowrap="nowrap" >SZÁLLÁS&nbsp;&nbsp;&nbsp;</td>
+			                <td nowrap="nowrap" >1778&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">13.</td>
+			                <td nowrap="nowrap" >NAPKÖZBENI ÁTUTALÁS&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">15000</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">371536</td>
+			                <td nowrap="nowrap" >10300002-10453708-49010017&nbsp;</td>
+			                <td nowrap="nowrap" >MÓDLY MÁRK&nbsp;</td>
+			                <td nowrap="nowrap" >SZÁLLÁS++&nbsp;&nbsp;&nbsp;</td>
+			                <td nowrap="nowrap" >1779&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">14.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-1200</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">370336</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CHAM SALATABAR             PPASS&nbsp;&nbsp;2017.04.25 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1780&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">15.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-319</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">370017</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >Nemzeti Dohąnybolt         PPASS&nbsp;&nbsp;2017.04.26 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1781&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">16.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.04.28.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-2788</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">367229</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >SPAR PARTNER               PPASS&nbsp;&nbsp;2017.04.27 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1782&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">17.</td>
+			                <td nowrap="nowrap" >IDŐSZAKOS KÖLTSÉGEK&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.01.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.01.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-180</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">367049</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;&nbsp;&nbsp;</td>
+			                <td nowrap="nowrap" >1783/01&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">18.</td>
+			                <td nowrap="nowrap" >HAVI ZÁRLATI DÍJ&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.01.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.01.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-166</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">366883</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;&nbsp;&nbsp;</td>
+			                <td nowrap="nowrap" >1783/02&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">19.</td>
+			                <td nowrap="nowrap" >KP.FELVÉT/-BEFIZ. DÍJA&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-492</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">366391</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;&nbsp;2017.04.28 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1784&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">20.</td>
+			                <td nowrap="nowrap" >KÉSZPÉNZFELVÉT ATM-BŐL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-100000</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">266391</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >Budapest,XI.Gellért tér 3&nbsp;&nbsp;2017.04.28 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1785&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">21.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-1440</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">264951</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >MARIKA BÜFÉ                PPASS&nbsp;&nbsp;2017.04.28 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1786&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">22.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-3086</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">261865</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >SPAR PARTNER               PPASS&nbsp;&nbsp;2017.04.28 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1787&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">23.</td>
+			                <td nowrap="nowrap" >EGYÉB KÁRTYÁS TRANZ. DÍJA&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-20</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">261845</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;Vásárlási limit állítás díja&nbsp;2017.04.28 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1788&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">24.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-1339</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">260506</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >Nemzeti Dohąnybolt         PPASS&nbsp;&nbsp;2017.04.27 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1789&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">25.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-757</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">259749</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >ITAL, ILLATSZER, EDES      PPASS&nbsp;&nbsp;2017.04.26 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1790&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">26.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-2329</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">257420</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >Tesco Kolin                PPASS&nbsp;7,400EUR  314,6800&nbsp;2017.04.29 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1791&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">27.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-1976</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">255444</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >RELAY MUSTEK CKD 41002     PPASS&nbsp;6,280EUR  314,6800&nbsp;2017.04.30 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1792&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">28.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-5170</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">250274</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >Tesco Kolin                PPASS&nbsp;16,430EUR  314,6800&nbsp;2017.04.30 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1793&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">29.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-10435</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">239839</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CD PRAHA HL.N.             PPASS&nbsp;33,160EUR  314,6800&nbsp;2017.04.29 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1794&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">30.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-29413</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">210426</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >Restaurace U dvou koce     PPASS&nbsp;93,470EUR  314,6800&nbsp;2017.04.29 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1795&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">31.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.02.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-5494</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">204932</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CD PRAHA HL.N.             PPASS&nbsp;17,460EUR  314,6800&nbsp;2017.04.30 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1796&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">32.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-646</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">204286</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >MCDONALDS VACLAVSKE NA     PPASS&nbsp;2,050EUR  315,1500&nbsp;2017.04.29 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1797&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">33.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-4144</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">200142</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >ZTRATY NALEZY              PPASS&nbsp;13,150EUR  315,1500&nbsp;2017.04.30 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1798&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">34.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-11771</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">188371</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >RESTAURANT LAVANDE         PPASS&nbsp;37,350EUR  315,1500&nbsp;2017.05.01 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1799&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">35.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-28250</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">160121</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >BUDVARKA-DEJVICE SRO       PPASS&nbsp;89,640EUR  315,1500&nbsp;2017.04.30 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1800&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">36.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-293</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">159828</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >MCDONALDS                  PPASS&nbsp;0,930EUR  315,1500&nbsp;2017.04.30 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1801&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">37.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.03.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-684</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">159144</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >MCDONALDS                  PPASS&nbsp;2,170EUR  315,1500&nbsp;2017.04.29 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1802&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">38.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.04.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.04.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-128849</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">30295</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >HOTEL THERESIA&nbsp;408,890EUR  315,1200&nbsp;2017.05.01 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1803&nbsp;</td>
+			            </tr>
+					
+						<tr>
+			            	<td nowrap="nowrap" align="right">39.</td>
+			                <td nowrap="nowrap" >VÁSÁRLÁS KÁRTYÁVAL&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.04.&nbsp;</td>
+			                <td nowrap="nowrap" >2017.05.04.&nbsp;</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">-21116</td>
+			                <td nowrap="nowrap" align="right" style="vnd.ms-excel.numberformat:#,##0.00">9179</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >&nbsp;</td>
+			                <td nowrap="nowrap" >CAFE BAR MONET             PPASS&nbsp;67,010EUR  315,1200&nbsp;2017.05.01 1503017008&nbsp;</td>
+			                <td nowrap="nowrap" >1804&nbsp;</td>
+			            </tr>
+					
+				</tbody>
+		    </table>
+		
+	
+
+		 
+	
+	
+
+
+			        
+			
+			            
+			
+			
+			<!-- end eredmeny adatok -->
+			
+			
+			
+			
+			
+			<!-- info -->
+			                
+			                                  
+			
+			<!-- end info -->
+			
+			<!-- end tranzakcios oldal -->
+				 
+		
+	</div>
+	
+	</body>
+
+</html>

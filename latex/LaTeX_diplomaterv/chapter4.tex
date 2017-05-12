@@ -1,0 +1,264 @@
+%----------------------------------------------------------------------------
+\chapter{Dokumentumbányászati tervezés}\label{sect:documentMinePlanning}
+%----------------------------------------------------------------------------
+Az elõzetes kutatás sikeres eredményeinek megállapítása után következhetett a komplex dokumentumelemzési eljárás implementálása.
+
+Szövegbányászati elemzések típusfeladatit többek között az alábbi két fõ csoportra is feloszthatjuk:
+
+\begin{enumerate}
+	\item Ismeretlen dokumentumok szövegbányászata
+	\item Ismert dokumentumok szövegbányászata
+\end{enumerate}
+
+Az ismeretlen dokumentumterek feltérképezése során általános megoldásokat kell használnunk, és célunk, hogy a rendelkezésre álló kevés információ segítségével a lehetõ legtöbb hasznos információt állapítsuk meg - nem várjuk el, hogy az emberi értelmezéshez hasonló adaptív algoritmust kapjunk. 
+
+Ismert dokumentumterek elemzése azzal az elõnnyel jár, hogy a dokumentumok szerkezeti, tartalmi és egyéb sajátosságai mentén sokkal specifikusabb algoritmusokat írhatunk, melyek segítségével sokkal részletesebb kutatásokat végezhetünk.
+
+A diplomám írása során mindkét feladattípusból választottam egyet-egyet, és ezekre kerestem a választ:
+\begin{enumerate}
+	\item Ismeretlen dokumentumtér elemzés: nagyméretû, ismeretlen html weboldalak tartalmának összehasonlítása, kategorizálása.
+	\item Ismert dokumentumok elemzése: elõre kiválasztott internetes portálok specifkus tartalmának rekurzív kinyerése, fõbb témaköreinek megállapítása.
+\end{enumerate}
+A Szövegelemzés és Dokumentum osztályozás fejezetekben kapott eredmények alapján következhetett a konkrét feladat megtervezése. Tapasztalataimmal felvértezve, a következõ fejlesztéseket eszközöltem a webalkalmazásban:
+
+%----------------------------------------------------------------------------
+\section{Webalkalmazás kiegészítése és új eszközök}
+%----------------------------------------------------------------------------
+A Django webalkalmazás bevált, de mûködése kezdetleges. Ezért szükséges, hogy az alapvetõ, modern webalkalmazásoktól elvárt mûködést megvalósítsa a program. Ezek az adatbányászati modul mûködését érdemben nem befolyásolják, de a felhasználói élményt nagyban növelik.
+
+%----------------------------------------------------------------------------
+\subsection{Biztonság}
+%----------------------------------------------------------------------------
+A webalkalamazásom jelenleg nem valósít meg felhasználókezelést. Ezt orvosolandó, létrehoztam a felhasználókezelési modult, implementáltam a regisztráció és bejelentkezés funkciókat, és az oldalt így csak regisztrált felhasználók számára tettem elérhetõvé. Ehhez az alapértelmezett Django belsõ adatbázist használtam fel, illetve a login\_required dekorátort   \cite{decorators}. 
+
+A dekorátorok a webalkalmzás oldalaihoz való hozzáférést korlátozzák. Ha egy dekorátor feltétele nem teljesül a http kérés beérkeztekor, akkor a dekorált weboldal helyett tetszõleges hibaüzenetet küldhetünk a válaszban. 
+
+\begin{lstlisting}[frame=single, caption=Login dekorátor példa, label=decoratorExmpl1,   float=!ht]
+@login_required
+def url_multi_parse(request):
+	if request.method == "POST":
+		links = getLinks(request.POST["linkTexts"])
+\end{lstlisting}
+
+\Aref{decoratorExmpl1} kódrészletben láthatjuk, hogy a @Login\_required dekorátor védi a lekérések végpontjait. 
+
+\begin{lstlisting}[frame=single, caption=Template autentikáció render példa, label=decoratorExmpl2,   float=!ht]
+{% if usenipr.is_authenticated %}
+
+<div class="col-md-4">
+<!--weboldal tartalma itt -->
+</div>
+
+{% else %}
+<a href="{% url 'login' %}"><span class="glyphicon glyphicon-lock"></span></a>
+{% endif %}
+\end{lstlisting}
+
+Ebben a kódrészletben a HTML template van felkészítve a be nem lépett felhasználók kezelésére: ebben az esetben a weboldal tartalma megváltozik, a login oldalra mutatunk linket a felhasználónak. 
+
+A felhasználók adatait egy, a szerver memóriájában tárolt H2-es <link> adatbázisban tároltam. 
+
+%----------------------------------------------------------------------------
+\section{Webcrawler}
+%----------------------------------------------------------------------------
+Az egyszerûbb webtartalom kinyerésére a korábban ismertetett BeautifulSoup megfelel. Azonban ahhoz, hogy akár több tízezer weboldalt végig tudjak iterálni, nem alkalmas: csak elõre megadott címeket tud kinyerni, fõként a DOM-ot \cite{dom} értelmezve, dinamikus feltételek nélkül, és ami a legnagyobb hátránya: szekvenciálisan.
+
+Szükségem volt egy olyan komponensre, amely:
+\begin{itemize}
+	\item képest több ezer weboldal párhuzamos bejárására
+	\item képes dinamikusan tartalmat keresni a dokumentumokban
+	\item képes feltételek, elágazások implementálása
+	\item képes rekurzívan lehívni linkeket a meglátogatott weboldalakról, és azokat is bejárni, ezeket a gazda weboldal tartalmához hozzácsatolni
+\end{itemize}
+
+Írnom kellett tehát egy webcrawler-t, ami egy önálló ágensként képes webtartalom akár rekurzív lehívására. 
+
+Ha egy-egy ilyen ágens képes önállóan feldolgozni megadott webcímeket, akkor õket párhuzamosítva felgyorsíthatom a mûködését az alkalmazásomnak. 
+
+%----------------------------------------------------------------------------
+\subsection{Scrapy}
+%----------------------------------------------------------------------------
+A feladat megvalósításához a Scrapy eszközt \cite{scrapyMain} választottam.  
+
+A Scrapy egy open source, nagyon gyors és jól skálázható python webcrawler keretrendszer. Arra találták ki, hogy gyorsan és egyszerûen lehessen olyan webcrawlert írni, amely tetszõleges adatokat le tud kérdezni weboldalakról, emellett pedig megõrzi a magas fokú testreszabhatóságot és fejlesztõi szabadságot. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/scrapyArch.png}
+	\caption{Scrapy belsõ mûködés folyamata} 
+	\label{scrapyArch}
+\end{figure}
+
+Az alkalmazás úgynevezett "Spider"-eket definiál: ezek azok az osztályok, amely a webtartalom kinyerését végzik. Õket futtatja az alkalmazás Engine, és õ rajta keresztül érik el az internetes tartalmat is. 
+
+Az Engine által futtatott Spider-ek "Crawl" kérést küldenek az Engine-nek egy megadott URL címmel. Ezt a kérést dolgozza fel az Engine, küldi tovább a Downloader-nek, aki pedig az idõvel letöltött weboldalt továbbítja az Engine-en keresztül a Spider-nek feldolgozásra. 
+
+Párhuzamos futtatás esetén szükséges a Scheduler (ütemezõ) használata, hogy egyik Spider-t se éheztessük ki, lévén hogy a Downloader véges erõforrással gazdálkodik. A kapott HTML tartalom feldolgozását az éppen futó Spiderek konkurens módon végezhetik.
+
+Egy példa Spider \aref{scrapyExample} kódrészetben látható. 
+
+\begin{lstlisting}[frame=single, caption=Scrapy példa, label=scrapyExample,   float=!ht]
+import scrapy
+
+class QuotesSpider(scrapy.Spider):
+name = "quotes"
+
+def start_requests(self):
+	urls = [
+		'http://quotes.toscrape.com/page/1/',
+		'http://quotes.toscrape.com/page/2/',
+	]
+	
+	for url in urls:
+		yield scrapy.Request(url=url, callback=self.parse)
+
+def parse(self, response):
+	page = response.url.split("/")[-2]
+	filename = 'quotes-%s.html' % page
+	with open(filename, 'wb') as f:
+		f.write(response.body)
+	self.log('Saved file %s' % filename)
+\end{lstlisting}
+
+Egy Spider-nek az Engine-nel való effektív kooperáció érdekében elõre meghatározott interfésznek kell megfelelnie. 
+
+\begin{itemize}
+	\item Tartalmaznia kell egy \textbf{name} paramétert: ez határozza meg egyértelmûen a Spider-t. Egy projekten belül egyedinek kell lennie - indítás elõtt a fejlesztõ felelõssége ugyanabból az osztálypéldányból példányosított Spider-ek elnevezése.
+	\item definiálnia kell egy \textbf{start\_request} függvényt: ennek feladata, hogy egy iterálható Request objektumokból álló listát adjon vissza, amit az Engine a Downloader-nek adhat, és amire válaszként érkezõ HTML tartalmat a Spider bejárhat. Szintén a fejlesztõ felelõssége "megetetni" a Spidert indítás elõtt ezzel az adattal.
+	\item definiálnia kell egy \textbf{parse()} metódust: ez a Spider legfontosabb függvénye. A Spider számára érkezõ HTML(tehát szöveges) tartalmakkal az Engine ezt a függvényt hívja meg - itt kell lekezelnünk és kinyernünk az adatokat a weboldalból.   
+\end{itemize}
+
+A példánk során a parse-olás abból áll, hogy a kiinduló két weboldalt lekérdezi, majd tartalmukat két fájlban, "quotes-1.html" és "quotes-2.html"-ben lementi. 
+
+Egy Spider futattására két lehetõségünk van:
+
+\begin{enumerate}
+	\item létrehozunk egy Scrapy projektet, és ebbe elhelyezve a Spider-eket, a projekt gyökérkönyvtárában kiadhatjuk a következõ parancssoros parancsot: scrapy crawl <ami nevet megadtunk>
+	\item  Másik lehetõség, hogy importáljuk modulként, és az alkalmazáson belül alakítjuk ki a Scrapy projektünket. Ekkor több kompatibilitási problémát is meg kell oldanunk, cserébe az alkalmazással sokkal szorosabb módon mûködik együtt az eszköz. 
+\end{enumerate}
+
+%----------------------------------------------------------------------------
+\subsubsection{Tartalom kinyerése}
+%----------------------------------------------------------------------------
+A Scrapy segítségével egy html dokumentumból két fõ módon nyerhetünk ki információt:
+\begin{enumerate}
+	\item CSS selector-ok \cite{selectors} segítségével, mint például \aref{selectorExample} kódrészletben.
+	\begin{lstlisting}[frame=single, caption=Példa CSS selector, label=selectorExample,   float=!ht]
+	>>> response.css('title::text').extract_first()
+	\end{lstlisting}
+	itt a <title> html elembõl nyerhetjük ki a tisztán szöveges tartalmat. 
+	\item XPath kifejezésekkel, mint \aref{selectorXPathExample} kódrészetlben.
+	\begin{lstlisting}[frame=single, caption=Ugyanaz a példa XPath selector segítségével, label=selectorXPathExample,   float=!ht]
+	>>> response.css('title::text').extract_first()
+	\end{lstlisting}
+\end{enumerate}
+
+%----------------------------------------------------------------------------
+\subsubsection{Rekurzív eljárás}
+%----------------------------------------------------------------------------
+
+A Scrapy igazi erõssége a rekurzív tartalomfeldolgozásban rejlik. A kezdetben megadott "start\_request" által generált listán kívül, a parse() függvény futása során is van lehetõségünk újabb lekéréseket indítani, más függvényeket meghívni, tartalmat összefûzni. Legegyszerûbb ennek használatát egy példán keresztül megnézni:
+
+\begin{lstlisting}[frame=single, caption=Példa rekurzív Scrapy eljárásra, label=scrapyExample,   float=!ht]
+class QuotesSpider(scrapy.Spider):
+name = "quotes"
+start_urls = [
+	'http://quotes.toscrape.com/page/1/',
+]
+
+def parse(self, response):
+	for quote in response.css('div.quote'):
+		yield {
+			'text': quote.css('span.text::text').extract_first(),
+			'author': quote.css('small.author::text').extract_first(),
+			'tags': quote.css('div.tags a.tag::text').extract(),
+		}
+
+	next_page = response.css('li.next a::attr(href)').extract_first()
+	if next_page is not None:
+		next_page = response.urljoin(next_page)
+		yield scrapy.Request(next_page, callback=self.parse)
+\end{lstlisting}
+
+A példaweboldal felépítése a következõ: egy oldalon egymás alatt felsorolva találhatóak <div class="quote"> elemek. Ezek tartalmaznak egy-egy idézetet, melynek van szerzõje, címkéje, szövege. A weboldal alján található egy link a következõ oldalra:
+
+
+\begin{lstlisting}[frame=single, label=scrapyExample, caption="Példa link",  float=!ht]
+	<li class="next">
+		<a href="/page/2/">Next <span aria-hidden="true">&rarr;</span></a>
+	</li>
+\end{lstlisting}
+
+Ezt az oldalt nyeri ki a "next\_page" változóba a függvény. Ha ez a query eredményt hoz, akkor a Spider egy teljes URL-t épít az ott szereplõ linkbõl, és egy új Request-et ad vissza, mely a következõ oldalra mutat - ebbe beregisztrálja magát, mint callback, és a kért oldal feldolgozásának végeztével hozzáfûzi a saját tartalmához. Így amíg ez meg nem történik, tudja folytatni a feldolgozást, vagy várakozhat a hívásra. 
+
+\newpage
+%----------------------------------------------------------------------------
+\section{JSON}
+%----------------------------------------------------------------------------
+A JSON egy speciális adatformátum \cite{jsonOrigin}. Jelentése: JavaScript Object Notation. Szöveges fájlformátum, elsõ sorban adattárolásra és továbbításra. 
+
+Számunkra azért fontos, mert egyrészt a Python natívan támogatja a JSON fájlok feldolgozását, ami így jóval gyorsabb, másrészt, formátuma jóval letisztultabb az XML-hez képest. XML-ben nehezebb adatot tárolni és olvasni, több benne a nem hasznos adat, és kevésbé illeszkedik a modern alkalmazások belsõ adatszerkezetéhez. például az következõ XML:
+
+\begin{lstlisting}[frame=single, label=json1xml,   float=!ht, frame=single]
+<employees>
+	<employee>
+	<first	Name>John</firstName> <lastName>Doe</lastName>
+	</employee>
+</employees>
+
+\end{lstlisting}
+
+JSON formában ennyi:
+
+\begin{lstlisting}[frame=single, label=json2,   float=!ht]
+{"employees":[
+	{ "firstName":"John", "lastName":"Doe" },
+]}
+\end{lstlisting}
+
+Adatbányászati elemzéseknél a JSON-t ajánlják a legtöbb helyen  \cite{jsonArticle1}.  Mindezek mellett szeretném hangsúlyozni, hogy a JSON nem "jobb" mint az XML, egyszerûen szituáció függõ, melyik bizonyul a hatékonyabbnak, jelen esetben a natív Python támogatás miatt döntöttem mellette.
+
+
+%----------------------------------------------------------------------------
+\section{Langdetect}
+%----------------------------------------------------------------------------
+A Langdetect 1.0.7 \cite{langdetect} egy Python függvénykönyvtár, mely a Google nyelvfelismerõ algoritmusát portolja át. Segítségével az osztálynak megadott szöveges függvényparaméterrõl megpróbálja eldönteni, mely nyelvbe tartozhat. Összesen 55 nyelvet támogat.
+ 
+Az algoritmus \cite{langdetectGoogleSlide}, így a túl kicsi, illetve túl "szemetes" (pl. scriptek, html tag-ek, vegyes nyelvû) szövegek esetén más-más eredményt adhat. Jelenleg azonban megfigyeléseim alapján nagyon pontos a feladatomban felmerülõ dokumentumok nyelvének megállapítása, arról nem is beszélve, hogy ez a ma elérhetõ, és a jelenlegi technológiai korlátok ellenére létezõ legjobb eszköz.  
+
+%----------------------------------------------------------------------------
+\section{Webes felület}
+%----------------------------------------------------------------------------
+Az alkalmazás felületét két menü részre osztottam fel, ahogyan az \aref{MainGUI} ábrán is látható. 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/MainGUI.png}
+	\caption{Az alkalmazás felülete} 
+	\label{MainGUI}
+\end{figure}
+
+Webalkalmazásom, megnyitva a Programozott webelemzés modult, ahogy böngészõben megjelenik.
+
+A Dinamikus webbányászat funkció valósítja meg az nagy mennyiségû weboldalak adatbányászatát.
+
+A Programozott webelemzés funkció felel az elõre felkészített webtartomány részletesebb elemzéséért.
+
+Az új funkciók implementálásához szintúgy a Django keretrendszert használtam fel, mint a korábbi feladatok során. Az alkalmazást összesen több mint 20 új oldallal egészítettem ki. 
+
+Új modulok:
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=100mm, keepaspectratio]{figures/NewModules.png}
+	\caption{Végleges alkalmazás felépítése} 
+	\label{NewModules}
+\end{figure}
+
+\begin{itemize}
+	\item \textbf{data}: itt tárolom el az elemzések során keletkezõ adathalmazokat JSON fájlformátumban. 
+	\item \textbf{editor/langdetect}: a nyelv detektálásához szükséges modulok
+	\item \textbf{editor/topicmodeller/documents}: a Scrapy által elõállított dokumentumokat tárolom itt.
+	\item \textbf{editor/topicmodeller/services}: itt tároltam az adat- és szövegbányászati modulokat
+	\item \textbf{editor/topicmodeller/utils}: segédosztályok és segédfüggvények, pl. az alkalmazás által használt elérési utak konstansai, string kezelõ algoritmusok, leggyakoribb szó kiválasztása, stb.
+	\item \textbf{editor/webcrawler}: a Scrapy által használt könyvtár, benne a Scrapy motor, és az általam írt Spider-ek. Ezen belül itt tároltam még a futtatások beállításához szükséges szkripteket is. 
+\end{itemize}
+

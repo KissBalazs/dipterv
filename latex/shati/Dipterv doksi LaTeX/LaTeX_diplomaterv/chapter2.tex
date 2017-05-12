@@ -1,0 +1,99 @@
+%----------------------------------------------------------------------------
+\chapter{Multi-platform mobilszoftver-fejlesztõ keretrendszerek}
+%----------------------------------------------------------------------------
+Ebben a fejezetben röviden összefoglalom a multi-platform szoftverfejlesztés témakörét, majd megvizsgálom a jelenleg elérhetõ multi-platform mobilszoftverfejlesztõ-\linebreak keretrendszereket, és értékelem õket a megvalósítandó applikációhoz való alkalmasságuk szempontjából.
+
+%----------------------------------------------------------------------------
+\section{A multi-platform mobilszoftver-fejlesztés}
+%----------------------------------------------------------------------------
+Az okostelefonok piacát jelenleg a Google Android operációs rendszerének különbözõ verzióival szállított készülékek uralják, második helyen stabilan az Apple iOS telefonok állnak, harmadik pedig a feltörekvõben lévõ Microsoft Windows Phone platform \cite{SmartphoneMarketShare}.
+A piac ezen osztottságán felül az operációs rendszerek különbözõ verziói és az azokat futtató készülékek képességei is jelentõsen különbözhetnek egymástól.
+Jó példa erre az Android operációs rendszer szegmentáltsága, ahol egy kimutatás szerint 2016 májusában a piac egyharmadát a 4.4-es, "KitKat" kódnevû verzió teszi ki, második a közel húsz százalékkal rendelkezõ 5.1-es "Lollipop", harmadik 16\%-kal az 5.0-ás "Lollipop" \cite{AndroidOSMarketShare}.
+Ennek a töredezettségnek az oka abban keresendõ, hogy a telefonhardverek eszközillesztõi jelentõs újraoptimalizálást igényelnek az operációs rendszer minden frissítésekor.
+Ellenkezõ esetben a keletkezõ instabilitás a felhasználói élmény rovására mehet, például ha a telefon válaszideje jelentõsen megnõ.
+Extrém esetekben a készülék a hibás erõforrás-menedzsment miatt tönkre is mehet, például egy folyamat végtelen ciklusba kerül, amit a rendszer nem terminál, emiatt a processzor túlmelegszik, ezzel tönkre téve az akkumulátort és esetleg más áramköri egységeket.
+Mivel az eszközillesztõk újraoptimalizálása és alapos tesztelése jelentõs többletmunkát, ugyanakkor közvetlen bevételt nem jelent a cégek számára, ezért inkább ritkán, vagy egyáltalán nem adnak ki operációsrendszer-frissítést a forgalmazott modelljeik többségéhez.
+
+Látható tehát, hogy minden egyes operációs rendszerre (és verzióra) optimalizált programkódot - az adott platform programozási nyelvén - írni nem idõ- és költséghatékony.
+Érdemes egy olyan multi-platform keretrendszert felhasználni a fejlesztéshez, amivel a kívánt operációs rendszereken minél nagyobb kód-újrahasznosítás érhetõ el, azaz elég egyszer implementálni egy funkcionalitást, mert a keretrendszer gondoskodik róla, hogy a megcélzott operációs rendszerekkel kompatibilis futtatható állományok generálódjanak.
+
+%----------------------------------------------------------------------------
+\section{Az elérhetõ multi-platform keretrendszerek}
+%----------------------------------------------------------------------------
+Jelenleg a piacon háromfajta multi-platform fejlesztési irányt különböztethetünk meg \cite{CrossPlatformAppTypes}.
+Lehetséges tisztán webes alkalmazást írni, ami a mobiltelefon webböngészõjét használja.
+Ez tulajdonképpen egy okostelefonokra optimalizált weblap, JavaScript, HTML5 és más webes technológiák felhasználásával készített tartalommal.
+Ezek a weblapok azonban sokszor olyan hibákba ütköznek, mint például a böngészõapplikáció szkriptfuttató-motorjának\footnote{A szkriptek futtatásáért felelõs programkomponensek összessége.} hibái, illetve az operációs rendszer által a böngészõknek engedélyezett API-k\footnote{Application Programming Interface: olyan alkalmazás- vagy operációsrendszer-funkcionalitások gyûjteménye, melyek elérhetõk más alkalmazások számára, pl. helymeghatározási szolgáltatás, internetelérés.\label{ApiFootnote}} korlátozottsága.
+
+Egy másik megközelítés a hibrid alkalmazás fejlesztése.
+Ekkor szintén webes technológiák használatával készül az app, de a keretrendszer biztosít egy, az operációs rendszerre natív alkalmazásfuttató-héjat.
+Ezzel lehetõség nyílik több hardverközelebbi funkcionalitás egyszerûbb elérésére a keretrendszer API-jain keresztül, valamint nincs feltétlenül szükség internetelérésre.
+A szkriptek futtatásáért a héj felel, aminek hibáit a keretrendszer-fejlesztõk felé lehet jelezni, akik számára fontosabb azok javítása, mint egy böngészõalkalmazás esetében.
+
+Harmadik lehetõség a natív applikáció készítése.
+A natív appok teljes egészében hozzáférhetnek az operációs rendszer által kínált funkcionalitásokhoz (természetesen a megfelelõ jogosultságok birtokában), valamint a három alkalmazásfajta közül ezek kódja fut optimálisan és leggyorsabban. A natív alkalmazásokat fordító keretrendszerek a multi-platform fejlesztés legújabb irányát képviselik, és dinamikusan fejlõdnek.
+
+A továbbiakban bemutatok - a teljesség igénye nélkül - jelenleg rendelkezésre álló multi-platform mobilszoftver-fejlesztõ keretrendszereket, és megvizsgálom õket a SmartActive mobilalkalmazáshoz való alkalmasságuk szempontjából, a saját programozási ismereteim figyelembe vételével.
+
+%----------------------------------------------------------------------------
+\subsection{Sencha}
+%----------------------------------------------------------------------------
+A Sencha egy webalkalmazáskészítõ-keretrendszer, azaz információközlésre, valamint szöveges adatbevitelre alkalmas applikáció készíthetõ vele.
+Használatához folyamatos internetelérés szükséges. 
+Programozási nyelve a HTML5 JavaScripttel kiegészítve. 
+Gazdag grafikus elemek megjelenítésére alkalmas a saját fejlesztésû Ext JS \cite{SenchaExtJS} és Sencha Touch \cite{SenchaTouch} JavaScriptben írt könyvtárakkal.
+
+Mivel a készítendõ mobilapplikáció a keretrendszer által támogatott funkciókat kívánja megvalósítani, és a Sencha platform az összes cél-operációsrendszert támogatja, alkalmas választás lehetne, azonban az appnak követelménye az internetkapcsolat nélküli mûködés is, így ez a keretrendszer nem megfelelõ hozzá.
+
+%----------------------------------------------------------------------------
+\subsection{Apache Cordova (PhoneGap)}\label{sect:Cordova}
+%----------------------------------------------------------------------------
+Az Apache Cordova egy hibrid alkalmazások készítésére szolgáló keretrendszer, ami nyílt forráskódú (az Apache 2.0 licenc kereteiben), de léteznek a fejlesztéshez szükséges alapvetõ könyvtárakon túl számos egyéb funkcionalitást (például tesztelõi szolgáltatást) nyújtó, szolgáltatásként megvásárolható verziói is (pl. Adobe PhoneGap) \cite{ApacheCordova}. Az applikációk készítéséhez három webprogramozásban használatos nyelvet kell igénybe venni: míg a kinézetért HTML\texttt{+}CSS kombinációja felel, addig a funkcionalitást JavaScriptben írhatjuk, amiben a keretrendszerben biztosított könyvtárak által elérhetjük a telefon hardveres erõforrásait is (pl. gyorsulásmérõ, GPS, háttértár).
+
+Hibrid alkalmazásokban megvalósítható a SmartActive mobilapp összes kívánt funkcionalitása, és az Apache Cordova támogatja az összes célplatformot. Az applikációt azonban mégsem ebben a keretrendszerben fogom elkészíteni, mert nem rendelkezem elég tapasztalattal a webtechnológiákban egy ilyen komplex alkalmazás elkészítéséhez.
+
+%----------------------------------------------------------------------------
+\subsection{Appcelerator}
+%----------------------------------------------------------------------------
+Az Appcelerator platform teljes ökoszisztémát kínál natív multi-platform alkalmazások JavaScriptben történõ készítésére a saját fejlesztõszoftvertõl a tesztautomatizáláson át az elkészült alkalmazás életciklus-menedzsmentjéig (lifecycle management) \cite{Appcelerator}. A natív funkciókat a Titanium SDK-val érhetjük el.
+
+A keretrendszer támogatja az összes célplatformot, és natívan futó alkalmazásként minden funkcionalitás megvalósítható, de a JavaScript nyelv és a számomra ismeretlen fejlesztõszoftver miatt nem az Appceleratort tartom a legmegfelelõbb választásnak.
+
+%----------------------------------------------------------------------------
+\subsection{Corona}
+%----------------------------------------------------------------------------
+A Corona egy fõként kétdimenziós játékok fejlesztésére optimalizált SDK \cite{Corona}.
+Programozási nyelve a Lua, és az alkalmazások natívan futnak az adott operációs rendszeren.
+A Windows mobiltelefonos platformok támogatása nem a legújabb Windows Runtime API-kon keresztül, hanem a kifutó Silverlight technológiával történik.
+
+Ennek a keretrendszernek nem erõssége a készítendõ alkalmazástípus, valamint a Silverlight technológiás windowsplatform-támogatás és a számomra ismeretlen Lua nyelv miatt nem tartom megfelelõnek a Coronát az applikáció elkészítéséhez.
+
+%----------------------------------------------------------------------------
+\subsection{Unity}
+%----------------------------------------------------------------------------
+A Unity egy alapvetõen játékalkalmazásokhoz készített keretrendszer, legyen az kettõ- vagy háromdimenziós. Fejlesztéshez a \Csharp~vagy a JavaScript jelentõsen Unityhez igazított változata, a UnityScript nyelvek használhatók \cite{Unity}. A Unity az egyik legszélesebb platformlefedettséget kínáló rendszer: ugyanaz az alkalmazás megcélozhat okostelefonokat, asztali számítógépeket, kézi- vagy otthoni játékkonzolokat, virtuális valóság headseteket, okostévéket, és mindemellett lehet akár webböngészõben futtatható is.
+
+Ez a keretrendszer egyértelmûen nem információközlõ alkalmazások számára készült. Bár a kívánt funkciók megvalósíthatóak benne, de nem tartalmaz elõre elkészített vizuális elemeket (például görgethetõ lista), valamint mivel egy teljes videojáték-motort tölt be az alkalmazás indításakor, ezért 5-10 másodpercbe is telik, mielõtt a fejlesztõ által írt kód futtatása megkezdõdhet.
+
+%----------------------------------------------------------------------------
+\subsection{Kony}
+%----------------------------------------------------------------------------
+A Kony \cite{Kony} szintén egy teljes ökoszisztémát kínáló rendszert nyújt saját fejlesztõeszközökkel, tesztautomatizálási és alkalmazáséletciklus-menedzselési lehetõségekkel, valamint rendelésre is vállalnak alkalmazáskészítést (Kony Apps szolgáltatás).
+A Gartner IT piackutató és tanácsadó cég úgynevezett "Magic Quadrant" besorolásában 2015-ben sorozatban harmadjára kerültek a piacvezetõ kategóriába \cite{KonyMagicQuadrant}.
+Fejlesztõszoftverükben, a Kony Visualizerben JavaScripttel támogatott HTML-ben fejleszthetünk, valamint elõre elkészített grafikus elemeket "fogd és vidd" (drag and drop) módszerrel integrálhatunk az alkalmazásba.
+A keretrendszer képes natív, hibrid és tisztán webes alkalmazások fordítására akár ugyanabból a kódbázisból, ezzel fedve számos okostelefon- és egyéb operációs rendszert.
+
+A Kony, bár támogatja a célplatformokat és a Visualizer is intuitívnak tûnik, annak ingyenesen elérhetõ Starter Edition verziója korlátozott funkcionalitást kínál csak, illetve ahogy a \sectref{Cordova} pontban írtam, a webes technológiákban nem rendelkezem kellõ ismeretekkel.
+
+%----------------------------------------------------------------------------
+\subsection{Xamarin}\label{sect:XamarinResearch}
+%----------------------------------------------------------------------------
+A Xamarin \cite{Xamarin} szintén egy teljes szoftverfejlesztési folyamatot lefedõ keretrendszer.
+Windowson a Microsoft Visual Studio fejlesztõszoftverbe integrálódik.
+Elõfizethetõ a Xamarin TestCloud, aminek segítségével akár több ezer különbözõ telefonon is futtathatunk automatizált funkcionális és grafikus felhasználói felület teszteket, emellett életciklus-menedzsment eszközökkel is rendelkezik.
+A Xamarin University pedig rögzített elõadásokkal egy újfajta megközelítésben kínál bevezetést és haladóknak szánt útmutatást a Xamarin használatához.
+Programozási nyelve a \Csharp, amit a Microsoft .NET platform könyvtárainak jelentõs részének elérhetõsége egészít ki hasznos funkciókkal.
+Natívan futó alkalmazások készíthetõek vele Androidra, iOS-re, Windows Phone 8-ra, 8.1-re és Windows 10 Mobile-ra, valamint célozhatóak a legújabb asztali Windows és Apple OSX operációs rendszerek is.
+A kód-újrahasznosítás jelentõsen növelhetõ a Xamarin.Forms \cite{XamarinForms} felhasználói felület programozási könyvtárral, ha az egységes kinézet a fontosabb, de lehetõség van csak a mûködési logika közös kódban tartására, és mellette a cél-operációsrendszerek dizájnútmutatóinak megfelelõ egy-egy külön felhasználói felület létrehozására is.
+
+Ez a keretrendszer megfelel a fejlesztendõ alkalmazás követelményeinek, a Xamarin.Forms könyvtár használatával pedig igen nagy mértékû közös kódbázist látok megvalósíthatónak. A \Csharp~ programozási nyelvben szerzett tapasztalataim és a Microsoft Visual Studio fejlesztõkörnyezet miatt a Xamarint választottam a SmartActive mobilapplikáció elkészítéséhez.

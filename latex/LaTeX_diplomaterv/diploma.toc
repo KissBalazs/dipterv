@@ -1,0 +1,64 @@
+\select@language {magyar} \contentsline {chapter}{Kivonat}{4}{chapter*.2}
+\select@language {magyar} \contentsline {chapter}{Abstract}{5}{chapter*.3}
+\select@language {magyar} \contentsline {chapter}{Bevezet\H o}{6}{chapter*.4}
+\select@language {magyar} \contentsline {chapter}{Feladat}{8}{chapter*.5}
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Adat- \'es sz\"ovegb\'any\'aszat}{9}{chapter.1}
+\select@language {magyar} \contentsline {section}{\numberline {1.1}Bevezet\'es}{9}{section.1.1}
+\select@language {magyar} \contentsline {section}{\numberline {1.2}Adatb\'any\'aszat}{9}{section.1.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {1.2.1}Adatb\'any\'aszat l\'ep\'esei}{10}{subsection.1.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {1.2.2}Adatb\'any\'aszati m\'odszerek: oszt\'alyoz\'as}{11}{subsection.1.2.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {1.2.3}Adatb\'any\'aszati m\'odszerek: klaszterez\'es}{12}{subsection.1.2.3}
+\select@language {magyar} \contentsline {section}{\numberline {1.3}Sz\"ovegb\'any\'aszat}{14}{section.1.3}
+\select@language {magyar} \contentsline {subsection}{\numberline {1.3.1}El\H ofeldolgoz\'as}{15}{subsection.1.3.1}
+\select@language {magyar} \contentsline {subsubsection}{Fogalmak}{15}{section*.13}
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Felhaszn\'alt webes technol\'ogi\'ak}{17}{chapter.2}
+\select@language {magyar} \contentsline {section}{\numberline {2.1}Python}{17}{section.2.1}
+\select@language {magyar} \contentsline {section}{\numberline {2.2}Webalkalmaz\'asok}{18}{section.2.2}
+\select@language {magyar} \contentsline {section}{\numberline {2.3}Django}{18}{section.2.3}
+\select@language {magyar} \contentsline {section}{\numberline {2.4}Beautiful Soup}{20}{section.2.4}
+\select@language {magyar} \contentsline {section}{\numberline {2.5}Gensim}{21}{section.2.5}
+\select@language {magyar} \contentsline {subsection}{\numberline {2.5.1}Gensim funkci\'ok}{21}{subsection.2.5.1}
+\select@language {magyar} \contentsline {chapter}{\numberline {3}El\H ozetes kutat\'as: sz\"ovegelemz\'es}{22}{chapter.3}
+\select@language {magyar} \contentsline {section}{\numberline {3.1}Sz\"ovegelemz\'es \'es c\IeC {\'\i }mk\'ek}{22}{section.3.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.1}Eredm\'enyek}{23}{subsection.3.1.1}
+\select@language {magyar} \contentsline {section}{\numberline {3.2}Dokumentum oszt\'alyoz\'as}{23}{section.3.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}Tervez\'es}{24}{subsection.3.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}Implement\'al\'as}{24}{subsection.3.2.2}
+\select@language {magyar} \contentsline {subsubsection}{Webes megjelen\IeC {\'\i }t\H o r\'esz}{24}{section*.20}
+\select@language {magyar} \contentsline {subsubsection}{Alkalmaz\'as architekt\'ura}{25}{section*.21}
+\select@language {magyar} \contentsline {subsubsection}{Parser modul}{26}{section*.25}
+\select@language {magyar} \contentsline {subsubsection}{Sz\"ovegb\'any\'aszati modul}{27}{section*.27}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.3}Eredm\'enyek}{29}{subsection.3.2.3}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}Dokumentumb\'any\'aszati tervez\'es}{31}{chapter.4}
+\select@language {magyar} \contentsline {section}{\numberline {4.1}Webalkalmaz\'as kieg\'esz\IeC {\'\i }t\'ese \'es \'uj eszk\"oz\"ok}{32}{section.4.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.1.1}Biztons\'ag}{32}{subsection.4.1.1}
+\select@language {magyar} \contentsline {section}{\numberline {4.2}Webcrawler}{33}{section.4.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.2.1}Scrapy}{33}{subsection.4.2.1}
+\select@language {magyar} \contentsline {subsubsection}{Tartalom kinyer\'ese}{35}{section*.42}
+\select@language {magyar} \contentsline {subsubsection}{Rekurz\IeC {\'\i }v elj\'ar\'as}{35}{section*.45}
+\select@language {magyar} \contentsline {section}{\numberline {4.3}JSON}{37}{section.4.3}
+\select@language {magyar} \contentsline {section}{\numberline {4.4}Langdetect}{37}{section.4.4}
+\select@language {magyar} \contentsline {section}{\numberline {4.5}Webes fel\"ulet}{37}{section.4.5}
+\select@language {magyar} \contentsline {chapter}{\numberline {5}Ismeretlen dokumentumt\'er: Webt\'erk\'epez\'es}{40}{chapter.5}
+\select@language {magyar} \contentsline {section}{\numberline {5.1}Param\'eterek}{40}{section.5.1}
+\select@language {magyar} \contentsline {section}{\numberline {5.2}Funkci\'ok tervez\'ese \'es megval\'os\IeC {\'\i }t\'as}{40}{section.5.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.2.1}Dokumentumt\'er kialak\IeC {\'\i }t\'asa}{41}{subsection.5.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.2.2}Webelemz\'es}{41}{subsection.5.2.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.2.3}Felhaszn\'al\'oi fel\"ulet}{42}{subsection.5.2.3}
+\select@language {magyar} \contentsline {section}{\numberline {5.3}El\H ozetes eredm\'enyek}{42}{section.5.3}
+\select@language {magyar} \contentsline {section}{\numberline {5.4}\'Ujratervez\'es}{45}{section.5.4}
+\select@language {magyar} \contentsline {section}{\numberline {5.5}Angol nyelv\H u eredm\'enyek}{46}{section.5.5}
+\select@language {magyar} \contentsline {chapter}{\numberline {6}Ismert dokumentumt\'er: Programozott webelemz\'es}{48}{chapter.6}
+\select@language {magyar} \contentsline {section}{\numberline {6.1}Param\'eterek}{48}{section.6.1}
+\select@language {magyar} \contentsline {section}{\numberline {6.2}Funkci\'ok tervez\'ese, megval\'os\IeC {\'\i }t\'as}{48}{section.6.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {6.2.1}Dokumentumt\'er kialak\IeC {\'\i }t\'asa}{50}{subsection.6.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {6.2.2}T\'emaelemz\'es}{50}{subsection.6.2.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {6.2.3}Felhaszn\'al\'oi fel\"ulet }{51}{subsection.6.2.3}
+\select@language {magyar} \contentsline {section}{\numberline {6.3}Eredm\'enyek}{52}{section.6.3}
+\select@language {magyar} \contentsline {subsection}{\numberline {6.3.1}H\IeC {\'\i }rport\'al elemz\'es}{52}{subsection.6.3.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {6.3.2}Wikipedia elemz\'es}{53}{subsection.6.3.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {6.3.3}Konkl\'uzi\'o}{54}{subsection.6.3.3}
+\select@language {magyar} \contentsline {chapter}{\numberline {7}\"Osszefoglal\'as, \'ert\'ekel\'es}{56}{chapter.7}
+\select@language {magyar} \contentsline {section}{\numberline {7.1}Tov\'abbfejleszt\'esi lehet\H os\'egek}{56}{section.7.1}
+\select@language {magyar} \contentsline {section}{\numberline {7.2}K\"osz\"onetnyilv\'an\IeC {\'\i }t\'as}{57}{section.7.2}
+\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{60}{chapter*.67}

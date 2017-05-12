@@ -1,0 +1,259 @@
+%----------------------------------------------------------------------------
+\chapter{Az elkészült alkalmazás bemutatása}
+%----------------------------------------------------------------------------
+Az alábbiakban bemutatom a féléves munkám során elkészített alkalmazás végleges verzióját, annak oldalait és a felhasználó számára elérhetõ funkciókat.
+Ebben a fejezetben képernyõképek csak az alkalmazás iOS verziójáról láthatók.
+Az iOS platform sajátja, hogy a visszafelé navigálás ikonja mellett megjeleníti annak az oldalnak a nevét, ahova a navigáció visz, emiatt az oldalak fejléce több ponton sûrûnek tûnhet.
+A többi platformon más elrendezésû fejlécek jelennek meg.
+Az applikációról készült multi-platform képernyõképek a függelék \sectref{AppScreenshots} pontjában foglalnak helyet.
+
+Az alkalmazás jelenlegi állapotában nem a SmartActive webszerverrel kommunikál, mert annak a komponensnek a felelõse nem készült el idõben feladatával.
+Kerülõmegoldásként a Dropbox\footnote{További információ a Dropbox termékrõl: \url{https://www.dropbox.com/}} ingyenes felhõs tárhelyszolgáltatásban hoztam létre JSON fájlokat, és azok URI-jait\footnote{Uniform Resource Identifier, egy rövid karaktersorozat, amelyet egy webes erõforrás azonosítására használunk, pl. egy honlapcím.} beégettem a kommunikációt megvalósító függvényekbe.
+Ahhoz, hogy a dropboxban lévõ fájlokat módosítani tudjam az alkalmazásban, saját azonosító adataimat is be kellett volna égetnem, ezt pedig adatvédelmi okokból nem tettem meg.
+Ennek következményeképp amikor az alkalmazás szinkronizál a szerverrel, a helyi adatbázisban tárolt változások elvesznek (pl. hozzáadott barát, létrehozott torna).
+
+%----------------------------------------------------------------------------
+\section{Bejelentkezõ-oldal}
+%----------------------------------------------------------------------------
+Az applikáció elsõ indulásakor a bejelentkezõ-képernyõ látható, ami a felhasználó egyedi azonosítóját kéri (\figref{Login_ios} ábra).
+A dropboxtárhely-használat miatt kér az app azonosítószámot a megszokott felhasználónév - jelszó páros helyett, mivel utóbbi funkciót felesleges lett volna megvalósítani beégetett fájlútvonalak használata mellett.
+A megadott azonosító sikeres bejelentkezés esetén eltárolódik, így a további alkalmazásindításokkor az app már nem kéri azt.
+Hibás azonosító megadása esetén hibaüzenet jelenik meg (\figref{Login_IdError_ios} ábra).
+
+\begin{figure}[!h]
+	\centering
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/Login_ios.png}
+		}
+		{
+			\caption{A bejelentkezõ-oldal}
+			\label{fig:Login_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/Login_IdError_ios.png}
+		}
+		{
+			\caption{Hibaüzenet hibás felhasználóazonosítónál}
+			\label{fig:Login_IdError_ios}
+		}
+	\end{floatrow}
+\end{figure}
+
+\FloatBarrier
+%----------------------------------------------------------------------------
+\section{Információk, statisztikák az edzésekrõl}
+%----------------------------------------------------------------------------
+A bejelentkezés utáni elsõ adatszinkronizálás 5-10 másodperces ideje alatt töltõképernyõ jelenik meg (\figref{Login_Loading_ios} ábra), majd az alkalmazás kezdõoldalaként a korábbi edzések listája látható, illetve itt lehet kijelentkezni is a \textit{Logout} gombbal (\figref{SessionList_ios} ábra).
+A listaelemek egy-egy rövid összefoglalót mutatnak az egyes edzésekrõl.
+A cellák felsõ szövegsorában látható az edzés dátuma, zárójelben az ellenfél keresztneve és vezetéknevének kezdõbetûje.
+Ezek alatt az edzés során elégetett kalóriák száma, az edzés hossza óra:perc:másodperc formátumban, illetve a megtett táv olvasható.
+A szöveges információktól balra egy fánkdiagram helyezkedik el, benne az edzés során játszott meccsek számával, a diagram eloszlása pedig a gyõztes és vesztes meccsek arányát mutatja sorrendben fehér és szürke színnel.
+A lista támogatja a lehúzással történõ frissítést, errõl képernyõkép a függelék \figref{SessionList_Update} ábráján látható.
+Ez a funkció a Xamarin jelenlegi verziójával csak Android és iOS operációs rendszereken érhetõ el.
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/Login_Loading_ios.png}
+		}
+		{
+			\caption{Töltési animáció a bejelentkezés alatt}
+			\label{fig:Login_Loading_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/SessionList_ios.png}
+		}
+		{
+			\caption{A korábbi edzések listája}
+			\label{fig:SessionList_ios}
+		}
+	\end{floatrow}
+\end{figure}
+
+\FloatBarrier
+Az edzéslista egy elemét kiválasztva arról részletes információkat tekinthetünk meg.
+Az elsõ fülön (\figref{SessionDet_Matches_ios} ábra) látható az ellenfél teljes neve, a játszott meccsek típusa ("legjobb a háromból" vagy "legjobb az ötbõl"), a meccsgyõztes neve, valamint az egyes szettek eredményei "felhasználó pontjai - ellenfél pontjai" formában.
+Az edzõpartner nevére kattintva részletesebb információkat kaphatunk róla, amiket az \figref{FriendDet_ios} ábra szemléltet.
+A második fül (\figref{SessionDet_Stats_ios} ábra) az edzés során készült statisztikákat mutatja. Megtekinthetõek biometrikai adatok, úgy mint az elégetett kalóriák száma, a megtett lépések száma és a megtett táv mértéke, valamint az átlagos szívritmus és annak változása az edzés során vonaldiagram formájában.
+Ezen túl a labdamenetrõl az ütések és melléütések számát, azok átlagos sebességét, valamint egy kördiagramon az ütések típusának (tenyeres vagy fonák) százalékos eloszlását mutatja az oldal.
+A vonaldiagram egy pontját, illetve a kördiagram egy szeletét kiválasztva megtekinthetõ annak számértéke is.
+A zöld téglalap egy úgynevezett helyõrzõ (angolul placeholder), ahova az edzés során használt labda típusáról (kezdõ, középhaladó, haladó vagy profi) kerülhet kép.
+
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/SessionDet_Matches_ios.png}
+		}
+		{
+			\caption{Egy edzés meccseinek eredményei}
+			\label{fig:SessionDet_Matches_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/SessionDet_Stats_ios.png}
+		}
+		{
+			\caption{Egy edzésrõl készült statisztikák}
+			\label{fig:SessionDet_Stats_ios}
+		}
+	\end{floatrow}
+\end{figure}
+\FloatBarrier
+%----------------------------------------------------------------------------
+\section{Barátok kezelése}\label{sect:FriendManagement}
+%----------------------------------------------------------------------------
+Az alkalmazás második fõ fülén a barátok kereshetõ, ábécé sorrendben rendezett listája látható a barát teljes nevével, valamint az eddigi közös edzések számával (\figref{FriendList_BeforeAdd_ios} ábra).
+A barátlista is frissíthetõ lehúzással Android és iOS rendszereken (függelék \figref{FriendList_Update} ábra). A keresés funkciót a függelék \figref{FriendList_Search} ábrája szemlélteti.
+
+A lista egy elemét kiválasztva az adott barátról részletesebb információkat kapunk (\figref{FriendDet_ios} ábra).
+Itt a helyõrzõ a barát profilképét mutathatja, alatta a telefonszáma, e-mail címe és lakcíme tekinthetõ meg, végül pedig az eddigi közös edzések listája látható, aminek egy elemét választva annak részletezõoldalára jutunk (\figref{SessionDet_Matches_ios} és \figref{SessionDet_Stats_ios} ábrák).
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/FriendList_BeforeAdd_ios.png}
+		}
+		{
+			\caption{A barátok listája}
+			\label{fig:FriendList_BeforeAdd_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/FriendDet_ios.png}
+		}
+		{
+			\caption{Részletes információk egy barátról}
+			\label{fig:FriendDet_ios}
+		}
+	\end{floatrow}
+\end{figure}
+
+Lehetõség van barátok hozzáadására is az \textit{Add Friend} gombbal.
+A webszerver komponens hiánya miatt a hozzáadási oldalon (\figref{FriendAdd_ios} ábra) lévõ adatok megadásával egy új barátrekordot hozunk létre a helyi adatbázisban, nem pedig a rendszerbe regisztrált felhasználók listájából választunk.
+Az \textit{Add} gombra kattintva a barátlista oldalra lép vissza az app, ahol már az új barát is látszik (\figref{FriendList_AfterAdd_ios} ábra).
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/FriendAdd_ios.png}
+		}
+		{
+			\caption{Új barát hozzáadása}
+			\label{fig:FriendAdd_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/FriendList_AfterAdd_ios.png}
+		}
+		{
+			\caption{Hozzáadás után az új barát a listában van}
+			\label{fig:FriendList_AfterAdd_ios}
+		}
+	\end{floatrow}
+\end{figure}
+
+\FloatBarrier
+%----------------------------------------------------------------------------
+\section{Bajnokságok szervezése, részvétel bajnokságokon}
+%----------------------------------------------------------------------------
+A harmadik fõ alkalmazásfül a bajnokságokról ad áttekintõt (\figref{TournamentList_BeforeAdd_ios} ábra).
+Látható a futó bajnokságok listája ábécé rendben, ahol a bajnokság neve mellett a résztvevõk aktuális és maximális létszáma is szerepel. A lista Android és iOS rendszereken lehúzással frissíthetõ (függelék \figref{TournamentList_Update} ábra).
+Lehetõség van új bajnokság létrehozására a \textit{Create} gombbal megjelenõ hozzáadási oldalon (\figref{TournamentAdd_ios} ábra).
+Itt az \textit{ID} mezõ megadása azért szükséges, mert a barátok felvételéhez hasonló módon itt is egy rekordot hozunk létre a helyi adatbázisban, mivel a webszerver komponens jelenleg nem érhetõ el.
+A függelék \figref{TournamentAdd_NativeDate} és \figref{TournamentAdd_NativeTime} ábrái szemléltetik, hogy a dátum és idõ megadásához a platform natív grafikus elemeit használja az app.
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentList_BeforeAdd_ios.png}
+		}
+		{
+			\caption{A bajnokságok oldala}
+			\label{fig:TournamentList_BeforeAdd_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentAdd_ios.png}
+		}
+		{
+			\caption{Új bajnokság létrehozása}
+			\label{fig:TournamentAdd_ios}
+		}
+	\end{floatrow}
+\end{figure}
+
+Egy bajnokságot kiválasztva a listából annak részleteit tekinthetjük meg (\figref{TournamentDet_empty_ios} ábra), a \textit{Join} gombra kattintva csatlakozhatunk a bajnoksághoz.
+Ekkor a felhasználó "You" néven megjelenik a résztvevõk listájában, ahol a késõbbiekben is elsõként szerepel majd, illetve meghívhat barátokat a bajnokságra az \textit{Invite Friends} gomb használatával (\figref{TournamentDet_joined_ios} ábra).
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentDet_empty_ios.png}
+		}
+		{
+			\caption{Az új bajnokság részletei}
+			\label{fig:TournamentDet_empty_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentDet_joined_ios.png}
+		}
+		{
+			\caption{A bajnokságrészletezõ-oldal csatlakozás után}
+			\label{fig:TournamentDet_joined_ios}
+		}
+	\end{floatrow}
+\end{figure}
+\FloatBarrier
+A barátok meghívására szolgáló oldalon (\figref{TournamentInvite_InviteAll_ios} ábra) meghívhatjuk egy gombnyomással az összes ismerõsünket, azonban ha ezek száma több, mint a bajnokság maximális létszáma, hibaüzenetet kapunk a még meghívható barátok számával (\figref{TournamentInvite_Error_ios} ábra).
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_InviteAll_ios.png}
+		}
+		{
+			\caption{Barátok meghívása oldal}
+			\label{fig:TournamentInvite_InviteAll_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Error_ios.png}
+		}
+		{
+			\caption{Hibaüzenet túl sok ismerõs meghívásakor}
+			\label{fig:TournamentInvite_Error_ios}
+		}
+	\end{floatrow}
+\end{figure}
+Az ismerõsök listája itt is kereshetõ, a szûrt listában történõ kijelöléseket megjegyzi az alkalmazás a keresõszó törlése után is (\figref{TournamentInvite_Search_ios} és \figref{TournamentInvite_Invite_ios} ábrák).
+A meghívást az \textit{Invite} gombbal véglegesítjük.
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Search_ios.png}
+		}
+		{
+			\caption{Meghívás kereséssel}
+			\label{fig:TournamentInvite_Search_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentInvite_Invite_ios.png}
+		}
+		{
+			\caption{Kiválasztott barátok meghívása}
+			\label{fig:TournamentInvite_Invite_ios}
+		}
+	\end{floatrow}
+\end{figure}
+
+Meghívás után a bajnokság résztvevõinek listája azonnal frissül (\figref{TournamentDet_Invited_ios} ábra).
+A meghívás elfogadása lépés azért hiányzik, mert a dropbox tárhellyel való kapcsolat egyirányú, így jelenleg nem megoldható, hogy A felhasználó részvételi kérelmet küldjön B-nek.
+Ha a meghívottak hozzáadásával egy bajnokság megtelt, az \textit{Invite Friends} gomb eltûnik, ezzel megszûnik a további résztvevõk hozzáadásának lehetõsége (\figref{TournamentDet_Full_ios} ábra).
+\begin{figure}[!h]
+	\begin{floatrow}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Invited_ios.png}
+		}
+		{
+			\caption{A bajnokság résztvevõi meghívás után}
+			\label{fig:TournamentDet_Invited_ios}
+		}
+		\ffigbox {
+			\includegraphics[width=\screenShotWidth, keepaspectratio]{figures/screens/TournamentDet_Full_ios.png}
+		}
+		{
+			\caption{Egy megtelt bajnokság}
+			\label{fig:TournamentDet_Full_ios}
+		}
+	\end{floatrow}
+\end{figure}

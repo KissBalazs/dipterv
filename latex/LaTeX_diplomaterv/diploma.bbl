@@ -1,0 +1,176 @@
+\begin{thebibliography}{10}
+
+\bibitem{clustVsClass}
+Arisiri.
+\newblock Clustering vs classifictaion.
+\newblock http://arisri.tistory.com/entry/Clustering-VS-Classification (, 2015.
+
+\bibitem{langdetect}
+Python Community.
+\newblock python.
+\newblock https://pypi.python.org/pypi/langdetect, 2016.
+
+\bibitem{scrapyMain}
+Scrapy community.
+\newblock Scrapy.
+\newblock https://scrapy.org, 2017.
+
+\bibitem{jsonOrigin}
+Douglas Crockford.
+\newblock Json.
+\newblock http://www.json.org/xml.html, 2001.
+
+\bibitem{TikkSzovegb}
+Tikk Domonkos.
+\newblock {\em Szövegbányászat ISBN 978-963-9664-45-6}.
+\newblock Typotex, 2007.
+
+\bibitem{django}
+Django~Software Foundation.
+\newblock Django.
+\newblock https://www.djangoproject.com, 2015.
+
+\bibitem{decorators}
+Django~Software Foundation.
+\newblock View decorators.
+\newblock https://docs.djangoproject.com/en/1.11/topics/http/decorators/, 2015.
+
+\bibitem{DNS}
+Network~Working Group.
+\newblock Domain names - concepts and facilities.
+\newblock https://tools.ietf.org/html/rfc1034, 1987.
+
+\bibitem{XmlDesc}
+Network~Working Group.
+\newblock The application/rss+xml media type.
+\newblock http://tools.ietf.org/id/draft-nottingham-rss-media-type-00.txt,
+  2007.
+
+\bibitem{jsonArticle1}
+Jeroen Janssens.
+\newblock 7 command-line tools for data science.
+\newblock
+  http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html,
+  2013.
+
+\bibitem{DataMiningSearch}
+Fred W. Prior David A.~Rubin Joseph P.~Erinjeri, Daniel~Picus and Paul Koppel.
+\newblock Development of a google-based search engine for data mining radiology
+  reports.
+\newblock https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3043709/, 2009.
+
+\bibitem{AbonyiAdatb}
+Dr.~Abonyi János.
+\newblock {\em Adatbányászat, a hatékonyság eszköze ISBN:963-618-432-2}.
+\newblock ComputerBooks, 2004.
+
+\bibitem{KissOnlab1}
+Nagy~Gábor Kiss~Balázs.
+\newblock Dokumentum osztályozás adatbányászati módszerekkel, 2014.
+
+\bibitem{KissOnlab2}
+Nagy~Gábor Kiss~Balázs.
+\newblock Dokumentum osztályozás adatbányászati módszerekkel, 2015.
+
+\bibitem{WebFramework}
+Jeff Knupp.
+\newblock What is a web framework?
+\newblock https://www.jeffknupp.com/blog/2014/03/03/what-is-a-web-framework,
+  2015.
+
+\bibitem{TopicModels}
+Tom~Griffiths Mark~Steyvers.
+\newblock {\em Probabilistic Topic Models}.
+\newblock 2009.
+
+\bibitem{djangoArch}
+MyTARDIS.
+\newblock Django architecture.
+\newblock https://pythonhosted.org/MyTARDIS/architecture.html, 2015.
+
+\bibitem{OraClassifi}
+Oracle.
+\newblock Classification.
+\newblock
+  http://www.oracle.com/ocom/groups/public/@otn/documents/digitalasset/115094.gif,
+  2015.
+
+\bibitem{BeautifulSoup}
+Leonard R.
+\newblock Beautifulsoup.
+\newblock http://www.crummy.com/software/BeautifulSoup, 2015.
+
+\bibitem{selectors}
+W3C Recommendation.
+\newblock Selectors level 3.
+\newblock https://www.w3.org/TR/selectors/, 2011.
+
+\bibitem{mvcArch}
+Trygve M.~H. Reenskaug.
+\newblock Mvc.
+\newblock http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html, 1978.
+
+\bibitem{gensimMain}
+Radim Rehurek and Petr Sojka.
+\newblock Gensim.
+\newblock https://radimrehurek.com/gensim, 2009.
+
+\bibitem{restful}
+Richard N.~Taylor Roy T.~Fielding.
+\newblock Principled design of the modern web architecture.
+\newblock http://www.ics.uci.edu/~taylor/documents/2002-REST-TOIT.pdf, 1999.
+
+\bibitem{langdetectGoogleSlide}
+Nakatani Shuyo.
+\newblock Cybozu labs, inc.
+\newblock https://www.slideshare.net/shuyo/language-detection-library-for-java,
+  2010.
+
+\bibitem{bagOfWords}
+C.~V.~Jawahar Siddhartha~Chandra, Shailesh~Kumar.
+\newblock Learning hierarchical bag of words using naive bayes clustering.
+\newblock pages 382--395.
+
+\bibitem{httpRFC}
+The~Internet Society.
+\newblock Hypertext transfer protocol.
+\newblock https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3043709/, 1999.
+
+\bibitem{NaturalLangProc}
+Radim Rehurekand~Petr Sojka.
+\newblock Software framework for topic modelling with large corpora.
+\newblock In {\em Proceedings of the LREC 2010 Workshop on New Challenges for
+  NLP Frameworks}, page~45.
+
+\bibitem{pythonBook}
+Gerard Swinnen.
+\newblock Tanuljunk meg programozni python nyelven.
+\newblock http://mek.oszk.hu/08400/08435/08435.pdf, 2005.
+
+\bibitem{TfIDF}
+Tf-idf.
+\newblock A single-page tutorial.
+\newblock http://www.tfidf.com, 2015.
+
+\bibitem{hungarianStopwords}
+Tutorial.hu.
+\newblock Hunagrian stop words.
+\newblock http://www.tutorial.hu/hungarian-stop-words, 2015.
+
+\bibitem{webservice}
+W3C.
+\newblock Web services glossary.
+\newblock https://www.w3.org/TR/2004/NOTE-ws-gloss-20040211/\#webservice, 2004.
+
+\bibitem{dom}
+W3C.
+\newblock Document object model (dom).
+\newblock https://www.w3.org/DOM/, 2009.
+
+\bibitem{webcrawling}
+How~Stuff Works.
+\newblock How internet search engines work.
+\newblock
+  http://computer.howstuffworks.com/internet/basics/search-engine1.html, 2015.
+
+\end{thebibliography}

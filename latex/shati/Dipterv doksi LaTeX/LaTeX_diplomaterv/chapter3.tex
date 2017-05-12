@@ -1,0 +1,130 @@
+%----------------------------------------------------------------------------
+\chapter{A szoftverfejlesztõ infrastruktúra}\label{sect:DevelopmentInfrastructureChapter}
+%----------------------------------------------------------------------------
+Az alábbiakban ismertetem, hogy a Xamarin keretrendszerben történõ munka\linebreak megkezdéséhez milyen eszközök szükségesek, valamint részletezem azok helyes beállítását\linebreak és használatát.
+
+%----------------------------------------------------------------------------
+\section{A Microsoft Visual Studio 2015 Update 2 telepítése és beállítása}
+%----------------------------------------------------------------------------
+A szakdolgozatom készítésekor a Microsoft szoftverfejlesztõ programjának (IDE\footnote{Integrated Development Environment: olyan szoftverfejlesztõ környezet, ami egy alkalmazásként nyújtja a fejlesztéshez szükséges komponenseket (pl. szövegszerkesztõ, fordító, hibakeresõ), valamint többletszolgáltatásokat (pl. automatikus kiegészítés) is nyújthat.}) legfrissebb ingyenes (\mbox{Community Edition}) verziójában is megtalálható már a \mbox{Xamarin} keretrendszer, mint telepíthetõ komponens. A \mbox{Community Edition} regisztráció után ingyenesen letölthetõ a Microsofttól, én az alkalmazás \mbox{Enterprise} verzióját telepítettem a BME \mbox{DreamSpark} programjának keretében szerzett licenc-szel.
+
+Mivel a fejlesztendõ alkalmazás a Windows 10 Mobile operációs rendszert is célozza, ezért követelmény, hogy a fejlesztõkörnyezetet futtató számítógépen a Windows 10 operációs rendszer Education, Professional vagy Enterprise kiadása legyen telepítve (a kiadások megkötése a Hyper-V technológia támogatása miatt fontos, lásd \sectref{EmulatorUsage} pont), lehetõleg az összes elérhetõ rendszerfrissítéssel.
+A Visual Studiohoz telepítendõ komponensek helyes kiválasztásának legegyszerûbb módja, ha a telepítés típusának a \textit{Custom} módot választjuk, majd az összes komponensbõl kivesszük a kijelölést.
+Ezután a \textit{Cross Platform Mobile Development} pontban kiválasztjuk a \textit{\CsharpDotNet~(Xamarin v4.0.3)} pontot, ami automatikusan újra kijelöli a számára szükséges egyéb komponenseket.
+A Windows Phone 8.1 és Windows 10 Mobile cél-operációsrendszerek miatt nyissuk le a \textit{Windows and Web Development} pontot, majd a \textit{Universal Windows App Development Tools} és \textit{Windows 8.1 and Windows Phone 8.0\texttt{/}8.1 Tools} pontokban lévõ teli négyzetet módosítsuk pipára, ezzel telepítve a szükséges SDK-kat\footnote{Software Development Kit: Adott platformot, keretrendszert vagy szolgáltatást célzó program fejlesztéséhez szükséges függvénykönyvtárak és eszközök.} és emulátorokat (lásd \sectref{Emulators} pont).
+A helyes beállításokról készült képernyõképek a függelék \sectref{VSCompInstallAppendix} pontjában találhatók.
+
+Nagyon fontos figyelembe venni, hogy hiába választunk az IDE telepítési helyének a rendszermeghajtótól különbözõ meghajtót, az így is jelentõs helyet fog elfoglalni ott, mivel a különbözõ SDK-k, emulátorok, és más közös komponensek mindenképp  az alapértelmezett helyre települnek, mint például a \path{C:\Program Files} vagy a \path{C:\Users\<felhasználónév>\AppData} mappa.
+Tapasztalataim alapján ajánlatos legalább 50 GB szabad hellyel rendelkezni a rendszermeghajtón a telepítés megkezdése elõtt, különben akár végzetes rendszerhibák is felléphetnek.
+
+A programot települése után nyissuk meg, majd a \url{https://www.xamarin.com/student} oldalon létrehozott felhasználói fiókunkkal jelentkezzünk be a \textit{Tools\texttt{/}Xamarin Account} menüben, ezzel aktiválva a keretrendszert.
+Ezután a telepített kiegészítõk naprakészségét kell biztosítani a \textit{Tools\texttt{/}Extensions and Updates\texttt{/}Updates} menü használatával.
+
+Fontos engedélyezni a számítógépen lévõ Windows PowerShell parancssor beállításaiban a távoli aláírt szkriptek futtatását, mert a Xamarin keretrendszer használ PowerShellben írt szkripteket.
+Indítsunk egy PowerShell parancssort rendszergazdai jogosultságokkal.
+Ha a \textit{Get-ExecutionPolicy -list} parancsot futtatva a \textit{CurrentUser} vagy \textit{LocalMachine} szkópokhoz nem \textit{RemoteSigned} jogosultságot látunk beállítva, módosítsuk azt a \textit{Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope <adott\_szkóp\_neve>} paranccsal.
+
+%----------------------------------------------------------------------------
+\subsection{Programfordítás iOS operációs rendszerre}\label{sect:IOSBuild}
+%----------------------------------------------------------------------------
+Az Apple cég híresen zárt rendszerekkel dolgozik.
+Fejlesztési szemszögbõl ez azt jelenti, hogy Apple terméket célzó programot csak az Apple OSX operációs rendszeren futó Xcode programcsomaggal lehet fordítani.
+A Xamarin fejlesztõi ügyesen áthidalták ezt a problémát: lehetõség van ugyanis egy távoli, OSX operációs rendszert futtató számítógépet úgy felkonfigurálni, hogy a Visual Studioba integrált Xamarin eszközök csatlakozni tudjanak hozzá, és a saját IDE-nkben fejlesztett kódot ott lefordítsuk, illetve az ott futó emulátorban (lásd \sectref{Emulators} pont) távolról futtassuk az appot hibakeresési céllal.
+
+A fejlesztéshez konzulensem biztosított egy, a tanszéken felkonfigurált Mac Minit.
+A pontos konfigurációs lépésekrõl a Xamarin keretrendszer fejlesztõknek szóló dokumentációjában található további információ \cite{ConnectToTheMac}.
+Fontos, hogy a megfelelõ beállítások elvégzéséhez mindenképp rendszergazdai jogosultságokkal rendelkezõ fiókra van szükség, azonban a beállításkor megadhatunk nem rendszergazda felhasználót is a kapcsolódáshoz, én egy ilyen felhasználón keresztül dolgoztam.
+
+Mivel a fejlesztett alkalmazás emulátorbeli futtatása csak a távoli gépen oldható meg, ezért szükség van valamilyen grafikus elérést biztosító távoli kapcsolódást nyújtó program használatára is.
+Én kezdetben a TeamViewer\footnote{További információ a TeamViewer termékrõl: \url{http://www.teamviewer.com/}} programot használtam, azonban stabilitási problémák miatt áttértem a RealVNC\footnote{További információ a RealVNC termékrõl: \url{https://www.realvnc.com/}} csomagra.
+
+%----------------------------------------------------------------------------
+\subsection{További beállítások a SmartActive mobilapplikáció fordításához}\label{sect:CompileSettings}
+%----------------------------------------------------------------------------
+A fordításhoz szükséges külsõ csomagok jelentõs része NuGet\footnote{A NuGet egy csomagkezelõ szolgáltatás a Visual Studiohoz.
+Az így közzétett programkönyvtárakat ugyanúgy referálhatjuk, mint a keretrendszer sajátjait, azonban nem kell telepíteni õket, hanem fordításkor automatikusan letöltõdnek. Lehetõség van különbözõ projektekben ugyanannak a csomagnak más verzióját használni.} csomagként van referálva, azonban bizonyos komponenseket külön kell telepíteni.
+
+A Visual Studio \textit{Tools\texttt{/}Extensions and Updates\texttt{/}Online\texttt{/}Visual Studio Gallery} menüjébõl szerezhetõ be a tesztek létrehozását segítõ "NUnit Templates for Visual Studio" kiegészítõ, valamint az alkalmazás Windows Phone 8.1-re és Windows 10 Mobile-ra fordításához szükséges \textit{SQLite for Windows Phone 8.1} és \textit{SQLite for Universal Windows Platform} csomagok.
+Az alkalmazás jelenleg 3.12.2-es verziójú SQLite csomagokat használ, ha csak újabb csomag érhetõ el a galériában, akkor telepítése után az adott platformspecifikus projektben frissíteni kell a referenciát.
+
+Az appban látható diagramokhoz szükség van a Syncfusion Essential Studio for Xamarin termék legalább 14.1.0.41-es verziójának telepítésére, amihez közösségi licenc keretein belül ingyenesen hozzájuthatunk \cite{SyncFusionXamarin}.
+
+A Visual Studio kódkiegészítõ- és javaslattevõ funkciójának bõvítéséhez, valamint a unit tesztek (lásd \sectref{UnitTests} pont) futtatásához a ReSharper Ultimate programcsomag \textit{ReSharper} és \textit{dotCover} komponenseit kell telepíteni, ezeket a \url{https://www.jetbrains.com/dotnet/} oldalról lehet elérni.
+
+%----------------------------------------------------------------------------
+\section{Az okostelefon-emulátorok}\label{sect:Emulators}
+%----------------------------------------------------------------------------
+Az emulátor egy olyan program, aminek célja egy olyan virtuális hardverkörnyezet biztosítása, ami mûködésében és funkcionalitásában megegyezik egy valódi hardverkörnyezettel (emulálja azt), lehetõvé téve akár egy teljes operációs rendszer futtatását benne.
+Mobilszoftver-fejlesztésben az emulátorok használata kiemelkedõ jelentõséggel bír, mert így nem kell az összes célplatformhoz és hardvertulajdonsághoz valódi eszközökkel rendelkeznünk.
+Fontos tudni, hogy az emulátor a futása során legalább annyi rendszermemóriát (RAM) foglal le, mint az emulált eszköz memóriája, így több emulátor egyszerre futtatása esetére érdemes kiszámolni, mennyi memóriával kell rendelkezzen a gazdaszámítógép\footnote{Az emulátorokat futtató fizikai számítógép, angolul host machine.}.
+(Én 16 GB-ra bõvítettem, hogy egyszerre futtathassak az összes célplatform emulátoraiból egyet-egyet.)
+
+%----------------------------------------------------------------------------
+\subsection{Az emulátorok használata}\label{sect:EmulatorUsage}
+%----------------------------------------------------------------------------
+A Visual Studio képes többfajta emulátorral együttmûködni, azonban én az Android, Windows Phone 8.1 és Windows 10 Mobile rendszerekhez a Microsoft saját emulátorait használtam.
+Ezek támogatják a Hyper-V technológiát, amivel megfelelõ processzorral és operációs rendszerrel rendelkezõ gazdaszámítógépen lényegesen egyenletesebb és nagyobb teljesítményt nyújtanak, mint a szintén kipróbált Google vagy Xamarin keretrendszerrel érkezõ emulátorok.
+Ezeket legegyszerûbben úgy indíthatjuk el, ha a már létrehozott Visual Studio \textit{Solutionben} a felsõ eszköztáron kiválasztjuk a célplatform-specifikus projektet (\figref{DebugSettings} ábra), választunk hozzá egy emulátort, majd a mellette lévõ zöld háromszögre kattintva a kód lefordul, bekapcsol az emulátor, települ az applikáció, ezután elindul a futtatás közbeni hibakeresés (debuggolás).
+Az emulátor a debuggolás végeztével is bekapcsolva marad, ezzel idõt takarítva meg a késõbbi hibakeresési folyamatok megkezdéséhez.
+Az alkalmazást hibakeresés indítása nélkül is telepíthetjük az emulátorokra.
+Miután kiválasztottuk az adott cél-operációsrendszerhez használandó emulátort, kattintsunk jobb egérgombbal a platformspecifikus projektre, majd válasszuk a \textit{Deploy} lehetõséget.
+A mûvelet befejeztével az alkalmazás megjelenik az emulátor telepített programjai között, onnan indítható.
+
+Egy másik lehetõség a Visual Studio Emulator for Android és Windows Phone Developer Power Tools 8.1 programok használata (ábrák a függelék \ref{EmulatorManagers} pontjában).
+Ezekkel a programokkal a Visual Studiotól függetlenül indíthatjuk el az emulátorokat, telepíthetünk továbbiakat, illetve részletesebb információkat kaphatunk róluk.
+
+Ahogy azt korábban említettem (\sectref{IOSBuild} pont), az iOS-es hibakeresést a távoli, OSX operációs rendszerû gépen kell végezni.
+Az ott futó emulátorprogram neve \textit{Simulator}, amiben az emulált eszköz fizikai gombjai nem látszódnak, azok megnyomását billentyûkombinációkkal vagy a menüsor \textit{Hardware} pontjában lehet kiváltani.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=8mm, keepaspectratio]{figures/DebugIOSToolbar.png}\\\vspace{3mm}	
+	\includegraphics[height=8mm, keepaspectratio]{figures/DebugWP81Toolbar.png}\\\vspace{3mm}
+	\includegraphics[height=8mm, keepaspectratio]{figures/DebugUWPToolbar.png}\\\vspace{3mm}
+	\includegraphics[height=8mm, keepaspectratio]{figures/DebugDroidToolbar.png}
+	\caption{Példák emulátorok beállítására különbözõ platformokon történõ futtatás közbeni hibakereséshez} 
+	\label{fig:DebugSettings}
+\end{figure}
+
+%----------------------------------------------------------------------------
+\subsection{Interakció az emulátorok fájlrendszerével}
+%----------------------------------------------------------------------------
+Mivel a SmartActive mobilalkalmazás képes a szerverrõl letöltött adatok alkalmazásfutások közötti tárolására a telefonon, ezért ismertetem, hogyan lehet a Visual Studio emulátorok és az Apple Simulator tárhelyére és tárhelyérõl adatokat másolni.
+Az androidos és windows okostelefonos fájlmûveletek megkönnyítésére és felgyorsítására írtam egy PowerShell szkriptet.
+
+%----------------------------------------------------------------------------
+\subsubsection{Android}
+%----------------------------------------------------------------------------
+A Visual Studio Android emulátorai ugyanazokkal a képességekkel rendelkeznek fájlelérés tekintetében, mint a Google sajátjai.
+Az Android SDK-val érkezõ \textit{adb.exe}\footnote{Alapértelmezett útvonala 64 bites operációs rendszeren: C:\textbackslash Program Files (x86)\textbackslash Android\textbackslash android-sdk\textbackslash platform-tools\textbackslash adb.exe.} programot a \textit{pull <forrásfájl\_az\_emulátoron> <célfájl\_a\_számítógépen>} paranccsal hívva az emulátorról a számítógépre, a \textit{push <forrásfájl\_a\_számítógépen> <célfájl\_az\_emulátoron>} paranccsal pedig fordított irányba másolhatunk fájlokat.
+
+Lehetõség van a \textit{shell} parancs kiadásával egy olyan, a linux shell parancsok részhalmazát, valamint egyéb, androidos fejlesztéshez használatos parancsokat elfogadó parancssor megnyitására, ami az emulátor fájlrendszerének gyökerében áll.
+Innen például a\linebreak\mbox{\textit{cd /data/data/SmartActive.SmartActive/files}} paranccsal a telepített mobilalkalmazás saját fájljait tartalmazó mappába navigálhatunk, ahol - az app elsõ futtatása után - listázható a szerverrel szinkronizált adatokat tároló \textit{SmartActiveSQLite.db3} fájl az ismert \textit{ls} parancs kiadásával.
+
+Több Android emulátor egyszerre történõ futtatása esetén elõször a \textit{devices} paranccsal listázzuk ki õket, majd a használni kívánt emulátor sorozatszámát a parancsokat megelõzõ \textit{-s} kapcsolóval adjuk meg.
+
+%----------------------------------------------------------------------------
+\subsubsection{Windows Phone 8.1 és Windows 10 Mobile}
+%----------------------------------------------------------------------------
+Ezeknek az emulátoroknak a tárhelyét a Windows 8.1 SDK-val települt Isolated Storage Explorer Tool\footnote{Alapértelmezett útvonala 64 bites operációs rendszeren: C:\textbackslash Program Files (x86)\textbackslash Microsoft SDKs\textbackslash Windows Phone\textbackslash v8.1\textbackslash Tools\textbackslash IsolatedStorageExplorerTool\textbackslash ISETool.exe.} parancssori programmal lehet elérni.
+Az adb-vel szemben itt a teljes fájlrendszeren nem, csak az adott alkalmazás saját, izolált tárhelyén lehet mûveleteket végezni.
+A teljes izolált mappa számítógépre másolása a \textit{ts}, míg a mappa lecserélése egy, a számítógépen található mappára az \textit{rs} paranccsal történik.
+A két mûvelet paraméterei hasonlóak: elsõként a használni kívánt emulátor azonosítóját kell megadni, amit az\linebreak\mbox{\textit{EnumerateDevices}} paranccsal kérdezhetünk le, majd az alkalmazás csomagazonosítója, végül parancstól függõen a cél- vagy forrásmappa következik.
+A csomagazonosítót a platformspecifikus projekt \textit{Package.appxmanifest} fájljában találjuk (\figref{AppxManifest} ábra).
+Például az alábbi parancs a négyes számú emulátorra telepített SmartActive applikáció izolált mappáját a jelenlegi könyvtárban található \textit{WinPhone} nevû mappára cseréli le:
+\begin{lstlisting}[frame=single]
+ISETool.exe rs deviceindex:4 e8ebdf4c-1a3c-4b54-919a-429e98e93142 ".\WinPhone"
+\end{lstlisting}
+\begin{figure}[!hb]
+	\centering
+	\includegraphics[width=143mm, keepaspectratio]{figures/WP81AppxManifest.png}
+	\caption{A mobilapp Windows Phone 8.1 platformspecifikus projektjének csomagazonosítója} 
+	\label{fig:AppxManifest}
+\end{figure}
+\newpage
+%----------------------------------------------------------------------------
+\subsubsection{iOS}
+%----------------------------------------------------------------------------
+A távoli Mac-en található Simulator fájlrendszerének eléréséhez indítsuk el legalább egyszer az appot a kívánt emulátoron, majd lépjünk a \path{/Users/<felhasználó_név>/Library/Developer/CoreSimulator/Devices} mappába (a \path{Library} mappa rejtett).
+Itt keressünk rá a módosítani kívánt fájlra, mert amíg az emulátor egyedi azonosítóját (GUID) megnézhetjük a \textit{device\texttt\_set.plist} fájlban, addig a telepített applikáció GUID-ját már nincs mód megtudni.
+Az alkalmazás fájljainak mappája a \path{./<GUID1>/data/Containers/Data/Application/<GUID2>/Library} mintára illeszkedik.

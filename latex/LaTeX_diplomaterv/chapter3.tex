@@ -1,0 +1,250 @@
+%----------------------------------------------------------------------------
+\chapter{Elõzetes kutatás: szövegelemzés}\label{sect:preResearch}
+%----------------------------------------------------------------------------
+Ahogy általánosságban is jellemzõ az adatbányászatra, a feladatom megoldása során is kiemelt figyelmet kellett fordítanom a tervezésre. Figyelembe kellett vennem, hogy olyan feladatot jelöljek ki, amely megvalósítható és releváns információkhoz juttatja a felhasználót. Fontos volt, hogy úgy lássak hozzá a munkához, hogy van egy elképzelésem arról, milyen elemzések eredményeit fogom látni, a felhasznált módszereknek milyen sajátosságaira kell ügyelni, közülük melyeket kell választanom.
+
+A diplomamunkám témájához kapcsolódó önálló munkáim eredményeire építve készült el a projekt. A saját kutatásaim eredményének felhasználásával alakítottam ki az alkalmazás végleges felépítését, ezek mentén választottam ki a felhasznált eljárásokat. Az alkalmazás végleges céljai és feladata így folyamatosan alakult, ahogyan az azok eléréséhez szükséges technológiákat és eszközöket kipróbáltam, teszteltem.
+
+A legelsõ ilyen kutatásom a szövegelemzés és a címkézhetõség vizsgálata volt. 
+%----------------------------------------------------------------------------
+\section{Szövegelemzés és címkék}
+%----------------------------------------------------------------------------
+Az automatikus webelemzés implementálása elõtt fontos volt megállapítani: magyar nyelvû webes tartalomra lehet-e egyáltalán szövegbányászati elemzéseket futtatni, és ha igen, milyen hatékonysággal?
+
+A kérdés megválaszolása során elõkészített, internetes hírportálokról kézzel letöltött szövegek között folytattam elemzéseket. A fõ feladatom az volt, hogy néhány cikk beolvasása után, az újonnan érkezõ dokumentumhoz javasoljak olyan címkét, amit az alapján állítok elõ, a dokumentum szövegtörzse melyik másik dokumentummal lehet közös témájú. Ezt magyar nyelven, és néhány jól elkülöníthetõ tanító szöveggel sikerült sikeresen implementálni.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=140mm, keepaspectratio]{figures/OldLabeler.png}
+	\caption{Címkézõ app} 
+	\label{OldLabeler}
+\end{figure}
+
+Láthatunk \aref{OldLabeler} ábrán  egy beolvasott példadokumentumot, alatta a címkéket amiket megadott hozzá a szerzõ, és a "|" jel után azt a címkét, amit az alkalmazás javasol.
+
+A feladat során kézzel kellett (egy webes felületen keresztül) betáplálni  a szövegeket, és a tanítóhalmazt is az osztályozási módszerekhez.
+
+%----------------------------------------------------------------------------
+\subsection{Eredmények}
+%----------------------------------------------------------------------------
+Az önálló laboratórium tárgyam során elvégzett feladatok alapján a felhasznált webes keretrendszer, az elemzési módszerek valamint szöveg- és adatbányászati függvénykönyvtárak mûködõképesnek bizonyultak. 
+
+%----------------------------------------------------------------------------
+\section{Dokumentum osztályozás}
+%----------------------------------------------------------------------------
+Az elõzõ pontban említett eredményekre alapozva a következõ lépés az volt, már a diplomamunkám keretein belül, hogy egy bonyolultabb elemzést hozzak létre, mely, amennyiben megvalósítható, megnyitja az utat a végleges munkám elkészítéséhez.
+
+Fontos tapasztalat volt a korábbi kutatásom során, hogy lehetõleg érdemes minél egyszerûbb elemzésekkel kezdenem, és csak ha az alapgondolat mûködik, akkor lássak neki a feladat és az algoritmusok komplexitásának növeléséhez. Ezek mellett figyelnem kellett arra, hogy hibás eredmények esetén alaposan körüljárjam, mit is várok el az algoritmustól, miért nem az az eredmény, amit várok, és hol lehet azt esetleg javítani.  
+
+Az alkalmazás funkcionalitását kibõvítettem azzal, hogy az egyszerû címkék ajánlásán túl, a beérkezõ dokumentumokat képes volt kategorizálni is adott elõzetesen kialakított kategóriák mentén (osztályozás).
+
+A feladat során az index.hu-n található, 8 fõbb rovatából, kategóriánként 50-50 cikket olvastam fel.
+
+ %----------------------------------------------------------------------------
+ \subsection{Tervezés}
+ %----------------------------------------------------------------------------
+Megfelelõ mennyiségû betanító dokumentum után az újonnan érkezõ szövegtörzset - legyen az a webportál egy eddig még fel nem dolgozott cikke, vagy a szerzõ által a webes felületen begépelt szöveg -  elemezte, és bekategorizálta nyolc témakör egyikébe.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/DocumentMinePlan.png}
+	\caption{Dokumentum osztályozás vázlatos terve} 
+	\label{DocumentMinePlan}
+\end{figure}
+
+\Aref{DocumentMinePlan} képen látható az a felületes terv, hogy hogyan valósítottam meg ezt a feladatot.
+
+Elsõként az összegyûjtött dokumentumokból kialakítottam a szótárt, a corpus-t, és a kategóriákat. A szavak súlyozása (tf-idf) és a dokumentumtér dimenziójának csökkentése (tf-idf) után redukált corpus-t hoztam létre, ahol mindegyik dokumentumhoz eltároltam a megfelelõ kategóriát.
+
+Az új cikkeket eme lépések után ehhez a redukált corpus-hoz hasonlítom: terveim szerint így világos eredményekre juthatunk, hiszen egyrészt csak a cikket jellemzõ legfontabb, és a corpus-ban elõforduló leggyakoribb szavakat használtam fel.  
+
+
+ %----------------------------------------------------------------------------
+\subsection{Implementálás}
+%----------------------------------------------------------------------------
+Ebben a fejezetben részletesen bemutatom, hogy milyen lépéseken keresztül valósítottam meg a dokumentum osztályozást.
+
+
+%----------------------------------------------------------------------------
+\subsubsection{Webes megjelenítõ rész}
+%----------------------------------------------------------------------------
+A Django keretrendszernek hála könnyedén tudtam mûködõképes weboldalt létrehozni. A hivatalos tutorial-t követve \cite{django} könnyedén mûködõ weboldalt tudunk összeállítani, ennek felhasználásával haladtam én is. Célom a keretrendszerrel a <link>tervezés- elõzetes eredmények fázis alatt az volt, hogy a legalapvetõbb funkciókat megvalósítsa (webszerver kiszolgálja a kéréseket, megjeleníti az algoritmusok eredményét, nyers HTML tartalmat mutat, stb.), a kényelmi funkcionalitásokat még nem implementáltam ekkor.
+
+%----------------------------------------------------------------------------
+\subsubsection{Alkalmazás architektúra}
+%----------------------------------------------------------------------------
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=60mm, keepaspectratio]{figures/DocumentMineArch.png}
+	\caption{A Dokumentum osztályozó alkalmazás szerkezete} 
+	\label{DocumentMineArch}
+\end{figure}
+
+Az alkalmazás a következõ modulokból áll:
+
+\textbf{IndexParser}: a csomagban található fájlok segítségével konfigurálható a webserver. 
+
+\textbf{Editor/datamining}: ebben a csomagban található az az osztály, amelyben a szöveg- és adatbányászati lépések megtörténnek a feldolgozás során.
+
+\textbf{Editor/parser}: ebben a csomagban foglalnak helyet a web parser eszközök. 
+
+\textbf{Editor/templates}: itt találhatóak a válaszként generálódó weboldalak template-jei. Kezdetben egy kezdõoldal, egy parser felület, és egy új cikk megadására szolgáló szerkesztõ ablak volt található itt.
+
+\begin{lstlisting}[frame=single, caption=Egy példa template, label=DjangoTemplateExample,  float=!ht]
+<form action="/index/" method="post">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Submit" />
+</form>
+\end{lstlisting}
+
+\Aref{DjangoTemplateExample} kódrészleten egy egyszerû template kód látható: megfigyelhetõ, hogy a HTML tartalom mellett a kapcsos zárójelek között szereplõ értékek mutatnak a dinamikus tartalomra. Az itt szereplõ példa egy egyszerû form-ot valósít meg, egy darab küldés gombbal, amelyet POST kérésben ad vissza a weboldalnak. A form dinamikusan generálódik attól függõen, hogy melyik objektumot rendeli hozzá a view.py a template-hez.  
+
+\textbf{Editor/forms.py}: ebben a form típusú objektumokat definiáltam.
+
+\textbf{Editor/models.py}: feladata a modellek definiálása. Az általam használt központi form, és az ezt implementáló model a következõképpen nézett ki:
+
+\begin{lstlisting}[frame=single, caption=Egy példa Django model, label=DjangoModelExample2,  float=!ht]
+class webArticle(forms.ModelForm):
+class article(models.Model):
+textBody = models.TextField()
+category = models.CharField(max_length = 100)
+\end{lstlisting}
+
+\textbf{Editor/admin.py}: adminisztrációs felület beállításai, jelenleg nem használt. 
+
+\textbf{Editor/url.py}: az útvonalak definiálása a különbözõ lekérésekhez.
+
+\textbf{Editor/views.py}: neve csalóka: valójában a control réteg megvalósítása, és a view generálására szolgáló függvények találhatóak itt. Ez gyakorlatilag az alkalmazás központi magja, ide futnak be végül a webes lekérések, innen szólítjuk meg az adatbázist és ebbõl az osztályból hívjuk meg a parser és adatbányászati függvényeket, mielõtt legeneráljuk a kimenetet.
+
+\textbf{Static/css}: stíluslapok. 
+
+A kezdõoldal \aref{DocumentMineGUI} ábrán látható. 
+
+
+%----------------------------------------------------------------------------
+\subsubsection{Parser modul}
+%----------------------------------------------------------------------------
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/DocumentMineGUI.png}
+	\caption{A Dokumentum osztályozó alkalmazás felhasználói felülete} 
+	\label{DocumentMineGUI}
+\end{figure}
+
+A parser modult a view.py akkor hívja meg, ha a felületen egy RSS feed gombra kattintunk: ekkor a gomb paramétereinek megfelelõ RSS töltõdik be, mint cél url lista.
+
+A corpus-hoz hozzáadás gomb mindig az aktuális RSS tartalmával hívja meg a parser modul erre a célra kijelölt függvényét. Ekkor a parser felolvassa az RSS feed tartalmát, kiszûri belõle a cikkek linkjeit, és ezeket egyesével lekérdezi. 
+
+A lekérdezett weboldalak szövegtörzsét kiválogatja, és fájlonként lementi egy erre kijelölt mappába. Így jönnek létre a cikkek dokumentumreprezentációi.
+
+Minden weboldal mellé eltároljuk az adott cikk kategóriáját is a fájl elsõ sorában.
+
+Ezek után meghívódik a szövegbányászati modul egy függvénye, amely a már kész adatokkal "tanítja" a corpus-t, tehát itt prediktív analízist nem végzünk, csak hozzáadjuk a szótárhoz az új szavakat, lementjük a szöveget a corpus-ba, és eltároljuk a hozzá tartozó kategóriát.
+
+%----------------------------------------------------------------------------
+\subsubsection{Szövegbányászati modul}
+%----------------------------------------------------------------------------
+
+A szövegbányászati modul lépései a következõképp történnek:
+
+\begin{enumerate}
+	\item Egy új cikket írunk be az erre a célból létrehozott form-ba a weboldalon. Rányomunk a Submit gombra.
+	
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=120mm, keepaspectratio]{figures/NewArticleGUI.png}
+		\caption{Új cikk megadása felület} 
+		\label{NewArticleGUI}
+	\end{figure}
+
+	\item A view.py feldolgozva a POST kérést meghívja az input szöveggel a szövegbányászati modul erre kijelölt függvényét.
+	
+	\begin{lstlisting}[frame=single, caption=POST kérés feldolgozása, label=PostRequestExmpl,   float=!ht]
+	def add_to_corpus(request):
+	if request.method == "POST":
+	szoveg = request.POST("textArea")
+	category = indexTopicModeller.addToCorpus(szoveg)
+	return render(request, 'parse_menu_index.html', {'categoryResult':category})
+	\end{lstlisting}
+	
+	\item A függvény megnyitja a letárolt corpus-t, szótárat és a kategóriák listáját. 
+	\item A beérkezett szöveget tokenizálja.
+	\item A szövegbõl kiszûri a stop-szavakat
+
+	\begin{lstlisting}[frame=single, caption=Stopszó szûrés és tokenizálás, label=POSTrequest,   float=!ht]
+	 tokenizalt = [[word for word in document.lower().split() 
+	 	if word not in stopwordlist] for document in documents_list]
+	\end{lstlisting}
+		
+	\item Az új szövegben elõforduló esetleges új szavakat hozzáadja a szótárhoz.
+
+	\begin{lstlisting}[frame=single, caption=Szótár bõvítése, label=dictionary,  float=!ht]
+	 dictionary = corpora.Dictionary(tokenizalt)
+	\end{lstlisting}
+	
+	\item Transzformálja a szöveget vektortérbe.
+
+	\begin{lstlisting}[frame=single, caption=Vektortér transzformáció, label=vektorTrans,   float=!ht]
+	dictionary = 	corpus = [dictionary.doc2bow(text) for text in tokenizalt]
+	\end{lstlisting}
+	
+	\item A gensim saját adatmodellje segítségével a szöveget tf-idf szerint súlyozza.
+	\item Az így kialakult szöveget LSI mentén transzformálja kisebb dimenziós térbe (jelenleg ez megegyezik a kategóriák számával).
+
+	\begin{lstlisting}[frame=single, caption=LSI transzformáció, label=LsiTransfr,   float=!ht]
+	vec_bow = dictionary.doc2bow(article.lower().split())
+	vec_lsi = lsi[vec_bow]
+	\end{lstlisting}
+
+	\item A tf-idf és LSI transzformációkat alkalmazom a corpus-on is.
+
+	\begin{lstlisting}[frame=single, caption=Corpus transzformáció, label=CorpTransf,   float=!ht]
+	lsi = models.LsiModel(corpus, id2word=dictionary, num_topics=8)
+	\end{lstlisting}
+
+	\item A két eredményt összehasonlítja és megkeresi azt a dokumentumot, amelyik a legközelebb helyezkedik el a vektortérben a megadott szöveghez
+
+	\begin{lstlisting}[frame=single, caption=Hasonlósági elemzés, label=SimilaritiesAnalyse,   float=!ht]
+	index = similarities.MatrixSimilarity(lsi[corpus])
+	sims = index[vec_lsi]
+	sims = sorted(enumerate(sims), key=lambda item: -item[1])
+	print("--- Similarities:")
+	print(sims)
+	\end{lstlisting}
+
+	Az így kapott lista tetején lévõ dokumentum lesz a legjobban hasonló elem. 
+	\item A legközelebbi szöveg kategóriáját felajánlja, mint valószínûsíthetõ kategória. 
+	\item Letárolja az adatokat a merevlemezre
+\end{enumerate}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/DocumentMineOutput.png}
+	\caption{Az eljárás kimenete} 
+	\label{DocumentMineOutput}
+\end{figure}
+
+A corpushoz való hozzáadás után az alkalmazás kijelzi a meghatározott kategóriát a felhasználónak. Ez az alkalmazás központi mûködési mechanizmusa.
+
+
+%----------------------------------------------------------------------------
+\subsection{Eredmények}
+%----------------------------------------------------------------------------
+
+A feladat során az index.hu-n található 8 fõbb kategória 50-50 cikkét olvastam be. A megfelelõ hosszúságú, és jól paraméterezett szövegekre az alkalmazás jól tippelte be a kategóriákat. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/DocumentMineResults.png}
+	\caption{A kategóriák} 
+	\label{fig:DocumentMineResults}
+\end{figure}
+
+Elõre kinyert, kézzel kimásolt cikkeket olvasott fel .txt formátumú fájlokból az alkalmazás. 
+
+Tesztelés során olyan, a tanulási folyamathoz nem használt cikkek szövegeit adtam meg, amelyek kategóriáját elõre tudtam az index.hu-ról. Az eredmények igen bíztatóak. Elsõként csak két kategóriát teszteltem egymás ellen, így a jól elkülönülõ kategóriák (pl. Tech és Belföld) között a szintén jól szövegezett dokumentumokat általában jól kategorizálta be az alkalmazás.
+
+A kiszélesített, összesen nyolc témakört felölelõ elemzésben már elõfordultak pontatlanságok, ezek többsége azonban abból fakadt, hogy a cikk témája nem volt egyértelmûen körülhatárolható, vagy a cikk szövegezése volt olyan, ahol félreérthetõ volt a tartalom (pl. nemzetközi focicsapat meccsének elemzése Külföld, politikai témájú cikk pedig Sport kategóriába került bele a témaátfedés és a szakzsargon miatt). 
+
+Összességében az eredmény, hogy igenis használhatóak a szövegbányászat eszközei az ilyen jellegû feladatok megvalósítására. 

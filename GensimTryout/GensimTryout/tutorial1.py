@@ -31,7 +31,7 @@ def tutorial():
     texts = [[word for word in document.lower().split() if word not in stoplist]
              for document in documents]
 
-    # remove words that appear only once - todo nekem ez kell?
+    # remove words that appear only once -
     from collections import defaultdict
     frequency = defaultdict(int)
     for text in texts:

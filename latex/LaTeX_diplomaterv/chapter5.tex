@@ -1,0 +1,208 @@
+% !TeX encoding = ISO-8859-2
+%----------------------------------------------------------------------------
+\chapter{Ismeretlen dokumentumtér: Webtérképezés}\label{sect:webmapping}
+%----------------------------------------------------------------------------
+A feladat során rendelkezésemre bocsátottak egy 700.000 webcímet tartalmazó .csv fájlt. Itt minden URL-hez meg volt adva egy vagy több kategória, ami alapján a weboldal tartalmát már egyéb módszerek segítségével jellemezték. Összesen több mint ötven kategóriára osztotta fel a címeket a fájl, pl.: oktatás, webáruház, közösségi oldal, híroldal, tárhely, stb. Ezt használtam fel az általam elõállított kategóriák ellenõrzésére.
+
+%----------------------------------------------------------------------------
+\section{Paraméterek}
+%----------------------------------------------------------------------------
+Az elemzés során a következõ információkat szerettem volna megtudni egy weboldalról:
+\begin{itemize}
+	\item Mik a leggyakoribb, jól elkülöníthetõ témakörök? 
+	\item Hány témakörre lehet hatékonyan bekategorizálni a weboldalakat? 
+	\item Milyen nyelvûek az oldalak?
+	\item Kinyerhetõek-e a weboldal tartalmára legjellemzõbb kifejezések?
+\end{itemize}
+
+%----------------------------------------------------------------------------
+\section{Funkciók tervezése és megvalósítás}
+%----------------------------------------------------------------------------
+A tervezés fázisban a már ismertetett módszereket vettem alapul. A webelemzés során a következõ lépéseket terveztem meg, majd implementáltam:
+\begin{enumerate}
+	\item Fázis: \textbf{linkek formázása}: ebben a fázisban a felhasználó által megadott URL címeket rendezem össze, és tárolom el olyan formában, hogy a webcrawler-em képes legyen azokat bejárni. A linkek megadása során egy szöveges beviteli mezõbe írhatóak be az linkek. Ezt az alkalmazás dinamikusan formázza, majd pedig JSON objektumként lementi.
+	\item Fázis: \textbf{Dokumentumtér kialakítása}: ebben a fázisban indítom el az URL lista bejárását a megírt Spider-rel. Segítségével elkülönített dokumentumokat hozok létre, melyek tartalmazzák az adott internetes címek mögött rejlõ weboldalak szöveges tartalmát.
+	\item Fázis: \textbf{Webelemzés}: ebben a fázisban történik meg a Topic-modelling eljárás futtatása, mely során megpróbálom összehasonlítani a kiolvasott weboldalak tartalmát, és Klaszterezési eljárás segítségével kategóriákra bontom õket. 
+\end{enumerate}
+
+%----------------------------------------------------------------------------
+\subsection{Dokumentumtér kialakítása}
+%----------------------------------------------------------------------------
+A dokumentumtér elkészítésére az általam írt Spider-t használtam fel. 
+Ez az alkalmazás leginkább idõigényes lépése. A futást megkönnyítendõ, egyszerre több példány is futtatható, felosztva közöttük a bejárandó webtartományt.
+A Spider-t úgy konfiguráltam fel, hogy hibás vagy nem létezõ weboldal esetén ne próbálkozzon újra a DNS lekérdezéssel \cite{DNS}, illetve a nagyon lassan letöltõdõ weboldalak esetén állítsa meg a letöltést és ugorjon tovább. Ezek nélkül ezer link letöltése több órát vett igénybe, így csak néhány percet.
+A spider a következõ algoritmus szerint mûködik:
+\begin{enumerate}
+	\item A DOM-ból kiválasztja a <body> tag között lévõ tartalmat.
+	\item Kitörli a dokumentumban található sortöréseket.
+	\item Kitörli a dokumentumból a <script> és <style> tag-ek között lévõ tartalmat, ez számunkra nem hordoz információt.
+	\item Kitörli a dokumentumban található egyéb HTML tag-eket, a maradék szöveges tartalmat pedig összefûzi.
+\end{enumerate}
+
+Minden dokumentumhoz letároltam egy egyedi azonosítót, az eredeti URL címet és a Google nyelvdetektáló algoritmusának futási eredményét. 
+
+%----------------------------------------------------------------------------
+\subsection{Webelemzés}
+%----------------------------------------------------------------------------
+A dokumentumok klaszterezését végeztem el ebben a modulban. Alapjául szolgál a korábban ismertetett szövegbányászati modul, ezt fejlesztettem tovább. Az algoritmus futása a következõ lépésekbõl áll:
+\begin{enumerate}
+	\item Az elõzõ lépésben letárolt összes dokumentumot szavakra bontom, szavaikat STOP-szótáramat felhasználva megszûröm, belõlük az írásjeleket kitisztítom.
+	\item Elõállítom mindegyik szó elõfordulási gyakoriságát. A leggyakrabban elõforduló szó letárolásra kerül az egyes dokumentumhoz, megfigyeléseim alapján ez hasznos megfigyelés a témaköröket illetõen.
+	\item Elkészítem a közös szótárat, letárolom külön elemzésekhez.
+	\item A dokumentumteret vektorizálom, és tf-idf alapján súlyozom.
+	\item A súlyozott vektorteret LSI model szerint 2, 4, 8 és 12 dimenziós vetkortérré redukálom.
+	\item A létrejött modell-ben topic-modelling elemzést futtatok, és a létrejövõ témakörök legjellemzõbb szavait kimentem külön.
+	\item A dokumentumok mindegyikét besorolom a hozzá legközelebb esõ témakör egyikébe.
+\end{enumerate}
+
+%----------------------------------------------------------------------------
+\subsection{Felhasználói felület}
+%----------------------------------------------------------------------------
+
+A felhasználó \aref{WebmappingGUI} ábrán látható felületet használhatja a funkciók elérésére.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/WebmapingGUI.png}
+	\caption{Webtérképezõ modul kezelõfelülete} 
+	\label{WebmappingGUI}
+\end{figure}
+
+A webelemzés megtekintése oldalon (\ref{WebmappingGUI2} ábra) elsõként a négy különbözõ dimenziójú elemzés által meghatározott kategóriák szerepelnek.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/WebmapingGUI2.png}
+	\caption{Témakörök megállapítása} 
+	\label{WebmappingGUI2}
+\end{figure}
+
+A dokumentumok, a megállapított nyelv, és a leggyakoribb szavak és a besorolt kategóriák pedig alattuk (\ref{WebmappingGUI3} ábra).
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/WebmapingGUI3.png}
+	\caption{Dokumentumok és elemzésük eredményei} 
+	\label{WebmappingGUI3}
+\end{figure}
+
+A feladat során e dokumentumokon végeztem el témakutatást. 
+
+%----------------------------------------------------------------------------
+\section{Elõzetes eredmények}
+%----------------------------------------------------------------------------
+Sajnos az adatbányászat egyik jellemzõ sajátossága, hogy bár az algoritmus amit terveztem, elméletben megfelelõen mûködik, a kapott dokumentumtéren azonban sajnos az eredmények nem voltak kielégítõek. Több probléma is felmerült a futtatás során:
+
+\begin{itemize}
+	\item \textbf{Túl nagy dokumentumtér.} A kapott linkgyûjtemény összesen 375.441 dokumentumot tartalmazott. Ezek mindegyikébõl általában több oldal szöveg töltõdött le. Mivel az alkalmazáson mûködése egy webszerveren valósul meg, tapasztalataim alapján már egy pár tízezres linklista is jelentõs memóriahiányt okozott a 8 gigabite ram-mal felszerelt gépen.
+	\begin{itemize}
+		\item Megoldásként egy 10.000 linkbõl álló címhalmazra redukáltam az elemzést.
+	\end{itemize}
+	\item \textbf{Túl nagy kategóriahalmaz.} A kapott linkekhez összesen 52 különbözõ, legalább egy, maximum három címkét rendeltek. Ekkora halmazt szinte lehetelten pontosan reprodukálni, pláne nem az ott meghatározott általános címkék alapján. 
+	\begin{itemize}
+		\item Megoldásként az elemzésemhez összesen négy modellt futtattam, 2, 4, 8 és 12 maximális kategóriát meghatározva. Az általam kapott kategóriákban szereplõ dokumentumokon meg tudtam figyelni, hogy van-e szabályos minta a címkékben. 
+	\end{itemize}
+
+	 A fenti problémákra bár találtam kompromisszumos megoldást, azonban néhány olyan probléma is felmerült, amely miatt a feladat újratervezése mellett döntöttem.
+	 
+	 \item \textbf{Túl sok nyelv.} Az elemzés során a világ összes tájáról találtam nyelveket. A szövegbányászati modul nincsen felvértezve azzal a tudással, hogy hasonló témájú oldalakat nyelvtõl függetlenül egy csoportba rendezze, hiszen az általam implementált módszert szinte teljes egészében a dokumentumokban található szavakra épít. 
+	 \begin{itemize}
+	 	\item Általános nyelvi elemzõprogram írása lenne a megoldás, de ez túlmutat az egy ember által megírható projekt határain.
+	 \end{itemize}
+ 
+	 \begin{figure}[!ht]
+	 	\centering
+	 	\includegraphics[width=120mm, keepaspectratio]{figures/WebmapingOldResults.png}
+	 	\caption{Elemzés eredménye. Balról jobbra: weboldal nyelve, kivonat a tartalomból, leggyakoribb szó az oldalon, majd pedig elsõként a 2, 4, 8, végül a 12 kategóriás klaszterezés eredménye.} 
+	 	\label{WebmapingOldResults}
+	 \end{figure}
+ 
+ 	\Aref{WebmapingOldResults} ábrán látható 1000 weboldal elemzésébõl részlet. Erõsen észrevehetõ, hogy a nyelvek mentén alakulnak ki a csoportok. 
+ 	
+ 	\item Weboldal tartalma félrevezetõ. Rengeteg olyan esettel találkoztam, amikor a weboldalon elhelyezkedõ reklámok mennyisége nagyobb volt, mint a weboldal hasznos tartalma. Gyakran fordult elõ, hogy a generált tartalomban olyan kódrészleteket rejtettek el, melynek feladata a keresõmotorok félrevezetése. Sok esetben én magam sem tudtam a nyers HTML tartalom alapján kisilabizálni, mirõl is szólhat az adott oldal. 
+ 	\item Az oldal kódja nem utal a tartalomra. A legnagyobb probléma a feladattal az volt, hogy az általános webcrawler modul nem volt felkészítve a weboldalak sajátosságaira. A gyakran elõforduló, személyre szabott reklámokon felül olyan oldalrészletek, mint pl. a cookie-k elfogadása, bejelentkezés, regisztráció, fõoldal belépés és még számos más, általános weboldal elem, nem utal a weboldal tartalmára, mégis megjelennek a szövegben, ezáltal hamis kategóriákat alkotva. Ezen felül egy megjelenített weboldal felületének lehet, hogy nagy részét egy szövegdoboz tesz ki, az a HTML tartalomban azonban csak az oldal tartalmának töredéke: elmondható, hogy egy weboldalt\textbf{ nem lehet a vizuális megjelenítése nélkül hatékonyan bekategorizálni.}	 
+\end{itemize}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=120mm, keepaspectratio]{figures/WebmapingOldResults2.png}
+\caption{12 témakörös klaszterezés eredménye} 
+\label{WebmapingOldResults2}
+\end{figure}
+
+\Aref{WebmapingOldResults2} ábrán látható 1000 weboldal elemzése során kialakult kategóriák legfõbb szavai. Látszik, hogy bár észrevehetõek témabeli kategóriák, többségében kezd eluralkodni a nyelvek mentén kialakuló kategorizálás.
+
+Az elemzés kimenetét látva a következõt állapítottam meg:
+
+\begin{itemize}
+	\item A program szinte kivétel nélkül nyelvek mentén határozza meg a klasztereket. 
+	\item A dokumentumok szövegezése között akkora óriási különbség van, hogy a vektorértékek közötti különbség elenyészõ - azaz nincsenek jól elkülönülõ kategóriák.
+\end{itemize}
+
+%----------------------------------------------------------------------------
+\section{Újratervezés}
+%----------------------------------------------------------------------------
+
+A feladathoz eredeti célja bár nem megvalósítható, mégis érdemes megállapítani, mi az a pontosítás, ahol már használható, hasznos eredményeket kapunk. Ennek érdekében a következõ módosításokat hajtottam végre:
+
+\begin{itemize}
+\item Tovább pontosítottam a webcrawler modul mûködését. Kiegészítettem, hogy még több, gyakran elõforduló tartalmat szûrjön ki, és még inkább a hasznos tartalmat nyerjem ki a weboldalakról.
+\item Leszûkítettem a mûködést angol nyelvre - tehát a dokumentumok közül csak azon weboldalak tartalmára futtattam le a programot, melyek nyelvét angolnak állapította meg a nyelvdetektáló modul.
+\end{itemize}
+
+
+%----------------------------------------------------------------------------
+\section{Angol nyelvû eredmények}
+%----------------------------------------------------------------------------
+Az új elemzés futtatása után a következõ eredményeket tapasztaltam:
+\begin{itemize}
+	\item Az egynyelvû futtatás hatására kiküszöböltem a nyelvkezelési problémát.
+	\item Kis dimenzió esetén általában két nagy klasztert állapít meg az algoritmus: 
+	\begin{enumerate}
+		\item Az egyik kategóriába tartozik általában egy specifikus, de gyakran elõforduló weboldaltípus,
+		\item a másik kategóriába pedig az összes többi oldal.
+	\end{enumerate}
+	\item Magasabb dimenziószámok esetében is csak néhány jól elkülöníthetõ weboldal-típus jön létre, nem jönnek létre újabb, jól elkülönülõ csoportok.  
+\end{itemize}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=120mm, keepaspectratio]{figures/WebmappingNewResults1.png}
+	\caption{Egy angol elemzés témakörei} 
+	\label{WebmappingNewResults1}
+\end{figure}
+
+\Aref{WebmappingNewResults1} ábrán látható, hogy a kétdimenziós bontás esetén, az elsõ kategória valamilyen fájlletöltés/konvertálás témájú oldalakat fog össze. 
+
+A második kategória szavainak súlyozási értékeit vizsgálva az látszódik, hogy az összes szó egymáshoz képest nagyon közel van, értékük szinte azonos. Ebbõl arra következtettem, hogy ezek a szavak a "minden más" kategóriát képviselik.
+
+Tovább emelve a dimenziószámot láthatjuk, hogy a korábbi elsõ kategóriánk megmarad, az új kategóriákban viszont továbbra is egymástól nem túl jól elkülönülõ csoportok jönnek létre. Ez látszik a dokumentumtéren is(\ref{WebmappingNewResults2} ábra).
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=170mm, keepaspectratio]{figures/WebmappingNewResults2.png}
+	\caption{Angol elemzés dokumentum besorolásai. Balról jobbra a következõ látható: weboldal sorszáma, URL-je, megállapított nyelve, szöveg kivonat, leggyakoribb szó, majd pedig a 2-4-8-12 dimenziós klaszterezés eredményei.} 
+	\label{WebmappingNewResults2}
+\end{figure}
+
+Az ábrán látszik, hogy a 416-os, online pdf tárhelyet a "0"-s kategóriába sorolja a program, míg az összes többi oldalt a másik kategóriába. Magasabb dimenziószám esetén érdemben ez a felosztás nem változik. 
+
+Megállapítottam, hogy az elemzést a korábban említett nehézségek, a webes tartalom zajossága, és a html tartalom sajátosságai miatt ilyen mértéknél jobban az általam felhasznált eszközökkel pontosabban nem lehet megoldani.
+
+Az elemzéseket akkor lehetne pontosabb eredménnyel futtatni, ha sokkal szélesebb algoritmikus és hardveres eszköztár állna a rendelkezésre, illetve ha komplex feldolgozását végeznénk el egy weboldalnak a DOM szövegkinyerése mellett. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

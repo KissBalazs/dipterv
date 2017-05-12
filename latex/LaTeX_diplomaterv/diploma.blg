@@ -1,0 +1,83 @@
+This is BibTeX, Version 0.99d (TeX Live 2016/W32TeX)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: diploma.aux
+A level-1 auxiliary file: titlepage.aux
+A level-1 auxiliary file: declaration.aux
+A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: chapter1.aux
+A level-1 auxiliary file: chapter2.aux
+A level-1 auxiliary file: chapter3.aux
+A level-1 auxiliary file: chapter4.aux
+A level-1 auxiliary file: chapter5.aux
+A level-1 auxiliary file: chapter6.aux
+A level-1 auxiliary file: chapter7.aux
+The style file: plain.bst
+Database file #1: mybib.bib
+I was expecting a `,' or a `}'---line 69 of file mybib.bib
+ :  
+ :  organization = "Google"
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 87 of file mybib.bib
+ : @phdthesis{TopicModels
+ :                       ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 99 of file mybib.bib
+ :  pages = 45
+ :            --50,
+I'm skipping whatever remains of this entry
+Repeated entry---line 179 of file mybib.bib
+ : @misc{selectors
+ :                ,
+I'm skipping whatever remains of this entry
+Too many commas in name 1 of "Joseph P. Erinjeri, Daniel Picus, Fred W. Prior, David A. Rubin and Paul Koppel" for entry DataMiningSearch
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Joseph P. Erinjeri, Daniel Picus, Fred W. Prior, David A. Rubin and Paul Koppel" for entry DataMiningSearch
+while executing---line 1090 of file plain.bst
+Warning--empty publisher in TopicModels
+Warning--empty booktitle in bagOfWords
+Warning--empty year in bagOfWords
+Warning--empty year in NaturalLangProc
+You've used 33 entries,
+            2118 wiz_defined-function locations,
+            673 strings with 7609 characters,
+and the built_in function-call counts, 7241 in all, are:
+= -- 681
+> -- 243
+< -- 2
++ -- 105
+- -- 70
+* -- 238
+:= -- 1205
+add.period$ -- 97
+call.type$ -- 33
+change.case$ -- 131
+chr.to.int$ -- 0
+cite$ -- 37
+duplicate$ -- 273
+empty$ -- 753
+format.name$ -- 70
+if$ -- 1598
+int.to.chr$ -- 0
+int.to.str$ -- 33
+missing$ -- 8
+newline$ -- 166
+num.names$ -- 66
+pop$ -- 273
+preamble$ -- 1
+purify$ -- 101
+quote$ -- 0
+skip$ -- 248
+stack$ -- 0
+substring$ -- 199
+swap$ -- 48
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 126
+warning$ -- 4
+while$ -- 69
+width$ -- 35
+write$ -- 326
+(There were 6 error messages)

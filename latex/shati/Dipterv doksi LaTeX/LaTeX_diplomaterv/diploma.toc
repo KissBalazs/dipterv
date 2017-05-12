@@ -1,0 +1,60 @@
+\select@language {magyar} \contentsline {chapter}{Kivonat}{4}{chapter*.2}
+\select@language {magyar} \contentsline {chapter}{Abstract}{5}{chapter*.3}
+\select@language {magyar} \contentsline {chapter}{Bevezet\H o}{6}{chapter*.4}
+\select@language {magyar} \contentsline {chapter}{\numberline {1}A SmartActive mobilalkalmaz\'as koncepci\'oja}{8}{chapter.1}
+\select@language {magyar} \contentsline {section}{\numberline {1.1}Kezdeti tervek}{8}{section.1.1}
+\select@language {magyar} \contentsline {section}{\numberline {1.2}K\"ovetelm\'enym\'odosul\'asok}{11}{section.1.2}
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Multi-platform mobilszoftver-fejleszt\H o keretrendszerek}{16}{chapter.2}
+\select@language {magyar} \contentsline {section}{\numberline {2.1}A multi-platform mobilszoftver-fejleszt\'es}{16}{section.2.1}
+\select@language {magyar} \contentsline {section}{\numberline {2.2}Az el\'erhet\H o multi-platform keretrendszerek}{17}{section.2.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {2.2.1}Sencha}{17}{subsection.2.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {2.2.2}Apache Cordova (PhoneGap)}{18}{subsection.2.2.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {2.2.3}Appcelerator}{18}{subsection.2.2.3}
+\select@language {magyar} \contentsline {subsection}{\numberline {2.2.4}Corona}{18}{subsection.2.2.4}
+\select@language {magyar} \contentsline {subsection}{\numberline {2.2.5}Unity}{18}{subsection.2.2.5}
+\select@language {magyar} \contentsline {subsection}{\numberline {2.2.6}Kony}{19}{subsection.2.2.6}
+\select@language {magyar} \contentsline {subsection}{\numberline {2.2.7}Xamarin}{19}{subsection.2.2.7}
+\select@language {magyar} \contentsline {chapter}{\numberline {3}A szoftverfejleszt\H o infrastrukt\'ura}{20}{chapter.3}
+\select@language {magyar} \contentsline {section}{\numberline {3.1}A Microsoft Visual Studio 2015 Update 2 telep\IeC {\'\i }t\'ese \'es be\'all\IeC {\'\i }t\'asa}{20}{section.3.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.1}Programford\IeC {\'\i }t\'as iOS oper\'aci\'os rendszerre}{21}{subsection.3.1.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.2}Tov\'abbi be\'all\IeC {\'\i }t\'asok a SmartActive mobilapplik\'aci\'o ford\IeC {\'\i }t\'as\'ahoz}{22}{subsection.3.1.2}
+\select@language {magyar} \contentsline {section}{\numberline {3.2}Az okostelefon-emul\'atorok}{22}{section.3.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}Az emul\'atorok haszn\'alata}{22}{subsection.3.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}Interakci\'o az emul\'atorok f\'ajlrendszer\'evel}{23}{subsection.3.2.2}
+\select@language {magyar} \contentsline {subsubsection}{Android}{23}{section*.15}
+\select@language {magyar} \contentsline {subsubsection}{Windows Phone 8.1 \'es Windows 10 Mobile}{24}{section*.16}
+\select@language {magyar} \contentsline {subsubsection}{iOS}{25}{section*.18}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}A mobilapplik\'aci\'o fejleszt\'ese \'es tesztel\'ese}{26}{chapter.4}
+\select@language {magyar} \contentsline {section}{\numberline {4.1}A Xamarin multi-platform fejleszt\'esi lehet\H os\'egei}{26}{section.4.1}
+\select@language {magyar} \contentsline {section}{\numberline {4.2}A fejleszt\'es sor\'an haszn\'alt f\H obb programoz\'asi paradigm\'ak}{28}{section.4.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.2.1}Az MVVM}{28}{subsection.4.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.2.2}C\texttt {\#}~grafikus elemek le\IeC {\'\i }r\'asa XAML-ben, adatk\"ot\'es}{28}{subsection.4.2.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.2.3}Aszinkron mechanizmusok}{29}{subsection.4.2.3}
+\select@language {magyar} \contentsline {section}{\numberline {4.3}Az alkalmaz\'aslogika}{30}{section.4.3}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.3.1}Kommunik\'aci\'o a webszerverrel}{30}{subsection.4.3.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.3.2}Az adatok perziszt\'al\'asa}{31}{subsection.4.3.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.3.3}Az \"uzleti logika vez\'erl\'ese}{31}{subsection.4.3.3}
+\select@language {magyar} \contentsline {section}{\numberline {4.4}A felhaszn\'al\'oi fel\"ulet elk\'esz\IeC {\'\i }t\'ese Xamarin.Forms-ban}{32}{section.4.4}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.4.1}Alkalmaz\'asoldalak}{32}{subsection.4.4.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.4.2}Elemek elhelyez\'ese az oldalakon}{34}{subsection.4.4.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.4.3}St\IeC {\'\i }lusoz\'as}{35}{subsection.4.4.3}
+\select@language {magyar} \contentsline {section}{\numberline {4.5}Az alkalmaz\'as tesztel\'ese}{36}{section.4.5}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.5.1}Unit tesztek}{37}{subsection.4.5.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {4.5.2}Manu\'alis tesztek}{38}{subsection.4.5.2}
+\select@language {magyar} \contentsline {chapter}{\numberline {5}Az elk\'esz\"ult alkalmaz\'as bemutat\'asa}{39}{chapter.5}
+\select@language {magyar} \contentsline {section}{\numberline {5.1}Bejelentkez\H o-oldal}{39}{section.5.1}
+\select@language {magyar} \contentsline {section}{\numberline {5.2}Inform\'aci\'ok, statisztik\'ak az edz\'esekr\H ol}{40}{section.5.2}
+\select@language {magyar} \contentsline {section}{\numberline {5.3}Bar\'atok kezel\'ese}{42}{section.5.3}
+\select@language {magyar} \contentsline {section}{\numberline {5.4}Bajnoks\'agok szervez\'ese, r\'eszv\'etel bajnoks\'agokon}{44}{section.5.4}
+\select@language {magyar} \contentsline {chapter}{\numberline {6}Konkl\'uzi\'o, tov\'abbviteli lehet\H os\'egek}{48}{chapter.6}
+\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{52}{chapter*.39}
+\select@language {magyar} \contentsline {chapter}{Mell\'ekletek}{53}{appendix*.40}
+\select@language {magyar} \contentsline {section}{\numberline {M.1}Forr\'asf\'ajlok}{53}{section.M.1}
+\select@language {magyar} \contentsline {section}{\numberline {M.2}Telep\IeC {\'\i }thet\H o alkalmaz\'ascsomagok}{53}{section.M.2}
+\select@language {magyar} \contentsline {chapter}{F\"uggel\'ek}{54}{appendix*.41}
+\select@language {magyar} \contentsline {section}{\numberline {F.1}A Visual Studio 2015 Update 2 komponenstelep\IeC {\'\i }t\'esi be\'all\IeC {\'\i }t\'asai}{54}{section.F.1}
+\select@language {magyar} \contentsline {section}{\numberline {F.2}A Visual Studio emul\'atorokat kezel\H o szoftverek}{56}{section.F.2}
+\select@language {magyar} \contentsline {section}{\numberline {F.3}P\'eldak\'od az adatk\"ot\'es (data binding) szeml\'eltet\'es\'ere}{57}{section.F.3}
+\select@language {magyar} \contentsline {section}{\numberline {F.4}P\'eldak\'od st\IeC {\'\i }lustulajdons\'ag adatk\"ot\'es\'ere statikus v\'altoz\'ohoz az x:Static XAML le\IeC {\'\i }r\'ob\H ov\IeC {\'\i }tm\'eny haszn\'alat\'aval}{58}{section.F.4}
+\select@language {magyar} \contentsline {section}{\numberline {F.5}P\'eldak\'od elemtulajdons\'agok adatk\"ot\'es\'ere statikus v\'altoz\'okhoz az x:Static XAML le\IeC {\'\i }r\'ob\H ov\IeC {\'\i }tm\'eny haszn\'alat\'aval}{59}{section.F.5}
+\select@language {magyar} \contentsline {section}{\numberline {F.6}Multi-platform k\'eperny\H ok\'epek az elk\'esz\"ult alkalmaz\'asr\'ol}{60}{section.F.6}

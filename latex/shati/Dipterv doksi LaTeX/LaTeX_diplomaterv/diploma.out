@@ -1,0 +1,57 @@
+\BOOKMARK [0][-]{chapter*.2}{Kivonat}{}% 1
+\BOOKMARK [0][-]{chapter*.3}{Abstract}{}% 2
+\BOOKMARK [0][-]{chapter*.4}{Bevezeto}{}% 3
+\BOOKMARK [0][-]{chapter.1}{A SmartActive mobilalkalmaz\341s koncepci\363ja}{}% 4
+\BOOKMARK [1][-]{section.1.1}{Kezdeti tervek}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.2}{K\366vetelm\351nym\363dosul\341sok}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{Multi-platform mobilszoftver-fejleszto keretrendszerek}{}% 7
+\BOOKMARK [1][-]{section.2.1}{A multi-platform mobilszoftver-fejleszt\351s}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Az el\351rheto multi-platform keretrendszerek}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.1}{Sencha}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.2}{Apache Cordova \(PhoneGap\)}{section.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.3}{Appcelerator}{section.2.2}% 12
+\BOOKMARK [2][-]{subsection.2.2.4}{Corona}{section.2.2}% 13
+\BOOKMARK [2][-]{subsection.2.2.5}{Unity}{section.2.2}% 14
+\BOOKMARK [2][-]{subsection.2.2.6}{Kony}{section.2.2}% 15
+\BOOKMARK [2][-]{subsection.2.2.7}{Xamarin}{section.2.2}% 16
+\BOOKMARK [0][-]{chapter.3}{A szoftverfejleszto infrastrukt\372ra}{}% 17
+\BOOKMARK [1][-]{section.3.1}{A Microsoft Visual Studio 2015 Update 2 telep\355t\351se \351s be\341ll\355t\341sa}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.1.1}{Programford\355t\341s iOS oper\341ci\363s rendszerre}{section.3.1}% 19
+\BOOKMARK [2][-]{subsection.3.1.2}{Tov\341bbi be\341ll\355t\341sok a SmartActive mobilapplik\341ci\363 ford\355t\341s\341hoz}{section.3.1}% 20
+\BOOKMARK [1][-]{section.3.2}{Az okostelefon-emul\341torok}{chapter.3}% 21
+\BOOKMARK [2][-]{subsection.3.2.1}{Az emul\341torok haszn\341lata}{section.3.2}% 22
+\BOOKMARK [2][-]{subsection.3.2.2}{Interakci\363 az emul\341torok f\341jlrendszer\351vel}{section.3.2}% 23
+\BOOKMARK [0][-]{chapter.4}{A mobilapplik\341ci\363 fejleszt\351se \351s tesztel\351se}{}% 24
+\BOOKMARK [1][-]{section.4.1}{A Xamarin multi-platform fejleszt\351si lehetos\351gei}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.2}{A fejleszt\351s sor\341n haszn\341lt fobb programoz\341si paradigm\341k}{chapter.4}% 26
+\BOOKMARK [2][-]{subsection.4.2.1}{Az MVVM}{section.4.2}% 27
+\BOOKMARK [2][-]{subsection.4.2.2}{C\043 grafikus elemek le\355r\341sa XAML-ben, adatk\366t\351s}{section.4.2}% 28
+\BOOKMARK [2][-]{subsection.4.2.3}{Aszinkron mechanizmusok}{section.4.2}% 29
+\BOOKMARK [1][-]{section.4.3}{Az alkalmaz\341slogika}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.3.1}{Kommunik\341ci\363 a webszerverrel}{section.4.3}% 31
+\BOOKMARK [2][-]{subsection.4.3.2}{Az adatok perziszt\341l\341sa}{section.4.3}% 32
+\BOOKMARK [2][-]{subsection.4.3.3}{Az \374zleti logika vez\351rl\351se}{section.4.3}% 33
+\BOOKMARK [1][-]{section.4.4}{A felhaszn\341l\363i fel\374let elk\351sz\355t\351se Xamarin.Forms-ban}{chapter.4}% 34
+\BOOKMARK [2][-]{subsection.4.4.1}{Alkalmaz\341soldalak}{section.4.4}% 35
+\BOOKMARK [2][-]{subsection.4.4.2}{Elemek elhelyez\351se az oldalakon}{section.4.4}% 36
+\BOOKMARK [2][-]{subsection.4.4.3}{St\355lusoz\341s}{section.4.4}% 37
+\BOOKMARK [1][-]{section.4.5}{Az alkalmaz\341s tesztel\351se}{chapter.4}% 38
+\BOOKMARK [2][-]{subsection.4.5.1}{Unit tesztek}{section.4.5}% 39
+\BOOKMARK [2][-]{subsection.4.5.2}{Manu\341lis tesztek}{section.4.5}% 40
+\BOOKMARK [0][-]{chapter.5}{Az elk\351sz\374lt alkalmaz\341s bemutat\341sa}{}% 41
+\BOOKMARK [1][-]{section.5.1}{Bejelentkezo-oldal}{chapter.5}% 42
+\BOOKMARK [1][-]{section.5.2}{Inform\341ci\363k, statisztik\341k az edz\351sekrol}{chapter.5}% 43
+\BOOKMARK [1][-]{section.5.3}{Bar\341tok kezel\351se}{chapter.5}% 44
+\BOOKMARK [1][-]{section.5.4}{Bajnoks\341gok szervez\351se, r\351szv\351tel bajnoks\341gokon}{chapter.5}% 45
+\BOOKMARK [0][-]{chapter.6}{Konkl\372zi\363, tov\341bbviteli lehetos\351gek}{}% 46
+\BOOKMARK [0][-]{chapter*.39}{Irodalomjegyz\351k}{}% 47
+\BOOKMARK [0][-]{appendix*.40}{Mell\351kletek}{}% 48
+\BOOKMARK [1][-]{section.M.1}{Forr\341sf\341jlok}{appendix*.40}% 49
+\BOOKMARK [1][-]{section.M.2}{Telep\355theto alkalmaz\341scsomagok}{appendix*.40}% 50
+\BOOKMARK [0][-]{appendix*.41}{F\374ggel\351k}{}% 51
+\BOOKMARK [1][-]{section.F.1}{A Visual Studio 2015 Update 2 komponenstelep\355t\351si be\341ll\355t\341sai}{appendix*.41}% 52
+\BOOKMARK [1][-]{section.F.2}{A Visual Studio emul\341torokat kezelo szoftverek}{appendix*.41}% 53
+\BOOKMARK [1][-]{section.F.3}{P\351ldak\363d az adatk\366t\351s \(data binding\) szeml\351ltet\351s\351re}{appendix*.41}% 54
+\BOOKMARK [1][-]{section.F.4}{P\351ldak\363d st\355lustulajdons\341g adatk\366t\351s\351re statikus v\341ltoz\363hoz az x:Static XAML le\355r\363bov\355tm\351ny haszn\341lat\341val}{appendix*.41}% 55
+\BOOKMARK [1][-]{section.F.5}{P\351ldak\363d elemtulajdons\341gok adatk\366t\351s\351re statikus v\341ltoz\363khoz az x:Static XAML le\355r\363bov\355tm\351ny haszn\341lat\341val}{appendix*.41}% 56
+\BOOKMARK [1][-]{section.F.6}{Multi-platform k\351pernyok\351pek az elk\351sz\374lt alkalmaz\341sr\363l}{appendix*.41}% 57

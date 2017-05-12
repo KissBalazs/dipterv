@@ -1,0 +1,23 @@
+%----------------------------------------------------------------------------
+\chapter{Konklúzió, továbbviteli lehetõségek}
+%----------------------------------------------------------------------------
+Munkám során megismerkedtem a Xamarin multi-platform szoftverfejlesztõ keretrendszerrel, és tapasztalatot szereztem egy komplex grafikus alkalmazás elkészítésében a\linebreak\Csharp~nyelv, Microsoft fejlesztõeszközök és korszerû programozási paradigmák használatával.
+Betekintést nyertem a unit tesztek készítésébe az NUnit keretrendszerrel, és megtapasztaltam ezen tesztek hasznosságát a kódminõség szempontjából.
+
+Elkészítettem a SmartActive projekt keretében egy mobilalkalmazást, ami négy különbözõ mobiloperációs-rendszert támogat.
+Az alkalmazás funkcionalitása és struktúrája minden célplatformon megegyezik, ezzel azonos élményt nyújtva.
+A felhasználó mobilkészülékén gyorsan és hatékonyan hozzáférhet a squash sporttevékenységéhez kapcsolódó statisztikákhoz, valamint a projekt nyújtotta közösségi funkciókat is igénybe veheti: megtekintheti barátait, és bajnokságokat szervezhet, amire meghívhatja ismerõseit.
+
+Véleményem szerint a Xamarin a \Csharp-ban járatos fejlesztõk számára egy hasznos és funkcionalitásban gazdag keretrendszer, használatával nincs szükség a konkurens termékek nagy részénél megkövetelt webtechnológiák beható ismeretére.
+További elõnye, hogy a .NET könyvtár jelentõs része használható a közös osztálykönyvtárbeli kódban is.
+Ugyanakkor a Xamarin.Forms multi-platform grafikusfelület-könyvtár még fiatalságából adódóan problémákkal és hiányosságokkal küzd, ahogy ezekre munkámban rámutattam.
+
+Az alkalmazás utólagos kiértékelésekor megállapítottam, hogy a barátok hozzáadása funkciónál (\sectref{FriendManagement} pont) implementált kerülõmegoldás - ami egy barátrekord létrehozása a helyi adatbázisban - helyett használhattam volna egy JSON fájlt a dropbox tárhelyen, ami a felhasználók listáját adja vissza, és a bejelentkezett felhasználó ebbõl választ.
+A webszerver komponens elkészültéig ez a módosítás eszközölhetõ, utána pedig az alkalmazás bõvíthetõ kétirányú szinkronizálással nem csak a barátok hozzáadásánál, de a bajnokságok létrehozásánál és kezelésénél is.
+Még egy hibajavítási opció lehet a TabbedPage oldalcímének platformspecifikus éltüntetése Windows Phone 8.1-en az x:Static leíróbõvítmény használatával (lásd \sectref{Styling} pont), amíg a Xamarin keretrendszerben ki nem javítják a \figref{TabbedPageTitleTooBig} ábrán látható "túl nagy oldalcím-betûméret" hibát. 
+
+Az applikáció dizájnja a késõbbiekben finomítható, például a helyõrzõk lecserélhetõk valós képekre, illetve a statisztikai elemek megjelenése fiatalosabbá tehetõ piktogramokkal.
+Továbbá az applikáció a SmartActive projekt elõrehaladtával új funkciókkal bõvíthetõ, például a kezdeti tervekben szereplõ pályafoglalási lehetõséggel.
+Szintén egy bõvítési opció, hogy az edzések információi megoszthatóak legyenek más szociális platformokon, mint például Facebook vagy Twitter, valamint importálhatóak legyenek barátok más portálokról, illetve a készülék telefonkönyvébõl.
+A platformtámogatás kiterjeszthetõ a viselhetõ eszközökre, például okosórákra, így az app akár a sportolás során is szolgálhat hasznos információkkal, és adatok nyerhetõk ki az órába épített szenzorok segítségével.
+Ezzel a fejlesztéssel a mobilapplikáció már nem csak fogyasztójává, hanem szolgáltatójává is válna a sportolási statisztikáknak.

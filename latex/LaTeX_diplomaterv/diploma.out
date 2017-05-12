@@ -1,0 +1,57 @@
+\BOOKMARK [0][-]{chapter*.2}{Kivonat}{}% 1
+\BOOKMARK [0][-]{chapter*.3}{Abstract}{}% 2
+\BOOKMARK [0][-]{chapter*.4}{Bevezeto}{}% 3
+\BOOKMARK [0][-]{chapter*.5}{Feladat}{}% 4
+\BOOKMARK [0][-]{chapter.1}{Adat- \351s sz\366vegb\341ny\341szat}{}% 5
+\BOOKMARK [1][-]{section.1.1}{Bevezet\351s}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.2}{Adatb\341ny\341szat}{chapter.1}% 7
+\BOOKMARK [2][-]{subsection.1.2.1}{Adatb\341ny\341szat l\351p\351sei}{section.1.2}% 8
+\BOOKMARK [2][-]{subsection.1.2.2}{Adatb\341ny\341szati m\363dszerek: oszt\341lyoz\341s}{section.1.2}% 9
+\BOOKMARK [2][-]{subsection.1.2.3}{Adatb\341ny\341szati m\363dszerek: klaszterez\351s}{section.1.2}% 10
+\BOOKMARK [1][-]{section.1.3}{Sz\366vegb\341ny\341szat}{chapter.1}% 11
+\BOOKMARK [2][-]{subsection.1.3.1}{Elofeldolgoz\341s}{section.1.3}% 12
+\BOOKMARK [0][-]{chapter.2}{Felhaszn\341lt webes technol\363gi\341k}{}% 13
+\BOOKMARK [1][-]{section.2.1}{Python}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.2}{Webalkalmaz\341sok}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.3}{Django}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.4}{Beautiful Soup}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.5}{Gensim}{chapter.2}% 18
+\BOOKMARK [2][-]{subsection.2.5.1}{Gensim funkci\363k}{section.2.5}% 19
+\BOOKMARK [0][-]{chapter.3}{Elozetes kutat\341s: sz\366vegelemz\351s}{}% 20
+\BOOKMARK [1][-]{section.3.1}{Sz\366vegelemz\351s \351s c\355mk\351k}{chapter.3}% 21
+\BOOKMARK [2][-]{subsection.3.1.1}{Eredm\351nyek}{section.3.1}% 22
+\BOOKMARK [1][-]{section.3.2}{Dokumentum oszt\341lyoz\341s}{chapter.3}% 23
+\BOOKMARK [2][-]{subsection.3.2.1}{Tervez\351s}{section.3.2}% 24
+\BOOKMARK [2][-]{subsection.3.2.2}{Implement\341l\341s}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.3}{Eredm\351nyek}{section.3.2}% 26
+\BOOKMARK [0][-]{chapter.4}{Dokumentumb\341ny\341szati tervez\351s}{}% 27
+\BOOKMARK [1][-]{section.4.1}{Webalkalmaz\341s kieg\351sz\355t\351se \351s \372j eszk\366z\366k}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.1.1}{Biztons\341g}{section.4.1}% 29
+\BOOKMARK [1][-]{section.4.2}{Webcrawler}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.2.1}{Scrapy}{section.4.2}% 31
+\BOOKMARK [1][-]{section.4.3}{JSON}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.4}{Langdetect}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.5}{Webes fel\374let}{chapter.4}% 34
+\BOOKMARK [0][-]{chapter.5}{Ismeretlen dokumentumt\351r: Webt\351rk\351pez\351s}{}% 35
+\BOOKMARK [1][-]{section.5.1}{Param\351terek}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.2}{Funkci\363k tervez\351se \351s megval\363s\355t\341s}{chapter.5}% 37
+\BOOKMARK [2][-]{subsection.5.2.1}{Dokumentumt\351r kialak\355t\341sa}{section.5.2}% 38
+\BOOKMARK [2][-]{subsection.5.2.2}{Webelemz\351s}{section.5.2}% 39
+\BOOKMARK [2][-]{subsection.5.2.3}{Felhaszn\341l\363i fel\374let}{section.5.2}% 40
+\BOOKMARK [1][-]{section.5.3}{Elozetes eredm\351nyek}{chapter.5}% 41
+\BOOKMARK [1][-]{section.5.4}{\332jratervez\351s}{chapter.5}% 42
+\BOOKMARK [1][-]{section.5.5}{Angol nyelvu eredm\351nyek}{chapter.5}% 43
+\BOOKMARK [0][-]{chapter.6}{Ismert dokumentumt\351r: Programozott webelemz\351s}{}% 44
+\BOOKMARK [1][-]{section.6.1}{Param\351terek}{chapter.6}% 45
+\BOOKMARK [1][-]{section.6.2}{Funkci\363k tervez\351se, megval\363s\355t\341s}{chapter.6}% 46
+\BOOKMARK [2][-]{subsection.6.2.1}{Dokumentumt\351r kialak\355t\341sa}{section.6.2}% 47
+\BOOKMARK [2][-]{subsection.6.2.2}{T\351maelemz\351s}{section.6.2}% 48
+\BOOKMARK [2][-]{subsection.6.2.3}{Felhaszn\341l\363i fel\374let }{section.6.2}% 49
+\BOOKMARK [1][-]{section.6.3}{Eredm\351nyek}{chapter.6}% 50
+\BOOKMARK [2][-]{subsection.6.3.1}{H\355rport\341l elemz\351s}{section.6.3}% 51
+\BOOKMARK [2][-]{subsection.6.3.2}{Wikipedia elemz\351s}{section.6.3}% 52
+\BOOKMARK [2][-]{subsection.6.3.3}{Konkl\372zi\363}{section.6.3}% 53
+\BOOKMARK [0][-]{chapter.7}{\326sszefoglal\341s, \351rt\351kel\351s}{}% 54
+\BOOKMARK [1][-]{section.7.1}{Tov\341bbfejleszt\351si lehetos\351gek}{chapter.7}% 55
+\BOOKMARK [1][-]{section.7.2}{K\366sz\366netnyilv\341n\355t\341s}{chapter.7}% 56
+\BOOKMARK [0][-]{chapter*.67}{Irodalomjegyz\351k}{}% 57
